@@ -1,0 +1,82 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+const tel = site.phone.replace(/[^+\d]/g, '');
+---
+
+<footer class="site-footer">
+  <div class="container cols">
+    <div>
+      <p class="brand">{site.name}</p>
+      <p>{site.tagline}</p>
+    </div>
+    <div>
+      <h2>Contact</h2>
+      <p>
+        <a href={`mailto:${site.email}`}>{site.email}</a><br />
+        <a href={`tel:${tel}`}>{site.phone}</a><br />
+        {site.hours}
+      </p>
+    </div>
+    <div>
+      <h2>Date de identificare</h2>
+      <p>
+        {site.name} este numele sub care lucrează {site.legal.name}.<br />
+        Nr. Reg. Com.: {site.legal.regNo}<br />
+        CUI: {site.legal.cui}<br />
+        Sediul: {site.legal.seat}
+      </p>
+    </div>
+  </div>
+  <div class="container bottom">
+    <p>© {year} {site.legal.name}</p>
+    <a href="/confidentialitate/">Politica de confidențialitate</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    font-size: 0.95rem;
+  }
+
+  .site-footer a {
+    color: var(--color-footer-text);
+  }
+
+  .site-footer a:focus-visible {
+    outline-color: var(--color-footer-text);
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.5rem 2rem;
+    padding-block: 2.5rem 1.5rem;
+  }
+
+  .brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1rem 2rem;
+    border-top: 1px solid rgb(255 255 255 / 0.2);
+  }
+</style>

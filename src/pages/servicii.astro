@@ -1,7 +1,218 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import {
+  appPrices,
+  hourlyRate,
+  launchOffer,
+  lei,
+  leiRange,
+  officePrices,
+  sizes,
+  vatNote,
+} from '../data/offer';
 ---
 
-<BaseLayout title="Servicii" description="Diagnostic, punere în ordine și abonamente IT pentru birouri mici, plus aplicații și automatizări.">
-  <h1>Servicii</h1>
+<BaseLayout
+  title="Servicii și prețuri"
+  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București, plus aplicații web la comandă. Prețuri fixe, publicate."
+>
+  <h1>Servicii și prețuri</h1>
+  <p class="lead">
+    Pentru birourile de 5–30 de oameni: cabinete medicale, contabili, avocați.
+    Prețuri fixe, fără perioadă minimă de contract.
+  </p>
+  <nav class="toc" aria-label="Pe această pagină">
+    <ul>
+      <li><a href="#it-birouri">IT pentru birouri</a></li>
+      <li><a href="#preturi">Prețuri</a></li>
+      <li><a href="#aplicatii">Aplicații</a></li>
+      <li><a href="#firme-it">Pentru firme de IT</a></li>
+    </ul>
+  </nav>
+
+  <section class="section" aria-labelledby="it-birouri">
+    <h2 id="it-birouri">IT pentru birouri</h2>
+    <ol class="steps" role="list">
+      <li>
+        <h3>Diagnostic</h3>
+        <p>Vin o dată, seara sau sâmbăta, pentru 2–4 ore. Primiți un raport scris: ce echipamente și conturi aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
+      </li>
+      <li>
+        <h3>Punere în ordine</h3>
+        <p>Rezolv, la preț fix, ce a ieșit la diagnostic:</p>
+        <ul>
+          <li>rețea și Wi-Fi: router și firewall configurate, rețea separată pentru vizitatori, parole noi, firmware actualizat;</li>
+          <li>backup 3-2-1: o copie locală și una în cloud, cu test de restaurare;</li>
+          <li>conturi Google Workspace sau Microsoft 365, cu autentificare în doi pași și manager de parole pentru echipă;</li>
+          <li>calculatoare actualizate, cu antivirus și conturi de lucru fără drepturi de administrator;</li>
+          <li>documentație: inventarul, schema rețelei și parolele, predate într-un seif de parole al biroului;</li>
+          <li>30 de minute de instruire pentru echipă: parole, e-mailuri de phishing, backup.</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Întreținere lunară</h3>
+        <p>Monitorizez backup-ul, discurile și actualizările și intervin când e nevoie, după pachetul ales.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="preturi">
+    <h2 id="preturi">Prețuri</h2>
+    <div class="table-wrap" role="region" aria-labelledby="tabel-preturi" tabindex="0">
+      <table>
+        <caption id="tabel-preturi">Prețuri după numărul de calculatoare din birou</caption>
+        <thead>
+          <tr>
+            <th scope="col">Serviciu</th>
+            {sizes.map((size) => <th scope="col">{size} calculatoare</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {officePrices.map((item) => (
+            <tr>
+              <th scope="row">{item.name} <span class="period">({item.period})</span></th>
+              {item.prices.map((price) => <td>{lei(price)}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="cards" role="list">
+      <li class="card">
+        <h3>Esențial</h3>
+        <p>Monitorizare automată, verificarea lunară a backup-ului, suport de la distanță seara, raport lunar și o oră de intervenții inclusă.</p>
+      </li>
+      <li class="card">
+        <h3>Standard</h3>
+        <p>Tot ce are Esențial, plus 3 ore de intervenții, o vizită lunară la sediu, conturi pentru angajații noi și închiderea celor care pleacă, administrarea rețelei și a Wi-Fi-ului.</p>
+      </li>
+    </ul>
+
+    <ul class="notes">
+      <li>Orele peste cele incluse costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă.</li>
+      <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
+      {launchOffer && <li>Primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise, dacă sunt mulțumite.</li>}
+      <li>{vatNote}</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="program">
+    <h2 id="program">Program și timp de răspuns</h2>
+    <ul class="prose">
+      <li>Lucrez luni–vineri între 18:00 și 22:00 și sâmbăta între 9:00 și 17:00.</li>
+      <li>Cererile primite până la ora 16:00 primesc răspuns în aceeași zi, după ora 18:00.</li>
+      <li>Actualizările și reconfigurările se fac în afara programului biroului, deci fără întreruperi.</li>
+      <li>Nu ofer intervenții imediate în timpul zilei. Monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="conditii">
+    <h2 id="conditii">Condiții</h2>
+    <ul class="prose">
+      <li><strong>Nu intră în preț:</strong> echipamentele și licențele, cumpărate pe numele biroului, la prețul furnizorului (vă ajut să le alegeți); cablarea prin pereți și lucrările electrice, făcute de un electrician autorizat; camerele de supraveghere și alarmele, care cer o firmă licențiată; reparațiile hardware.</li>
+      <li><strong>Fără perioadă minimă:</strong> abonamentul se oprește cu 30 de zile de preaviz.</li>
+      <li><strong>Plata:</strong> abonamentul se facturează lunar, în avans; punerea în ordine, 50% la început și 50% la predare.</li>
+      <li><strong>Confidențialitate:</strong> semnăm un acord de confidențialitate și, unde am acces la date personale, un contract de prelucrare a datelor, conform art. 28 din GDPR.</li>
+      <li><strong>Datele rămân ale dumneavoastră:</strong> parolele și documentația vă aparțin și vi le predau complet oricând.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="aplicatii">
+    <h2 id="aplicatii">Aplicații și automatizări</h2>
+    <p class="prose">Dacă țineți comenzi, stocuri, lucrări sau clienți într-un Excel care nu mai face față, îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă.</p>
+    <ul class="prose">
+      <li><strong>Exemple:</strong> evidența comenzilor sau a stocurilor, lucrări de service, pontaj, un CRM simplu, legătura dintre magazinul online, facturare și curieri. Pentru cabinetele de contabilitate: descărcarea și sortarea automată a facturilor din e-Factura, cu alerte și rapoarte.</li>
+      <li><strong>Cum lucrăm:</strong> discutăm fluxul de lucru, scriu specificațiile și criteriile de acceptare, apoi livrez în etape pe care le vedeți pe parcurs. Durata obișnuită: 6–10 săptămâni.</li>
+      <li><strong>Preț:</strong> fix, stabilit după specificații. Orientativ, {leiRange(appPrices.internalApp)} pentru o aplicație internă mică și {leiRange(appPrices.integration)} pentru o integrare. Găzduirea și mentenanța costă {leiRange(appPrices.hosting)} pe lună.</li>
+      <li><strong>Plata:</strong> 30–50% avans, restul pe etape. Schimbările față de specificații se plătesc separat, cu {lei(hourlyRate)}/oră.</li>
+      <li><strong>Codul și datele:</strong> la plata integrală primiți codul aplicației, iar datele rămân ale dumneavoastră. Când aplicația conține date personale, semnăm un contract de prelucrare a datelor, conform art. 28 din GDPR.</li>
+      <li><strong>Nu preiau:</strong> aplicații cu plăți online sau cu date medicale.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="firme-it">
+    <h2 id="firme-it">Pentru firme de IT</h2>
+    <p class="prose">Lucrez și ca subcontractor, la lucrări programate seara și în weekend: migrări de servere, backup, reorganizări de rack și de rețea. Nu iau legătura cu clienții firmei. Scrieți-mi pentru oferta de colaborare.</p>
+  </section>
+
+  <CallToAction />
 </BaseLayout>
+
+<style>
+  .toc ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps {
+    max-width: 42rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .steps > li {
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--color-border);
+    counter-increment: step;
+  }
+
+  .steps > li + li {
+    margin-top: 1.5rem;
+  }
+
+  .steps h3 {
+    margin-top: 0;
+  }
+
+  .steps h3::before {
+    content: counter(step) '. ';
+    color: var(--color-accent);
+  }
+
+  .table-wrap {
+    margin-block: 1rem 1.5rem;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-surface);
+  }
+
+  caption {
+    padding-bottom: 0.5rem;
+    color: var(--color-muted);
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  td {
+    white-space: nowrap;
+  }
+
+  .period {
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+
+  .notes {
+    max-width: 42rem;
+    margin-top: 1.5rem;
+    padding-left: 1.25rem;
+  }
+</style>

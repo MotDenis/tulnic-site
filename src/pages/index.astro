@@ -1,8 +1,135 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { launchOffer, lei, priceFrom } from '../data/offer';
 ---
 
-<BaseLayout description="IT pentru birouri mici din București: rețea, backup, conturi și aplicații, făcute temeinic.">
-  <h1>IT pentru birouri mici, făcut temeinic</h1>
-  <p>Textul paginii vine la pasul 3.</p>
+<BaseLayout description="Rețea, backup și conturi puse în ordine și întreținute pentru birouri de 5–30 de oameni din București. Seara și sâmbăta, la prețuri fixe.">
+  <section class="hero">
+    <h1>IT pentru birouri mici, făcut temeinic</h1>
+    <p class="lead">
+      Pun în ordine și întrețin rețeaua, backup-ul și conturile birourilor de 5–30 de oameni din București.
+      Lucrez seara și sâmbăta, ca echipa dumneavoastră să nu fie întreruptă.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact/">Programați un diagnostic</a>
+      <a class="btn btn-secondary" href="/servicii/">Servicii și prețuri</a>
+    </div>
+    <p class="small">Prețuri fixe, fără perioadă minimă de contract.</p>
+  </section>
+
+  <section class="section" aria-labelledby="ce-pun-in-ordine">
+    <h2 id="ce-pun-in-ordine">Ce pun în ordine</h2>
+    <ul class="cards" role="list">
+      <li class="card">
+        <h3>Rețea și Wi-Fi</h3>
+        <p>Router și firewall configurate, rețea separată pentru vizitatori, parole noi și firmware actualizat.</p>
+      </li>
+      <li class="card">
+        <h3>Backup verificat</h3>
+        <p>O copie în birou și una în cloud, cu test de restaurare, ca să știți sigur că merge.</p>
+      </li>
+      <li class="card">
+        <h3>Conturi și parole</h3>
+        <p>Google Workspace sau Microsoft 365, cu autentificare în doi pași și manager de parole pentru echipă.</p>
+      </li>
+      <li class="card">
+        <h3>Calculatoare</h3>
+        <p>Actualizate, cu antivirus și conturi de lucru fără drepturi de administrator.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="cum-incepem">
+    <h2 id="cum-incepem">Cum începem</h2>
+    <ol class="cards steps" role="list">
+      <li class="card">
+        <h3>Diagnostic</h3>
+        <p>Vin o dată, seara sau sâmbăta, pentru 2–4 ore. Primiți un raport scris: ce aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
+        <p class="price">De la {lei(priceFrom('diagnostic'))}</p>
+      </li>
+      <li class="card">
+        <h3>Punere în ordine</h3>
+        <p>Rezolv la preț fix ce a ieșit la diagnostic și vă predau documentația: inventarul, schema rețelei și parolele.</p>
+        <p class="price">De la {lei(priceFrom('setup'))}</p>
+      </li>
+      <li class="card">
+        <h3>Întreținere lunară</h3>
+        <p>Monitorizez backup-ul, discurile și actualizările și intervin când e nevoie, după pachetul ales.</p>
+        <p class="price">De la {lei(priceFrom('essential'))} pe lună</p>
+      </li>
+    </ol>
+    {launchOffer && (
+      <p class="note">Pentru primele trei birouri, diagnosticul e gratuit, în schimbul unei recomandări scrise, dacă sunteți mulțumiți.</p>
+    )}
+  </section>
+
+  <section class="section" aria-labelledby="cum-lucrez">
+    <h2 id="cum-lucrez">Cum lucrez</h2>
+    <ul class="prose checklist">
+      <li><strong>În afara programului dumneavoastră.</strong> Actualizările și reconfigurările se fac seara sau sâmbăta, fără întreruperi.</li>
+      <li><strong>Același om, de la început.</strong> Vorbiți direct cu cel care v-a pus rețeaua în ordine.</li>
+      <li><strong>Totul rămâne al dumneavoastră.</strong> Parolele și documentația vă aparțin și vi le predau complet oricând.</li>
+      <li><strong>Confidențialitate.</strong> Semnăm un acord de confidențialitate și, unde am acces la date personale, un contract de prelucrare a datelor, conform art. 28 din GDPR.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="aplicatii">
+    <h2 id="aplicatii">Și aplicații web la comandă</h2>
+    <p class="prose">
+      Dacă țineți comenzi, stocuri, lucrări sau clienți într-un Excel care nu mai face față, îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă.
+      <a href="/servicii/#aplicatii">Detalii și prețuri pentru aplicații</a>
+    </p>
+  </section>
+
+  <section class="section" aria-labelledby="cine-lucreaza">
+    <h2 id="cine-lucreaza">Cine lucrează</h2>
+    <p class="prose">
+      Sunt Denis, inginer software. Lucrez zilnic cu infrastructură fizică și virtuală: rețele, servere și mașini virtuale. Prin Tulnic lucrez pentru birouri mici, seara și sâmbăta.
+      Mai multe pe pagina <a href="/de-ce-tulnic/">De ce Tulnic</a>.
+    </p>
+  </section>
+
+  <CallToAction />
 </BaseLayout>
+
+<style>
+  .hero {
+    padding-top: 1rem;
+  }
+
+  .small {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .steps {
+    counter-reset: step;
+  }
+
+  .steps > li {
+    counter-increment: step;
+  }
+
+  .steps h3::before {
+    content: counter(step) '. ';
+    color: var(--color-accent);
+  }
+
+  .price {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .checklist {
+    padding-left: 1.25rem;
+  }
+
+  .checklist li + li {
+    margin-top: 0.5rem;
+  }
+
+  .note {
+    margin-top: 1.5rem;
+  }
+</style>

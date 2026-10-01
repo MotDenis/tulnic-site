@@ -10,6 +10,7 @@
   --color-accent: #1f5b3f;
   --color-on-accent: #ffffff;
   --color-border: #ddd6c9;
+  --color-wood: #8b5a2b;
   --color-footer-bg: #1f2a24;
   --color-footer-text: #f3efe6;
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
@@ -43,6 +44,8 @@ main {
 h1,
 h2,
 h3 {
+  font-family: var(--font-heading, Georgia, serif);
+  font-weight: 600;
   line-height: 1.2;
 }
 

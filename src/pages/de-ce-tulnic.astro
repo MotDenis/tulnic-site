@@ -1,7 +1,58 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+
+const sources = [
+  {
+    title: 'Adevărul: Tulnicul, străvechiul „telefon mobil” folosit de moții din Apuseni',
+    url: 'https://adevarul.ro/stiri-locale/alba-iulia/tulnicul-stravechiul-telefon-mobil-folosit-de-1810216.html',
+  },
+  {
+    title: 'Radio România Cluj: Tulnicăresele din Apuseni, sunetul care unește văile',
+    url: 'https://www.radiocluj.ro/2026/03/01/tulnicaresele-din-apuseni-sunetul-care-uneste-vaile-audio/',
+  },
+];
 ---
 
-<BaseLayout title="De ce Tulnic" description="Cine lucrează la Tulnic și de unde vine numele: tulnicul, trâmbița cu care moții își dădeau de veste peste dealuri.">
+<BaseLayout title="De ce Tulnic" description="De unde vine numele Tulnic: trâmbița de lemn cu care moții din Apuseni își dădeau de veste. Și cine lucrează sub acest nume.">
   <h1>De ce Tulnic</h1>
+  <p class="lead">Tulnicul e trâmbița lungă de lemn cu care moții din Munții Apuseni își dădeau de veste peste dealuri.</p>
+
+  <section class="section" aria-labelledby="povestea">
+    <h2 id="povestea">Povestea</h2>
+    <div class="prose">
+      <p>Se face din lemn de molid și are uneori câțiva metri, ca să se audă departe, de pe un deal pe altul. Într-un ținut de munte, unde drumul de la un sat la altul era greu, tulnicul era felul în care oamenii își dădeau de veste.</p>
+      <p>Cu el se chemau la adunare și se anunța un pericol. Se dădea semnalul de plecare la muncă, se coordona păstoritul și se vestea o naștere, o nuntă sau o moarte. Pe vremuri, aproape orice casă de moț avea măcar un tulnic, și la el cântau toți ai casei.</p>
+      <p>Cântecul lui l-au ținut în viață mai ales femeile, tulnicăresele, care l-au dat mai departe de la bunici la nepoate. Azi nu mai cheamă satul la adunare, dar se aude în continuare pe scenă și la evenimente culturale. Nu întâmplător, un articol din Adevărul îl numea „străvechiul telefon mobil” al moților.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="de-ce-l-am-ales">
+    <h2 id="de-ce-l-am-ales">De ce l-am ales</h2>
+    <div class="prose">
+      <p>Familia mea are rădăcini în Țara Moților, așa că, dintre toate numele la care m-am gândit, tulnicul a fost cel care a însemnat ceva pentru mine.</p>
+      {/* Opțional: 2–3 propoziții ale tale despre Apuseni sau despre tulnic (o amintire, un om din familie), fără să numești localitatea. */}
+      <p>Și se potrivește cu ce fac. Tulnicul ducea vestea limpede și la timp, peste orice deal. Cam asta încerc și eu pentru birourile cu care lucrez: o rețea care îi ține pe oameni legați, un backup verificat și o alertă care vine înainte să se oprească lucrul.</p>
+      <p>Iar tulnicul se face de mână, din lemn. Așa vreau să fie și lucrul meu: făcut temeinic, pe măsura fiecărui birou.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cine-lucreaza">
+    <h2 id="cine-lucreaza">Cine lucrează</h2>
+    <div class="prose">
+      <p>Sunt Denis, inginer software. Lucrez zilnic cu infrastructură fizică și virtuală: rețele, switch-uri și patch panel-uri, servere și mașini virtuale VMware, upgrade-uri și mentenanță.</p>
+      <p>Prin Tulnic lucrez pentru birouri mici, seara și sâmbăta, ca actualizările și reconfigurările să nu oprească lucrul nimănui. Vorbiți direct cu mine, de la diagnostic până la întreținere.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="surse">
+    <h2 id="surse">Surse</h2>
+    <ul class="prose">
+      {sources.map((source) => (
+        <li><a href={source.url}>{source.title}</a></li>
+      ))}
+    </ul>
+  </section>
+
+  <CallToAction />
 </BaseLayout>

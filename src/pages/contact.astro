@@ -1,7 +1,98 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const tel = site.phone.replace(/[^+\d]/g, '');
+
+// Butonul de e-mail deschide un mesaj cu subiectul și întrebările deja scrise.
+const subject = 'Cerere diagnostic';
+const body = [
+  'Bună ziua,',
+  '',
+  'Numele biroului:',
+  'Câți oameni și câte calculatoare:',
+  'Ce folosiți pentru e-mail și documente (Google, Microsoft, altceva):',
+  'Ce vă supără acum:',
+  'Când vă convine o primă vizită (o seară sau o sâmbătă):',
+].join('\r\n');
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 ---
 
-<BaseLayout title="Contact" description="Cum mă găsiți: e-mail, telefon și programul de lucru.">
+<BaseLayout title="Contact" description="Scrieți-mi sau sunați-mă pentru un diagnostic IT al biroului. Cererile primite până la ora 16:00 primesc răspuns în aceeași zi.">
   <h1>Contact</h1>
+  <p class="lead">Primul pas e diagnosticul. Scrieți-mi sau sunați-mă și stabilim o seară sau o sâmbătă.</p>
+
+  <div class="actions">
+    <a class="btn btn-primary" href={mailto}>Scrieți un e-mail</a>
+    <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați la {site.phone}</a>
+  </div>
+
+  <dl class="details">
+    <div>
+      <dt>E-mail</dt>
+      <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+    </div>
+    <div>
+      <dt>Telefon</dt>
+      <dd><a href={`tel:${tel}`}>{site.phone}</a></dd>
+    </div>
+    <div>
+      <dt>Program</dt>
+      <dd>{site.hours}</dd>
+    </div>
+    <div>
+      <dt>Răspuns</dt>
+      <dd>Cererile primite până la ora 16:00 primesc răspuns în aceeași zi, după ora 18:00.</dd>
+    </div>
+    <div>
+      <dt>Unde</dt>
+      <dd>La sediul dumneavoastră, în București. Suportul de la distanță și aplicațiile merg de oriunde.</dd>
+    </div>
+  </dl>
+
+  <section class="section" aria-labelledby="ce-sa-imi-scrieti">
+    <h2 id="ce-sa-imi-scrieti">Ce e bine să-mi scrieți</h2>
+    <ul class="prose">
+      <li>câți oameni și câte calculatoare are biroul;</li>
+      <li>ce folosiți pentru e-mail și documente: Google, Microsoft sau altceva;</li>
+      <li>ce vă supără acum: o rețea lentă, un backup de care nu sunteți siguri, parole scrise pe bilețele;</li>
+      <li>când vă convine o primă vizită: o seară sau o sâmbătă.</li>
+    </ul>
+    <p class="prose">Butonul „Scrieți un e-mail” deschide un mesaj cu aceste întrebări deja scrise.</p>
+  </section>
+
+  <section class="section" aria-labelledby="datele-dumneavoastra">
+    <h2 id="datele-dumneavoastra">Datele dumneavoastră</h2>
+    <p class="prose">Folosesc datele din mesaj doar ca să vă răspund și să pregătim diagnosticul. Detalii în <a href="/confidentialitate/">Politica de confidențialitate</a>.</p>
+  </section>
 </BaseLayout>
+
+<style>
+  .details {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 42rem;
+    margin-top: 2rem;
+  }
+
+  .details div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1rem;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  @media (max-width: 30rem) {
+    .details div {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

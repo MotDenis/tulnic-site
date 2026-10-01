@@ -1,5 +1,6 @@
 ---
-import { site, navLinks } from '../data/site';
+import Logo from './Logo.astro';
+import { navLinks } from '../data/site';
 
 // "/servicii/" și "/servicii" sunt aceeași pagină
 const normalize = (path: string) => (path.length > 1 ? path.replace(/\/$/, '') : path);
@@ -8,7 +9,7 @@ const current = normalize(Astro.url.pathname);
 
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="/">{site.name}</a>
+    <a class="brand" href="/"><Logo /></a>
     <nav aria-label="Meniu principal">
       <ul>
         {navLinks.map((link) => (
@@ -38,8 +39,6 @@ const current = normalize(Astro.url.pathname);
 
   .brand {
     color: var(--color-text);
-    font-size: 1.35rem;
-    font-weight: 700;
     text-decoration: none;
   }
 

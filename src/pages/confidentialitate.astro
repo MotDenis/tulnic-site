@@ -1,7 +1,79 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+// TODO: actualizează data la fiecare schimbare. Dacă adaugi formulare sau statistici, actualizează și textul.
+const updated = '2 octombrie 2026';
 ---
 
-<BaseLayout title="Politica de confidențialitate" description="Ce date personale primesc prin site și prin e-mail, de ce și cât timp le păstrez.">
+<BaseLayout title="Politica de confidențialitate" description="Ce date personale primesc prin site și prin e-mail, de ce, cât timp le păstrez și ce drepturi aveți.">
   <h1>Politica de confidențialitate</h1>
-</BaseLayout> 
+  <p class="lead">Pe scurt: site-ul nu vă urmărește, iar datele din mesajele pe care mi le trimiteți le folosesc doar ca să vă răspund și să lucrăm împreună.</p>
+
+  <div class="prose policy">
+    <h2>Cine răspunde de date</h2>
+    <p>Operatorul este {site.legal.name}, CUI {site.legal.cui}, cu sediul în {site.legal.seat}. Pentru orice întrebare despre date, scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+    <h2>Ce date primesc</h2>
+    <ul>
+      <li><strong>Când îmi scrieți sau mă sunați:</strong> numele, adresa de e-mail, numărul de telefon, numele biroului și ce îmi scrieți în mesaj.</li>
+      <li><strong>Când vizitați site-ul:</strong> date tehnice, ca adresa IP, browserul și pagina cerută, pe care furnizorul de găzduire le prelucrează ca să livreze site-ul și să-l protejeze de atacuri.</li>
+    </ul>
+    <p>Site-ul nu are formulare, nu folosește cookie-uri de urmărire sau de marketing și nu are statistici care să vă identifice. Fonturile sunt găzduite pe site, deci browserul nu contactează alte servere pentru ele.</p>
+
+    <h2>De ce și pe ce temei</h2>
+    <ul>
+      <li><strong>Ca să vă răspund și să pregătesc o ofertă sau un diagnostic:</strong> demersuri făcute la cererea dumneavoastră înainte de încheierea unui contract (art. 6 alin. (1) lit. b) din Regulamentul (UE) 2016/679, GDPR) sau, când scrieți în numele unei organizații, interesul legitim de a răspunde cererilor (lit. f).</li>
+      <li><strong>Ca să îndeplinesc un contract:</strong> executarea contractului (lit. b).</li>
+      <li><strong>Pentru contabilitate și facturi:</strong> obligațiile legale fiscale și contabile (lit. c).</li>
+      <li><strong>Pentru funcționarea și securitatea site-ului:</strong> interesul legitim de a-l ține disponibil și protejat (lit. f).</li>
+    </ul>
+    <p>Nu sunteți obligați să-mi trimiteți date, dar fără ele nu vă pot răspunde. Nu iau decizii automate despre dumneavoastră și nu fac profilare.</p>
+
+    <h2>Cât timp păstrez datele</h2>
+    <ul>
+      <li>Mesajele care nu duc la o colaborare: cel mult 12 luni de la ultimul mesaj, apoi le șterg.</li>
+      <li>Datele din contracte și facturi: cât cere legislația fiscală și contabilă.</li>
+      <li>Datele tehnice ale vizitelor: le prelucrează furnizorul de găzduire, după propria politică; eu nu le păstrez separat.</li>
+    </ul>
+
+    <h2>Cine mai vede datele</h2>
+    <ul>
+      <li><strong>Cloudflare</strong>, furnizorul de găzduire și DNS al site-ului.</li>
+      <li><strong>Zoho</strong>, furnizorul de e-mail, cu datele în centrul său de date din Uniunea Europeană.</li>
+      <li>Autoritățile, doar când legea o cere.</li>
+    </ul>
+    <p>Nu vând și nu închiriez date. Unii furnizori pot prelucra date și în afara Spațiului Economic European; atunci transferul se face cu garanțiile cerute de GDPR, de exemplu decizia de adecvare pentru cadrul UE–SUA privind protecția datelor sau clauzele contractuale standard.</p>
+
+    <h2>Datele din sistemele clienților</h2>
+    <p>Când lucrez la rețeaua, conturile sau aplicațiile unui client, pot avea acces la datele acestuia. Acolo lucrez ca persoană împuternicită, pe baza contractului de prelucrare a datelor semnat cu fiecare client (art. 28 din GDPR), iar această politică nu acoperă acele date.</p>
+
+    <h2>Drepturile dumneavoastră</h2>
+    <p>Puteți cere acces la datele dumneavoastră, corectarea sau ștergerea lor, restricționarea prelucrării și portarea lor și vă puteți opune prelucrării bazate pe interes legitim. Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> și vă răspund în cel mult o lună.</p>
+    <p>Dacă considerați că datele nu sunt prelucrate corect, puteți depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (<a href="https://www.dataprotection.ro">dataprotection.ro</a>).</p>
+
+    <h2>Cookie-uri</h2>
+    <p>Site-ul nu pune cookie-uri. Cloudflare poate folosi, pentru protecția împotriva atacurilor automate, un cookie strict necesar, care nu servește la urmărire.</p>
+
+    <h2>Linkuri către alte site-uri</h2>
+    <p>Pe unele pagini am pus linkuri către alte site-uri, de exemplu sursele de pe pagina De ce Tulnic. Acolo se aplică politicile acelor site-uri.</p>
+
+    <h2>Modificări</h2>
+    <p>Când schimb ceva în această politică, actualizez data de mai jos.</p>
+    <p class="updated">Ultima actualizare: {updated}.</p>
+  </div>
+</BaseLayout>
+
+<style>
+  .policy h2 {
+    margin-top: 2.25rem;
+  }
+
+  .policy li + li {
+    margin-top: 0.4rem;
+  }
+
+  .updated {
+    color: var(--color-muted);
+  }
+</style>

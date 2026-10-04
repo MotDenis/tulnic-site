@@ -32,6 +32,9 @@ const tel = site.phone.replace(/[^+\d]/g, '');
   <div class="container bottom">
     <p>© {year} {site.legal.name}</p>
     <a href="/confidentialitate/">Politica de confidențialitate</a>
+    <a class="sal" href="https://reclamatiisal.anpc.ro">
+      <img src="/anpc-sal.png" width="250" height="50" alt="ANPC: Soluționarea alternativă a litigiilor" />
+    </a>
   </div>
 </footer>
 
@@ -75,9 +78,14 @@ const tel = site.phone.replace(/[^+\d]/g, '');
   .bottom {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.5rem 1.5rem;
+    gap: 0.75rem 1.5rem;
     padding-block: 1rem 2rem;
     border-top: 1px solid rgb(255 255 255 / 0.2);
+  }
+
+  .sal {
+    line-height: 0;
   }
 </style>

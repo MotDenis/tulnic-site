@@ -17,23 +17,25 @@ import {
   title="Servicii și prețuri"
   description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București, plus aplicații web la comandă. Prețuri fixe, publicate."
 >
-  <h1>Servicii și prețuri</h1>
-  <p class="lead">
-    Pentru birourile de 5–30 de oameni: cabinete medicale, contabili, avocați.
-    Prețuri fixe, fără perioadă minimă de contract.
-  </p>
-  <nav class="toc" aria-label="Pe această pagină">
-    <ul>
-      <li><a href="#it-birouri">IT pentru birouri</a></li>
-      <li><a href="#preturi">Prețuri</a></li>
-      <li><a href="#aplicatii">Aplicații</a></li>
-      <li><a href="#firme-it">Pentru firme de IT</a></li>
-    </ul>
-  </nav>
+  <Fragment slot="intro">
+    <h1>Servicii și prețuri</h1>
+    <p class="lead">
+      Pentru birourile de 5–30 de oameni: cabinete medicale, contabili, avocați.
+      Prețuri fixe, fără perioadă minimă de contract.
+    </p>
+    <nav class="toc" aria-label="Pe această pagină">
+      <ul>
+        <li><a href="#it-birouri">IT pentru birouri</a></li>
+        <li><a href="#preturi">Prețuri</a></li>
+        <li><a href="#aplicatii">Aplicații</a></li>
+        <li><a href="#firme-it">Pentru firme de IT</a></li>
+      </ul>
+    </nav>
+  </Fragment>
 
   <section class="section" aria-labelledby="it-birouri">
     <h2 id="it-birouri">IT pentru birouri</h2>
-    <ol class="steps" role="list">
+    <ol class="step-list" role="list">
       <li>
         <h3>Diagnostic</h3>
         <p>Vin o dată, seara sau sâmbăta, pentru 2–4 ore. Primiți un raport scris: ce echipamente și conturi aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
@@ -60,7 +62,7 @@ import {
   <section class="section" aria-labelledby="preturi">
     <h2 id="preturi">Prețuri</h2>
     <div class="table-wrap" role="region" aria-labelledby="tabel-preturi" tabindex="0">
-      <table>
+      <table class="price-table">
         <caption id="tabel-preturi">Prețuri după numărul de calculatoare din birou</caption>
         <thead>
           <tr>
@@ -90,7 +92,7 @@ import {
       </li>
     </ul>
 
-    <ul class="notes">
+    <ul class="prose">
       <li>Orele peste cele incluse costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă.</li>
       <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
       {launchOffer && <li>Primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise, dacă sunt mulțumite.</li>}
@@ -139,80 +141,3 @@ import {
 
   <CallToAction />
 </BaseLayout>
-
-<style>
-  .toc ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
-    margin: 1rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .steps {
-    max-width: 42rem;
-    padding: 0;
-    list-style: none;
-    counter-reset: step;
-  }
-
-  .steps > li {
-    padding-left: 1.25rem;
-    border-left: 3px solid var(--color-border);
-    counter-increment: step;
-  }
-
-  .steps > li + li {
-    margin-top: 1.5rem;
-  }
-
-  .steps h3 {
-    margin-top: 0;
-  }
-
-  .steps h3::before {
-    content: counter(step) '. ';
-    color: var(--color-accent);
-  }
-
-  .table-wrap {
-    margin-block: 1rem 1.5rem;
-    overflow-x: auto;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--color-surface);
-  }
-
-  caption {
-    padding-bottom: 0.5rem;
-    color: var(--color-muted);
-    text-align: left;
-  }
-
-  th,
-  td {
-    padding: 0.6rem 0.75rem;
-    border-bottom: 1px solid var(--color-border);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  td {
-    white-space: nowrap;
-  }
-
-  .period {
-    color: var(--color-muted);
-    font-weight: 400;
-  }
-
-  .notes {
-    max-width: 42rem;
-    margin-top: 1.5rem;
-    padding-left: 1.25rem;
-  }
-</style>

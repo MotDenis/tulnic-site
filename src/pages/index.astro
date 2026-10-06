@@ -1,14 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CallToAction from '../components/CallToAction.astro';
+import Note from '../components/Note.astro';
 import { launchOffer, lei, priceFrom } from '../data/offer';
 ---
 
-<BaseLayout description="Rețea, backup și conturi puse în ordine și întreținute pentru birouri de 5–30 de oameni din București. Seara și sâmbăta, la prețuri fixe.">
-  <section class="hero">
+<BaseLayout
+  hero
+  description="Rețea, backup și conturi puse în ordine și întreținute pentru birouri de 5–30 de oameni din București. Seara și sâmbăta, la prețuri fixe."
+>
+  <Fragment slot="intro">
+    <p class="eyebrow">IT pentru birouri · București</p>
     <h1>IT pentru birouri mici, făcut temeinic</h1>
     <p class="lead">
-      Pun în ordine și întrețin rețeaua, backup-ul și conturile birourilor de 5–30 de oameni din București.
+      Pun în ordine și întrețin rețeaua, backup-ul și conturile birourilor de <span class="nowrap">5–30</span> de oameni din București.
       Lucrez seara și sâmbăta, ca echipa dumneavoastră să nu fie întreruptă.
     </p>
     <div class="actions">
@@ -16,7 +21,7 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
       <a class="btn btn-secondary" href="/servicii/">Servicii și prețuri</a>
     </div>
     <p class="small">Prețuri fixe, fără perioadă minimă de contract.</p>
-  </section>
+  </Fragment>
 
   <section class="section" aria-labelledby="ce-pun-in-ordine">
     <h2 id="ce-pun-in-ordine">Ce pun în ordine</h2>
@@ -45,7 +50,7 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
     <ol class="cards steps" role="list">
       <li class="card">
         <h3>Diagnostic</h3>
-        <p>Vin o dată, seara sau sâmbăta, pentru 2–4 ore. Primiți un raport scris: ce aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
+        <p>Vin o dată, seara sau sâmbăta, pentru <span class="nowrap">2–4 ore</span>. Primiți un raport scris: ce aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
         <p class="price">De la {lei(priceFrom('diagnostic'))}</p>
       </li>
       <li class="card">
@@ -60,13 +65,13 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
       </li>
     </ol>
     {launchOffer && (
-      <p class="note">Pentru primele trei birouri, diagnosticul e gratuit, în schimbul unei recomandări scrise, dacă sunteți mulțumiți.</p>
+      <Note><strong>Ofertă de lansare.</strong> Pentru primele trei birouri, diagnosticul e gratuit, în schimbul unei recomandări scrise, dacă sunteți mulțumiți.</Note>
     )}
   </section>
 
   <section class="section" aria-labelledby="cum-lucrez">
     <h2 id="cum-lucrez">Cum lucrez</h2>
-    <ul class="prose checklist">
+    <ul class="prose">
       <li><strong>În afara programului dumneavoastră.</strong> Actualizările și reconfigurările se fac seara sau sâmbăta, fără întreruperi.</li>
       <li><strong>Același om, de la început.</strong> Vorbiți direct cu cel care v-a pus rețeaua în ordine.</li>
       <li><strong>Totul rămâne al dumneavoastră.</strong> Parolele și documentația vă aparțin și vi le predau complet oricând.</li>
@@ -92,44 +97,3 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
 
   <CallToAction />
 </BaseLayout>
-
-<style>
-  .hero {
-    padding-top: 1rem;
-  }
-
-  .small {
-    color: var(--color-muted);
-    font-size: 0.95rem;
-  }
-
-  .steps {
-    counter-reset: step;
-  }
-
-  .steps > li {
-    counter-increment: step;
-  }
-
-  .steps h3::before {
-    content: counter(step) '. ';
-    color: var(--color-accent);
-  }
-
-  .price {
-    color: var(--color-accent);
-    font-weight: 700;
-  }
-
-  .checklist {
-    padding-left: 1.25rem;
-  }
-
-  .checklist li + li {
-    margin-top: 0.5rem;
-  }
-
-  .note {
-    margin-top: 1.5rem;
-  }
-</style>

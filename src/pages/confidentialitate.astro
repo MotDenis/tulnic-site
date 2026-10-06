@@ -7,8 +7,10 @@ const updated = '2 octombrie 2026';
 ---
 
 <BaseLayout title="Politica de confidențialitate" description="Ce date personale primesc prin site și prin e-mail, de ce, cât timp le păstrez și ce drepturi aveți.">
-  <h1>Politica de confidențialitate</h1>
-  <p class="lead">Pe scurt: site-ul nu vă urmărește, iar datele din mesajele pe care mi le trimiteți le folosesc doar ca să vă răspund și să lucrăm împreună.</p>
+  <Fragment slot="intro">
+    <h1>Politica de confidențialitate</h1>
+    <p class="lead">Pe scurt: site-ul nu vă urmărește, iar datele din mesajele pe care mi le trimiteți le folosesc doar ca să vă răspund și să lucrăm împreună.</p>
+  </Fragment>
 
   <div class="prose policy">
     <h2>Cine răspunde de date</h2>
@@ -74,6 +76,6 @@ const updated = '2 octombrie 2026';
   }
 
   .updated {
-    color: var(--color-muted);
+    color: var(--ink-muted);
   }
 </style>

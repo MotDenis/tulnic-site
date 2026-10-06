@@ -1,45 +1,16 @@
 ---
 import { site } from '../data/site';
+
+// Semnul tulnicului și numele. Culorile vin din clasa .logo (global.css):
+// cornul amber, undele și numele on-band; cu .logo-on-light, pentru fond deschis.
 ---
 
-<span class="logo">
-  <svg viewBox="0 0 64 64" width="36" height="36" aria-hidden="true">
-    <polygon class="horn" points="7.1,55.1 36.8,20.8 43.2,27.2 8.9,56.9" />
-    <g class="waves">
-      <path d="M42.4 15.1A8 8 0 0 1 48.9 21.6" />
-      <path d="M43.4 9.2A14 14 0 0 1 54.8 20.6" />
-      <path d="M44.5 3.3A20 20 0 0 1 60.7 19.5" />
-    </g>
-  </svg>
-  <span class="name">{site.name}</span>
-</span>
-
-<style>
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  svg {
-    flex-shrink: 0;
-  }
-
-  .horn {
-    fill: var(--color-wood);
-  }
-
-  .waves {
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 3.5;
-    stroke-linecap: round;
-  }
-
-  .name {
-    font-family: var(--font-heading, Georgia, serif);
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1;
-  }
-</style>
+<svg viewBox="0 0 64 64" width="36" height="36" aria-hidden="true">
+  <polygon class="horn" points="7.1,55.1 36.8,20.8 43.2,27.2 8.9,56.9" />
+  <g class="waves">
+    <path d="M42.4 15.1A8 8 0 0 1 48.9 21.6" />
+    <path d="M43.4 9.2A14 14 0 0 1 54.8 20.6" />
+    <path d="M44.5 3.3A20 20 0 0 1 60.7 19.5" />
+  </g>
+</svg>
+<span class="logo-name">{site.name}</span>

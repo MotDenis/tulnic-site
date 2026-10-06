@@ -5,7 +5,7 @@ const year = new Date().getFullYear();
 const tel = site.phone.replace(/[^+\d]/g, '');
 ---
 
-<footer class="site-footer">
+<footer class="site-footer band">
   <div class="container cols">
     <div>
       <p class="brand">{site.name}</p>
@@ -39,52 +39,6 @@ const tel = site.phone.replace(/[^+\d]/g, '');
 </footer>
 
 <style>
-  .site-footer {
-    background: var(--color-footer-bg);
-    color: var(--color-footer-text);
-    font-size: 0.95rem;
-  }
-
-  .site-footer a {
-    color: var(--color-footer-text);
-  }
-
-  .site-footer a:focus-visible {
-    outline-color: var(--color-footer-text);
-  }
-
-  .cols {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-    gap: 1.5rem 2rem;
-    padding-block: 2.5rem 1.5rem;
-  }
-
-  .brand {
-    font-family: var(--font-heading, Georgia, serif);
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-
-  h2 {
-    margin: 0 0 0.5rem;
-    font-size: 1rem;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .bottom {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem 1.5rem;
-    padding-block: 1rem 2rem;
-    border-top: 1px solid rgb(255 255 255 / 0.2);
-  }
-
   .sal {
     line-height: 0;
   }

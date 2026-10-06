@@ -1,4 +1,5 @@
 ---
+import '../styles/tokens.css';
 import '../styles/global.css';
 import { Font } from 'astro:assets';
 import Header from '../components/Header.astro';
@@ -8,9 +9,11 @@ import { site } from '../data/site';
 interface Props {
   title?: string;
   description: string;
+  /** Introducerea mare, doar pe pagina de start. */
+  hero?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, hero = false } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
 ---
 
@@ -21,14 +24,35 @@ const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#15291f" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a3326" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <Font cssVariable="--font-heading" preload />
+    <Font cssVariable="--font-heading" preload={[{ subset: 'latin', weight: 700 }]} />
+    <Font cssVariable="--font-body" preload={[{ subset: 'latin' }]} />
   </head>
   <body>
     <a class="skip-link" href="#continut">Sari la conținut</a>
-    <Header />
-    <main id="continut" class="container">
-      <slot />
+    <div class="band">
+      <Header />
+    </div>
+    <main id="continut">
+      <div class="band band-intro">
+        <svg class="arcs" viewBox="0 0 300 300" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+          <circle cx="300" cy="300" r="56" />
+          <circle cx="300" cy="300" r="104" />
+          <circle cx="300" cy="300" r="152" />
+          <circle cx="300" cy="300" r="200" />
+          <circle cx="300" cy="300" r="248" />
+          <circle cx="300" cy="300" r="296" />
+        </svg>
+        <div class:list={['intro', 'container', { 'intro-hero': hero }]}>
+          <slot name="intro" />
+        </div>
+      </div>
+      <div class="content container">
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>

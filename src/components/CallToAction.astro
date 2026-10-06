@@ -4,29 +4,10 @@ import { site } from '../data/site';
 const tel = site.phone.replace(/[^+\d]/g, '');
 ---
 
-<section class="cta" aria-labelledby="primul-pas">
+<section class="cta band" aria-labelledby="primul-pas">
   <h2 id="primul-pas">Primul pas: diagnosticul</h2>
   <p>
     Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.
     Cererile primite până la ora 16:00 primesc răspuns în aceeași zi, după ora 18:00.
   </p>
 </section>
-
-<style>
-  .cta {
-    margin-top: 3.5rem;
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-  }
-
-  h2 {
-    margin-top: 0;
-  }
-
-  p {
-    max-width: 42rem;
-    margin-bottom: 0;
-  }
-</style>

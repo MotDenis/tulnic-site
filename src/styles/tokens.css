@@ -1,0 +1,70 @@
+/* Tokenurile Tulnic: aceleași nume și valori ca în design system (tokens.json).
+   Tema luminoasă e implicită; cea întunecată se aplică singură, după setarea sistemului.
+   Fonturile (--font-heading, --font-body) le definește Astro, din astro.config.mjs. */
+
+:root {
+  color-scheme: light;
+
+  --bg: #f6f0e4;
+  --surface: #fffdf8;
+  --ink: #1e1a15;
+  --ink-muted: #62594e;
+  --line: #e1d6c2;
+  --band: #15291f;
+  --band-line: #36463b;
+  --on-band: #f4ecdc;
+  --on-band-muted: #c9c2b2;
+  --on-band-edge: #9b9e90;
+  --amber: #e0a64b;
+  --amber-hover: #d39539;
+  --on-amber: #1e1a15;
+  --amber-edge: var(--wood);
+  --amber-tint: #f3e2c0;
+  --link: #1e5a3c;
+  --wood: #8a4f1e;
+  --focus: var(--link);
+  --focus-on-band: var(--amber);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --radius-sm: 6px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --container: 68rem;
+  --measure: 42rem;
+
+  --border-hairline: 1px;
+  --border-control: 2px;
+  --focus-width: 3px;
+
+  --arcs-opacity: 0.13;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --bg: #101511;
+    --surface: #18201b;
+    --ink: #f1e9da;
+    --ink-muted: #b8b0a1;
+    --line: #2e3a32;
+    --band: #1a3326;
+    --band-line: #3b4f41;
+    --on-band-edge: #9da293;
+    --amber-hover: #ebb968;
+    --amber-edge: var(--amber);
+    --amber-tint: #3a2f1a;
+    --link: #9fd3b1;
+    --wood: #dca46a;
+    --focus: var(--amber);
+  }
+}

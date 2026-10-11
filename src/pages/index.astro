@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CallToAction from '../components/CallToAction.astro';
 import Note from '../components/Note.astro';
+import Profile from '../components/Profile.astro';
 import { launchOffer, lei, priceFrom } from '../data/offer';
 ---
 
@@ -90,12 +91,13 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
     </p>
   </section>
 
-  <section class="section" aria-labelledby="cine-lucreaza">
+    <section class="section" aria-labelledby="cine-lucreaza">
     <h2 id="cine-lucreaza">Cine lucrează</h2>
-    <p class="prose">
-      Sunt Denis, inginer software. Lucrez zilnic cu infrastructură fizică și virtuală: rețele, servere și mașini virtuale. Prin Tulnic lucrez pentru birouri mici, seara și sâmbăta.
-      Mai multe pe pagina <a href="/de-ce-tulnic/">De ce Tulnic</a>.
-    </p>
+    <Profile>
+      <p>Sunt Denis, inginer, cu patru ani de experiență în infrastructură și software. Lucrez zilnic cu rețele, servere și mașini virtuale VMware.</p>
+      <p>În birourile mici aduc aceleași obiceiuri: fiecare echipament trecut într-un inventar, fiecare schimbare notată, parolele într-un seif, nu pe bilețele. De la primul telefon până la întreținere, vorbiți direct cu mine.</p>
+      <p><a href="/de-ce-tulnic/#cine-lucreaza">Mai multe despre mine și despre nume</a></p>
+    </Profile>
   </section>
 
   <CallToAction />

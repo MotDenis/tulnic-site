@@ -80,6 +80,22 @@ import {
         </tbody>
       </table>
     </div>
+    
+    <ul class="price-cards" role="list">
+      {officePrices.map((item) => (
+        <li class="card">
+          <h3>{item.name} <span class="period">({item.period})</span></h3>
+          <dl class="price-rows">
+            {item.prices.map((price, i) => (
+              <div>
+                <dt>{sizes[i]} calculatoare</dt>
+                <dd>{lei(price)}</dd>
+              </div>
+            ))}
+          </dl>
+        </li>
+      ))}
+    </ul>
 
     <ul class="cards" role="list">
       <li class="card">

@@ -11,10 +11,17 @@ interface Props {
   description: string;
   /** Introducerea mare, doar pe pagina de start. */
   hero?: boolean;
+  /** Pagina nu apare în motoarele de căutare (de exemplu, pagina 404). */
+  noindex?: boolean;
 }
 
-const { title, description, hero = false } = Astro.props;
+const { title, description, hero = false, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
+
+// Adresa canonică a paginii, mereu cu „/” la final, ca în meniu și în sitemap.
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = new URL(path, Astro.site).href;
+const ogImage = new URL('/og-image.png', Astro.site).href;
 ---
 
 <!doctype html>
@@ -24,10 +31,27 @@ const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#15291f" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a3326" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Cum arată linkul când e distribuit pe Facebook, LinkedIn sau WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tulnic: IT pentru birouri mici, făcut temeinic" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <Font cssVariable="--font-heading" preload={[{ subset: 'latin', weight: 700 }]} />
     <Font cssVariable="--font-body" preload={[{ subset: 'latin' }]} />
   </head>

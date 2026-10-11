@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/denis.jpg';
+---
+
+<div class="profile">
+  <Image class="profile-photo" src={photo} alt="Denis" widths={[240, 460]} sizes="240px" />
+  <div class="profile-text">
+    <slot />
+  </div>
+</div>

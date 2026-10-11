@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Pagina nu există" description="Pagina căutată nu există sau a fost mutată." noindex>
+  <Fragment slot="intro">
+    <p class="eyebrow">Eroare 404</p>
+    <h1>Semnalul s-a pierdut pe drum</h1>
+    <p class="lead">Pagina căutată nu există sau a fost mutată.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Înapoi la prima pagină</a>
+      <a class="btn btn-secondary" href="/servicii/">Servicii și prețuri</a>
+    </div>
+  </Fragment>
+
+  <p class="prose">
+    Dacă ați ajuns aici dintr-un link de pe site, scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> și îl repar.
+  </p>
+</BaseLayout>

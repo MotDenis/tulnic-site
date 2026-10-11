@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CallToAction from '../components/CallToAction.astro';
+import Profile from '../components/Profile.astro';
 
 const sources = [
   {
@@ -41,10 +42,20 @@ const sources = [
 
   <section class="section" aria-labelledby="cine-lucreaza">
     <h2 id="cine-lucreaza">Cine lucrează</h2>
-    <div class="prose">
-      <p>Sunt Denis, inginer software. Lucrez zilnic cu infrastructură fizică și virtuală: rețele, switch-uri și patch panel-uri, servere și mașini virtuale VMware, upgrade-uri și mentenanță.</p>
+    <Profile>
+      <p>Sunt Denis, inginer, cu patru ani de experiență în infrastructură și dezvoltare software. Lucrez zilnic cu infrastructură fizică și virtuală: rețele, switch-uri și patch panel-uri, servere și mașini virtuale VMware, upgrade-uri și mentenanță.</p>
+      <p>Din infrastructura mare am păstrat obiceiurile care contează și la un birou de zece oameni. Țin un inventar al fiecărui echipament și al fiecărei conexiuni, notez fiecare schimbare și nu modific nimic fără un backup verificat înainte. Aplicațiile le construiesc la fel: specificații clare, livrare în etape și codul predat la final.</p>
       <p>Prin Tulnic lucrez pentru birouri mici, seara și sâmbăta, ca actualizările și reconfigurările să nu oprească lucrul nimănui. Vorbiți direct cu mine, de la diagnostic până la întreținere.</p>
-    </div>
+      <p class="small">Tehnologii cu care am lucrat:</p>
+      <ul class="tags" role="list">
+        <li>VMware</li>
+        <li>NetBox</li>
+        <li>GitLab</li>
+        <li>SQL</li>
+        <li>Java</li>
+        <li>PHP</li>
+      </ul>
+    </Profile>
   </section>
 
   <section class="section" aria-labelledby="surse">

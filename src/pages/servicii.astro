@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
 import CallToAction from '../components/CallToAction.astro';
 import {
   appPrices,
@@ -15,12 +16,12 @@ import {
 
 <BaseLayout
   title="Servicii și prețuri"
-  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București, plus aplicații web la comandă. Prețuri fixe, publicate."
+  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5-30 de oameni din București, plus aplicații web la comandă. Prețuri fixe, publicate."
 >
   <Fragment slot="intro">
     <h1>Servicii și prețuri</h1>
     <p class="lead">
-      Pentru birourile de 5–30 de oameni: cabinete medicale, contabili, avocați.
+      Pentru birourile de 5-30 de oameni: cabinete medicale, contabili, avocați.
       Prețuri fixe, fără perioadă minimă de contract.
     </p>
     <nav class="toc" aria-label="Pe această pagină">
@@ -28,7 +29,6 @@ import {
         <li><a href="#it-birouri">IT pentru birouri</a></li>
         <li><a href="#preturi">Prețuri</a></li>
         <li><a href="#aplicatii">Aplicații</a></li>
-        <li><a href="#firme-it">Pentru firme de IT</a></li>
       </ul>
     </nav>
   </Fragment>
@@ -38,7 +38,7 @@ import {
     <ol class="step-list" role="list">
       <li>
         <h3>Diagnostic</h3>
-        <p>Vin o dată, seara sau sâmbăta, pentru 2–4 ore. Primiți un raport scris: ce echipamente și conturi aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
+        <p>Vin o dată, seara sau sâmbăta, pentru 2-4 ore. Primiți un raport scris: ce echipamente și conturi aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
       </li>
       <li>
         <h3>Punere în ordine</h3>
@@ -103,8 +103,8 @@ import {
   <section class="section" aria-labelledby="program">
     <h2 id="program">Program și timp de răspuns</h2>
     <ul class="prose">
-      <li>Lucrez luni–vineri între 18:00 și 22:00 și sâmbăta între 9:00 și 17:00.</li>
-      <li>Cererile primite până la ora 16:00 primesc răspuns în aceeași zi, după ora 18:00.</li>
+      <li>Program: {site.hours}.</li>
+      <li>{site.reply}</li>
       <li>Actualizările și reconfigurările se fac în afara programului biroului, deci fără întreruperi.</li>
       <li>Nu ofer intervenții imediate în timpul zilei. Monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
     </ul>

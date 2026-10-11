@@ -10,7 +10,7 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
   description="Rețea, backup și conturi puse în ordine și întreținute pentru birouri de 5–30 de oameni din București. Seara și sâmbăta, la prețuri fixe."
 >
   <Fragment slot="intro">
-    <p class="eyebrow">IT pentru birouri · București</p>
+    <p class="eyebrow">Cabinete medicale · Contabili · Avocați</p>
     <h1>IT pentru birouri mici, făcut temeinic</h1>
     <p class="lead">
       Pun în ordine și întrețin rețeaua, backup-ul și conturile birourilor de <span class="nowrap">5–30</span> de oameni din București.
@@ -20,7 +20,10 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
       <a class="btn btn-primary" href="/contact/">Programați un diagnostic</a>
       <a class="btn btn-secondary" href="/servicii/">Servicii și prețuri</a>
     </div>
-    <p class="small">Prețuri fixe, fără perioadă minimă de contract.</p>
+    <p class="small">
+      Prețuri fixe, fără perioadă minimă de contract.
+      {launchOffer && 'Pentru primele trei birouri, diagnosticul e gratuit.'}
+    </p>
   </Fragment>
 
   <section class="section" aria-labelledby="ce-pun-in-ordine">

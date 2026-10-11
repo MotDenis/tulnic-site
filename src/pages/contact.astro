@@ -1,21 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, diagnosticMailto } from '../data/site';
 
 const tel = site.phone.replace(/[^+\d]/g, '');
-
-// Butonul de e-mail deschide un mesaj cu subiectul și întrebările deja scrise.
-const subject = 'Cerere diagnostic';
-const body = [
-  'Bună ziua,',
-  '',
-  'Numele biroului:',
-  'Câți oameni și câte calculatoare:',
-  'Ce folosiți pentru e-mail și documente (Google, Microsoft, altceva):',
-  'Ce vă supără acum:',
-  'Când vă convine o primă vizită (o seară sau o sâmbătă):',
-].join('\r\n');
-const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 ---
 
 <BaseLayout title="Contact" description="Scrieți-mi sau sunați-mă pentru un diagnostic IT al biroului. Cererile primite până la ora 16:00 primesc răspuns în aceeași zi.">
@@ -24,7 +11,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body
     <p class="lead">Primul pas e diagnosticul. Scrieți-mi sau sunați-mă și stabilim o seară sau o sâmbătă.</p>
 
     <div class="actions">
-      <a class="btn btn-primary" href={mailto}>Scrieți un e-mail</a>
+      <a class="btn btn-primary" href={diagnosticMailto}>Scrieți un e-mail</a>
       <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați la {site.phone}</a>
     </div>
   </Fragment>
@@ -44,7 +31,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body
     </div>
     <div>
       <dt>Răspuns</dt>
-      <dd>Cererile primite până la ora 16:00 primesc răspuns în aceeași zi, după ora 18:00.</dd>
+      <dd>{site.reply}</dd>
     </div>
     <div>
       <dt>Unde</dt>

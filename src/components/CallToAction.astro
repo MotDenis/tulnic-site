@@ -1,5 +1,5 @@
 ---
-import { site } from '../data/site';
+import { site, diagnosticMailto } from '../data/site';
 
 const tel = site.phone.replace(/[^+\d]/g, '');
 ---
@@ -8,6 +8,10 @@ const tel = site.phone.replace(/[^+\d]/g, '');
   <h2 id="primul-pas">Primul pas: diagnosticul</h2>
   <p>
     Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.
-    Cererile primite până la ora 16:00 primesc răspuns în aceeași zi, după ora 18:00.
+    {site.reply}
   </p>
+  <div class="actions">
+    <a class="btn btn-primary" href={diagnosticMailto}>Scrieți un e-mail</a>
+    <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+  </div>
 </section>

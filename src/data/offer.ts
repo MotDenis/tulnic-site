@@ -1,7 +1,7 @@
 // Oferta pentru birouri, într-un singur loc.
 // Prețurile de aici apar pe Acasă și pe Servicii; le schimbi doar aici.
 
-export const sizes = ['Până la 10', '11-20', '21-30'] as const; // calculatoare
+export const sizes = ['Până la 10', '11–20', '21-30'] as const; // calculatoare
 
 export const officePrices = [
   { id: 'diagnostic', name: 'Diagnostic', period: 'o singură dată', prices: [500, 700, 900] },

@@ -1,0 +1,11 @@
+// Configurația pentru Cloudflare Workers.
+// Cloudflare rulează „npm run build”, apoi publică folderul dist.
+{
+  "name": "tulnic-site",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Orice adresă care nu există primește pagina 404.html, cu codul 404.
+    "not_found_handling": "404-page"
+  }
+}

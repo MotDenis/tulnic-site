@@ -1,4 +1,16 @@
+# Motoarele de căutare și asistenții AI pot citi site-ul.
+# Content-Signal: textele nu pot fi folosite pentru antrenarea modelelor AI.
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
+
+# Roboții care colectează texte pentru antrenarea modelelor AI.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: Bytespider
+Disallow: /
 
 Sitemap: https://tulnic.ro/sitemap-index.xml

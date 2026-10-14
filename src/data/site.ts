@@ -3,6 +3,7 @@
 export const site = {
   name: 'Tulnic',
   tagline: 'IT făcut temeinic',
+  homeTitle: 'Tulnic — IT pentru birouri mici din București',
   email: 'contact@tulnic.ro',
   phone: '+40 741 704 551',
   hours: 'Luni\u2060–\u2060vineri 18\u2060–\u206022, sâmbătă 9\u2060–\u206017',

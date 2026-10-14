@@ -22,6 +22,29 @@ const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const canonical = new URL(path, Astro.site).href;
 const ogImage = new URL('/og-image.png', Astro.site).href;
+
+const isHome = Astro.url.pathname === '/';
+const homeUrl = new URL('/', Astro.site).href;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    alternateName: ['tulnic.ro'],
+    url: homeUrl,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.name,
+    legalName: site.legal.name,
+    url: homeUrl,
+    logo: new URL('/icon-192.png', Astro.site).href,
+    email: site.email,
+    telephone: site.phone.replace(/[^+\d]/g, ''),
+    taxID: site.legal.cui,
+  },
+];
 ---
 
 <!doctype html>
@@ -35,6 +58,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#15291f" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a3326" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -51,6 +75,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Tulnic: IT pentru birouri mici, făcut temeinic" />
     <meta name="twitter:card" content="summary_large_image" />
+    {isHome && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <Font cssVariable="--font-heading" preload={[{ subset: 'latin', weight: 700 }]} />
     <Font cssVariable="--font-body" preload={[{ subset: 'latin' }]} />

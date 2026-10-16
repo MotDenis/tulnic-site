@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { title, description, hero = false, noindex = false } = Astro.props;
-const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
+const pageTitle = !title ? site.homeTitle : title.includes(site.name) ? title : `${title} — ${site.name}`;
 
 // Adresa canonică a paginii, mereu cu „/” la final, ca în meniu și în sitemap.
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;

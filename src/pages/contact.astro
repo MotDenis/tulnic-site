@@ -5,10 +5,13 @@ import { site, diagnosticMailto } from '../data/site';
 const tel = site.phone.replace(/[^+\d]/g, '');
 ---
 
-<BaseLayout title="Contact" description="Scrieți-mi sau sunați-mă pentru un diagnostic IT al biroului. Cererile primite până la ora 16:00 primesc răspuns în aceeași zi.">
+<BaseLayout title="Contact" description={`Scrieți-mi sau sunați-mă pentru un diagnostic IT al biroului. ${site.reply}`}>
   <Fragment slot="intro">
     <h1>Contact</h1>
-    <p class="lead">Primul pas e diagnosticul. Scrieți-mi sau sunați-mă și stabilim o seară sau o sâmbătă.</p>
+    <p class="lead">
+      Haideți să vedem de ce are nevoie biroul dumneavoastră. Scrieți-mi câteva rânduri despre echipă și despre problemele pe care le întâmpinați.
+      Nu trebuie să cunoașteți termenii tehnici. Vă răspund în programul afișat și stabilim dacă diagnosticul este pasul potrivit.
+    </p>
 
     <div class="actions">
       <a class="btn btn-primary" href={diagnosticMailto}>Scrieți un e-mail</a>
@@ -35,7 +38,7 @@ const tel = site.phone.replace(/[^+\d]/g, '');
     </div>
     <div>
       <dt>Unde</dt>
-      <dd>La sediul dumneavoastră, în București. Suportul de la distanță și aplicațiile merg de oriunde.</dd>
+      <dd>Vizitele le fac la sediul dumneavoastră, în București. Suportul de la distanță și aplicațiile merg de oriunde. Sediul social, din județul Arad, e doar adresa oficială a PFA-ului.</dd>
     </div>
   </dl>
 
@@ -45,7 +48,7 @@ const tel = site.phone.replace(/[^+\d]/g, '');
       <li>câți oameni și câte calculatoare are biroul;</li>
       <li>ce folosiți pentru e-mail și documente: Google, Microsoft sau altceva;</li>
       <li>ce vă supără acum: o rețea lentă, un backup de care nu sunteți siguri, parole scrise pe bilețele;</li>
-      <li>când vă convine o primă vizită: o seară sau o sâmbătă.</li>
+      <li>când vă convine o primă vizită: o după-amiază sau o sâmbătă.</li>
     </ul>
     <p class="prose">Butonul „Scrieți un e-mail” deschide un mesaj cu aceste întrebări deja scrise.</p>
   </section>

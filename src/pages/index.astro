@@ -8,22 +8,25 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
 
 <BaseLayout
   hero
-  description="Rețea, backup și conturi puse în ordine și întreținute pentru birouri de 5–30 de oameni din București. Seara și sâmbăta, la prețuri fixe."
+  description="Rețea, backup și conturi puse în ordine și întreținute pentru birouri de 5–30 de oameni din București. Prețuri fixe, fără perioadă minimă de contract."
 >
   <Fragment slot="intro">
     <p class="eyebrow">Cabinete medicale · Contabili · Avocați</p>
-    <h1>IT pentru birouri mici, făcut temeinic</h1>
+    <h1>IT de încredere pentru birouri mici din București</h1>
     <p class="lead">
-      Pun în ordine și întrețin rețeaua, backup-ul și conturile birourilor de <span class="nowrap">5–30</span> de oameni din București.
-      Lucrez seara și sâmbăta, ca echipa dumneavoastră să nu fie întreruptă.
+      Pun în ordine rețeaua, copiile de siguranță și conturile de lucru, ca echipa dumneavoastră să își poată desfășura activitatea fără întreruperi IT evitabile.
+    </p>
+    <p class="lead">
+      Sunt Denis, inginer, și lucrez pentru birouri de <span class="nowrap">5–30</span> de oameni.
+      Fac actualizările și reconfigurările după închiderea biroului sau sâmbăta, iar la final primiți documentația și accesul complet la sistemele dumneavoastră.
     </p>
     <div class="actions">
-      <a class="btn btn-primary" href="/contact/">Programați un diagnostic</a>
-      <a class="btn btn-secondary" href="/servicii/">Servicii și prețuri</a>
+      <a class="btn btn-primary" href="/contact/">Solicitați un diagnostic</a>
+      <a class="btn btn-secondary" href="/servicii/">Vedeți serviciile și prețurile</a>
     </div>
     <p class="small">
-      Prețuri fixe, fără perioadă minimă de contract.
-      {launchOffer && 'Pentru primele trei birouri, diagnosticul e gratuit.'}
+      <span class="nowrap">Prețuri fixe</span> · <span class="nowrap">Fără perioadă minimă de contract</span> · <span class="nowrap">Interlocutor tehnic direct</span>
+      {launchOffer && <><br />Pentru primele trei birouri, diagnosticul e gratuit.</>}
     </p>
   </Fragment>
 
@@ -31,30 +34,31 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
     <h2 id="ce-pun-in-ordine">Ce pun în ordine</h2>
     <ul class="cards" role="list">
       <li class="card">
-        <h3>Rețea și Wi-Fi</h3>
-        <p>Router și firewall configurate, rețea separată pentru vizitatori, parole noi și firmware actualizat.</p>
+        <h3>O rețea pe care vă puteți baza</h3>
+        <p>Configurez și documentez rețeaua și Wi-Fi-ul, separ accesul vizitatorilor de cel al echipei și țin la zi echipamentele de rețea.</p>
       </li>
       <li class="card">
-        <h3>Backup verificat</h3>
-        <p>O copie în birou și una în cloud, cu test de restaurare, ca să știți sigur că merge.</p>
+        <h3>Copii de siguranță pe care le verificăm</h3>
+        <p>Configurez backup-ul, cu o copie în birou și una în cloud, și testez restaurarea, astfel încât să știm dacă datele pot fi recuperate, nu doar dacă backup-ul apare ca finalizat.</p>
       </li>
       <li class="card">
-        <h3>Conturi și parole</h3>
-        <p>Google Workspace sau Microsoft 365, cu autentificare în doi pași și manager de parole pentru echipă.</p>
+        <h3>Acces organizat și conturi protejate</h3>
+        <p>Configurez autentificarea în doi pași, folosirea unui manager de parole și accesul fiecărui angajat în funcție de rol. Calculatoarele rămân actualizate, cu antivirus și conturi de lucru fără drepturi de administrator.</p>
       </li>
       <li class="card">
-        <h3>Calculatoare</h3>
-        <p>Actualizate, cu antivirus și conturi de lucru fără drepturi de administrator.</p>
+        <h3>Un birou documentat, nu dependent de o singură persoană</h3>
+        <p>Inventar, schemă de rețea și documentație predată. Știți ce echipamente aveți și cum sunt organizate.</p>
       </li>
     </ul>
   </section>
 
   <section class="section" aria-labelledby="cum-incepem">
     <h2 id="cum-incepem">Cum începem</h2>
+    <p class="prose">Trei pași, fiecare cu preț fix. <a href="/servicii/#preturi">Vedeți toate prețurile și condițiile</a>.</p>
     <ol class="cards steps" role="list">
       <li class="card">
         <h3>Diagnostic</h3>
-        <p>Vin o dată, seara sau sâmbăta, pentru <span class="nowrap">2–4 ore</span>. Primiți un raport scris: ce aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
+        <p>Vin o dată, într-o după-amiază sau o sâmbătă, pentru <span class="nowrap">2–4 ore</span>, și primiți un raport scris, cu prețuri.</p>
         <p class="price">De la {lei(priceFrom('diagnostic'))}</p>
       </li>
       <li class="card">
@@ -73,10 +77,22 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
     )}
   </section>
 
+  <section class="section" aria-labelledby="dupa-diagnostic">
+    <h2 id="dupa-diagnostic">Ce primiți concret după diagnostic</h2>
+    <p class="prose">Un raport scris, pe care vi-l explic pe înțeles:</p>
+    <ul class="prose">
+      <li>inventarul echipamentelor și al conturilor;</li>
+      <li>constatările și riscurile, în ordinea priorității;</li>
+      <li>recomandările, cu prețul fiecărei etape;</li>
+      <li>pașii următori, inclusiv ce poate să mai aștepte.</li>
+    </ul>
+    <p class="prose">Decideți apoi ce implementăm și în ce ordine.</p>
+  </section>
+
   <section class="section" aria-labelledby="cum-lucrez">
     <h2 id="cum-lucrez">Cum lucrez</h2>
     <ul class="prose">
-      <li><strong>În afara programului dumneavoastră.</strong> Actualizările și reconfigurările se fac seara sau sâmbăta, fără întreruperi.</li>
+      <li><strong>În afara programului dumneavoastră.</strong> Actualizările și reconfigurările le fac după închiderea biroului sau sâmbăta, fără să vă întrerup lucrul.</li>
       <li><strong>Același om, de la început.</strong> Vorbiți direct cu cel care v-a pus rețeaua în ordine.</li>
       <li><strong>Totul rămâne al dumneavoastră.</strong> Parolele și documentația vă aparțin și vi le predau complet oricând.</li>
       <li><strong>Confidențialitate.</strong> Semnăm un acord de confidențialitate și, unde am acces la date personale, un contract de prelucrare a datelor, conform art. 28 din GDPR.</li>
@@ -84,19 +100,20 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
   </section>
 
   <section class="section" aria-labelledby="aplicatii">
-    <h2 id="aplicatii">Și aplicații web la comandă</h2>
+    <h2 id="aplicatii">Și aplicații sau automatizări la comandă</h2>
     <p class="prose">
       Dacă țineți comenzi, stocuri, lucrări sau clienți într-un Excel care nu mai face față, îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă.
-      <a href="/servicii/#aplicatii">Detalii și prețuri pentru aplicații</a>
+      Iar unde aceleași date se introduc de mai multe ori, de mână, pun o automatizare să facă munca repetitivă.
+      <a href="/servicii/#aplicatii">Exemple și prețuri pentru aplicații</a>
     </p>
   </section>
 
-    <section class="section" aria-labelledby="cine-lucreaza">
+  <section class="section" aria-labelledby="cine-lucreaza">
     <h2 id="cine-lucreaza">Cine lucrează</h2>
     <Profile>
       <p>Sunt Denis, inginer, cu patru ani de experiență în infrastructură și software. Lucrez zilnic cu rețele, servere și mașini virtuale VMware.</p>
       <p>În birourile mici aduc aceleași obiceiuri: fiecare echipament trecut într-un inventar, fiecare schimbare notată, parolele într-un seif, nu pe bilețele. De la primul telefon până la întreținere, vorbiți direct cu mine.</p>
-      <p><a href="/de-ce-tulnic/#cine-lucreaza">Mai multe despre mine și despre nume</a></p>
+      <p><a href="/de-ce-tulnic/">Mai multe despre mine și despre nume</a></p>
     </Profile>
   </section>
 

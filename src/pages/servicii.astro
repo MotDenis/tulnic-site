@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, appMailto, partnerMailto } from '../data/site';
 import CallToAction from '../components/CallToAction.astro';
 import {
   appPrices,
@@ -16,7 +16,7 @@ import {
 
 <BaseLayout
   title="Servicii și prețuri"
-  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București, plus aplicații web la comandă. Prețuri fixe, publicate."
+  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București, plus aplicații și automatizări la comandă. Prețuri fixe, publicate."
 >
   <Fragment slot="intro">
     <h1>Servicii și prețuri</h1>
@@ -28,24 +28,37 @@ import {
       <ul>
         <li><a href="#it-birouri">IT pentru birouri</a></li>
         <li><a href="#preturi">Prețuri</a></li>
-        <li><a href="#aplicatii">Aplicații</a></li>
+        <li><a href="#aplicatii">Aplicații și automatizări</a></li>
+        <li><a href="#firme-it">Pentru firme de IT</a></li>
       </ul>
     </nav>
   </Fragment>
 
   <section class="section" aria-labelledby="it-birouri">
     <h2 id="it-birouri">IT pentru birouri</h2>
+    <div class="prose">
+      <p>Un birou nu are nevoie doar de cineva care să repare calculatorul când se strică. Are nevoie de o infrastructură documentată, copii de siguranță verificate și conturi gestionate corect.</p>
+      <p>Începem cu un diagnostic și un raport scris. Vă explic ce am găsit, ce riscuri merită rezolvate primele și cât costă fiecare etapă. Decideți apoi ce implementăm și în ce ordine.</p>
+    </div>
     <ol class="step-list" role="list">
       <li>
         <h3>Diagnostic</h3>
-        <p>Vin o dată, seara sau sâmbăta, pentru <span class="nowrap">2–4 ore</span>. Primiți un raport scris: ce echipamente și conturi aveți, ce riscuri există și ce e urgent, cu prețuri.</p>
+        <p>Vin o dată, într-o după-amiază sau o sâmbătă, pentru <span class="nowrap">2–4 ore</span>. Primiți un raport scris, cu:</p>
+        <ul>
+          <li>inventarul echipamentelor și al conturilor;</li>
+          <li>ce am verificat și ce am găsit la rețea, backup, conturi și calculatoare;</li>
+          <li>riscurile, în ordinea priorității;</li>
+          <li>recomandările, cu prețul fiecărei etape;</li>
+          <li>ce e urgent și ce poate să mai aștepte.</li>
+        </ul>
+        <p>Diagnosticul nu include reparațiile, care se fac la punerea în ordine, și nu ține loc de un audit GDPR.</p>
       </li>
       <li>
         <h3>Punere în ordine</h3>
         <p>Rezolv, la preț fix, ce a ieșit la diagnostic:</p>
         <ul>
           <li>rețea și Wi-Fi: router și firewall configurate, rețea separată pentru vizitatori, parole noi, firmware actualizat;</li>
-          <li>backup 3-2-1: o copie locală și una în cloud, cu test de restaurare;</li>
+          <li>backup 3-2-1: pe lângă datele originale, două copii de rezervă, una în birou și una în cloud, cu test de restaurare;</li>
           <li>conturi Google Workspace sau Microsoft 365, cu autentificare în doi pași și manager de parole pentru echipă;</li>
           <li>calculatoare actualizate, cu antivirus și conturi de lucru fără drepturi de administrator;</li>
           <li>documentație: inventarul, schema rețelei și parolele, predate într-un seif de parole al biroului;</li>
@@ -80,7 +93,7 @@ import {
         </tbody>
       </table>
     </div>
-    
+
     <ul class="price-cards" role="list">
       {officePrices.map((item) => (
         <li class="card">
@@ -97,22 +110,24 @@ import {
       ))}
     </ul>
 
+    <p class="prose small">Se numără calculatoarele și laptopurile de lucru, inclusiv când un om folosește două. Imprimantele, telefoanele și echipamentele de rețea nu se numără.</p>
+
+    <ul class="prose">
+      <li>Orele de intervenție peste cele incluse în abonament costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă.</li>
+      <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
+      {launchOffer && <li>Primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise, dacă sunt mulțumite.</li>}
+      <li>{vatNote}</li>
+    </ul>
+
     <ul class="cards" role="list">
       <li class="card">
         <h3>Esențial</h3>
-        <p>Monitorizare automată, verificarea lunară a backup-ului, suport de la distanță seara, raport lunar și o oră de intervenții inclusă.</p>
+        <p>Monitorizare automată, verificarea lunară a backup-ului, suport de la distanță în programul de lucru, raport lunar și o oră de intervenții inclusă.</p>
       </li>
       <li class="card">
         <h3>Standard</h3>
         <p>Tot ce are Esențial, plus 3 ore de intervenții, o vizită lunară la sediu, conturi pentru angajații noi și închiderea celor care pleacă, administrarea rețelei și a Wi-Fi-ului.</p>
       </li>
-    </ul>
-
-    <ul class="prose">
-      <li>Orele peste cele incluse costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă.</li>
-      <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
-      {launchOffer && <li>Primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise, dacă sunt mulțumite.</li>}
-      <li>{vatNote}</li>
     </ul>
   </section>
 
@@ -121,8 +136,8 @@ import {
     <ul class="prose">
       <li>Program: {site.hours}.</li>
       <li>{site.reply}</li>
-      <li>Actualizările și reconfigurările se fac în afara programului biroului, deci fără întreruperi.</li>
-      <li>Nu ofer intervenții imediate în timpul zilei. Monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
+      <li>Suportul din abonamente se oferă în acest program. În zilele lucrătoare nu pot interveni înainte de ora 15:00; monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
+      <li>Actualizările și reconfigurările le fac după închiderea biroului sau sâmbăta, deci fără întreruperi.</li>
     </ul>
   </section>
 
@@ -139,21 +154,31 @@ import {
 
   <section class="section" aria-labelledby="aplicatii">
     <h2 id="aplicatii">Aplicații și automatizări</h2>
-    <p class="prose">Dacă țineți comenzi, stocuri, lucrări sau clienți într-un Excel care nu mai face față, îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă.</p>
+    <p class="prose">Dacă țineți comenzi, stocuri, lucrări sau clienți într-un Excel care nu mai face față, îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă. Iar unde aceleași date se introduc de mai multe ori, de mână, pun o automatizare să facă munca repetitivă.</p>
     <ul class="prose">
       <li><strong>Exemple:</strong> evidența comenzilor sau a stocurilor, lucrări de service, pontaj, un CRM simplu, legătura dintre magazinul online, facturare și curieri. Pentru cabinetele de contabilitate: descărcarea și sortarea automată a facturilor din e-Factura, cu alerte și rapoarte.</li>
       <li><strong>Cum lucrăm:</strong> discutăm fluxul de lucru, scriu specificațiile și criteriile de acceptare, apoi livrez în etape pe care le vedeți pe parcurs. Durata obișnuită: 6–10 săptămâni.</li>
       <li><strong>Preț:</strong> fix, stabilit după specificații. Orientativ, {leiRange(appPrices.internalApp)} pentru o aplicație internă mică și {leiRange(appPrices.integration)} pentru o integrare. Găzduirea și mentenanța costă {leiRange(appPrices.hosting)} pe lună.</li>
       <li><strong>Plata:</strong> 30–50% avans, restul pe etape. Schimbările față de specificații se plătesc separat, cu {lei(hourlyRate)}/oră.</li>
       <li><strong>Codul și datele:</strong> la plata integrală primiți codul aplicației, iar datele rămân ale dumneavoastră. Când aplicația conține date personale, semnăm un contract de prelucrare a datelor, conform art. 28 din GDPR.</li>
-      <li><strong>Nu preiau:</strong> aplicații cu plăți online sau cu date medicale.</li>
+      <li><strong>Nu preiau:</strong> aplicații cu plăți online sau care prelucrează date medicale. Administrarea IT a cabinetelor medicale (rețea, backup, conturi) o fac, ca la orice birou.</li>
     </ul>
+    <div class="actions">
+      <a class="btn btn-secondary" href={appMailto}>Scrieți-mi de ce aveți nevoie</a>
+    </div>
   </section>
 
   <section class="section" aria-labelledby="firme-it">
     <h2 id="firme-it">Pentru firme de IT</h2>
-    <p class="prose">Lucrez și ca subcontractor, la lucrări programate seara și în weekend: migrări de servere, backup, reorganizări de rack și de rețea. Nu iau legătura cu clienții firmei. Scrieți-mi pentru oferta de colaborare.</p>
+    <p class="prose">Lucrez și ca subcontractor, la lucrări programate în zilele lucrătoare după ora 15:00 și în weekend: migrări de servere, backup, reorganizări de rack și de rețea. Nu iau legătura cu clienții firmei. <a href={partnerMailto}>Scrieți-mi pentru oferta de colaborare</a>.</p>
   </section>
 
   <CallToAction />
 </BaseLayout>
+
+<style>
+  /* Rândul de după lista de livrabile a diagnosticului */
+  .step-list ul + p {
+    margin-top: var(--space-3);
+  }
+</style>

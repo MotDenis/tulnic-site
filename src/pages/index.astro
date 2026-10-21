@@ -1,9 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CallToAction from '../components/CallToAction.astro';
-import Note from '../components/Note.astro';
+import OfferBadge from '../components/OfferBadge.astro';
 import Profile from '../components/Profile.astro';
-import { launchOffer, lei, priceFrom } from '../data/offer';
+import { launchOffer, lei, leiRange, officePrices, priceFrom } from '../data/offer';
+
+// Cât costă de obicei diagnosticul: de la biroul cel mai mic la cel mai mare.
+const diagnosticPrices = officePrices.find((item) => item.id === 'diagnostic')?.prices ?? [0];
+const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPrices)] as const;
 ---
 
 <BaseLayout
@@ -24,9 +28,9 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
       <a class="btn btn-primary" href="/contact/">Solicitați un diagnostic</a>
       <a class="btn btn-secondary" href="/servicii/">Vedeți serviciile și prețurile</a>
     </div>
+    <OfferBadge href="#oferta" />
     <p class="small">
       <span class="nowrap">Prețuri fixe</span> · <span class="nowrap">Fără perioadă minimă de contract</span> · <span class="nowrap">Interlocutor tehnic direct</span>
-      {launchOffer && <><br />Pentru primele trei birouri, diagnosticul e gratuit.</>}
     </p>
   </Fragment>
 
@@ -59,6 +63,7 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
       <li class="card">
         <h3>Diagnostic</h3>
         <p>Vin o dată, într-o după-amiază sau o sâmbătă, pentru <span class="nowrap">2–4 ore</span>, și primiți un raport scris, cu prețuri.</p>
+        {launchOffer && <p class="card-offer"><a href="#oferta">Gratuit pentru primele trei birouri</a></p>}
         <p class="price">De la {lei(priceFrom('diagnostic'))}</p>
       </li>
       <li class="card">
@@ -72,9 +77,6 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
         <p class="price">De la {lei(priceFrom('essential'))} pe lună</p>
       </li>
     </ol>
-    {launchOffer && (
-      <Note><strong>Ofertă de lansare.</strong> Pentru primele trei birouri, diagnosticul e gratuit, în schimbul unei recomandări scrise, dacă sunteți mulțumiți.</Note>
-    )}
   </section>
 
   <section class="section" aria-labelledby="dupa-diagnostic">
@@ -87,7 +89,22 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
       <li>pașii următori, inclusiv ce poate să mai aștepte.</li>
     </ul>
     <p class="prose">Decideți apoi ce implementăm și în ce ordine.</p>
+    <div class="actions">
+      <a class="btn btn-secondary" href="/exemplu-raport/">Vedeți un exemplu de raport</a>
+    </div>
   </section>
+
+  {launchOffer && (
+    <section class="section offer-panel" id="oferta" aria-labelledby="oferta-titlu">
+      <p class="eyebrow">Ofertă de lansare</p>
+      <h2 id="oferta-titlu">Diagnostic gratuit pentru primele trei birouri</h2>
+      <p>Vin într-o după-amiază sau o sâmbătă, verific rețeaua, backup-ul, conturile și calculatoarele și primiți raportul scris, la fel ca la un diagnostic plătit. În mod normal, diagnosticul costă {leiRange(diagnosticRange)}, după numărul de calculatoare.</p>
+      <p>În schimb, dacă sunteți mulțumiți, îmi lăsați o recomandare scrisă.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/contact/">Rezervați un loc</a>
+      </div>
+    </section>
+  )}
 
   <section class="section" aria-labelledby="cum-lucrez">
     <h2 id="cum-lucrez">Cum lucrez</h2>
@@ -104,7 +121,7 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
     <p class="prose">
       Dacă țineți comenzi, stocuri, lucrări sau clienți într-un Excel care nu mai face față, îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă.
       Iar unde aceleași date se introduc de mai multe ori, de mână, pun o automatizare să facă munca repetitivă.
-      <a href="/servicii/#aplicatii">Exemple și prețuri pentru aplicații</a>
+      <a href="/aplicatii/">Exemple, cum lucrăm și prețuri</a>
     </p>
   </section>
 
@@ -119,3 +136,53 @@ import { launchOffer, lei, priceFrom } from '../data/offer';
 
   <CallToAction />
 </BaseLayout>
+
+<style>
+  /* Eticheta ofertei pe cardul Diagnostic */
+  .card-offer {
+    align-self: flex-start;
+    margin: 0 0 var(--space-3);
+    padding: var(--space-1) var(--space-3);
+    background: var(--amber-tint);
+    border: var(--border-hairline) solid var(--amber);
+    border-radius: var(--radius-pill);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .card-offer a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .card-offer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Panoul ofertei de lansare */
+  .offer-panel {
+    padding: var(--space-6);
+    background: var(--amber-tint);
+    border: var(--border-control) solid var(--amber);
+    border-radius: var(--radius-lg);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .offer-panel > * {
+    max-width: var(--measure);
+  }
+
+  .offer-panel h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .offer-panel .actions {
+    margin: var(--space-5) 0 0;
+  }
+
+  @media (max-width: 30rem) {
+    .offer-panel {
+      padding: var(--space-5);
+    }
+  }
+</style>

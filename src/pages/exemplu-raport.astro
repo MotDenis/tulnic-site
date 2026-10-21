@@ -1,0 +1,416 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Note from '../components/Note.astro';
+import { lei, priceFrom } from '../data/offer';
+
+// Un raport de diagnostic dat ca exemplu. Cabinetul, oamenii și cifrele sunt inventate.
+// Prețurile vin din data/offer.ts, ca exemplul să rămână la zi cu lista de prețuri
+// (cabinetul are 9 calculatoare, deci prețurile pentru „până la 10”).
+const diagnostic = priceFrom('diagnostic');
+const setup = priceFrom('setup');
+const essential = priceFrom('essential');
+---
+
+<BaseLayout
+  title="Exemplu de raport de diagnostic"
+  description="Cum arată raportul primit după diagnosticul IT: inventarul, problemele în ordinea priorității, recomandările cu prețuri și pașii următori. Exemplu cu date inventate."
+>
+  <Fragment slot="intro">
+    <p class="eyebrow">Exemplu cu date inventate</p>
+    <h1>Exemplu de raport de diagnostic</h1>
+    <p class="lead">Așa arată raportul pe care îl primiți după diagnostic. Cabinetul de mai jos e inventat, dar structura și nivelul de detaliu sunt cele din rapoartele reale.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact/">Solicitați un diagnostic</a>
+      <a class="btn btn-secondary" href="/servicii/#it-birouri">Ce include diagnosticul</a>
+    </div>
+  </Fragment>
+
+  <Note>Cabinetul, oamenii, datele și cifrele de pe această pagină sunt inventate. Raportul real e confidențial: îl primiți doar dumneavoastră.</Note>
+
+  <article class="report" aria-labelledby="raport-titlu">
+    <header>
+      <p class="report-kicker">Tulnic · Raport de diagnostic · Exemplu</p>
+      <h2 id="raport-titlu">Cabinet medical, București</h2>
+      <dl class="report-meta">
+        <div>
+          <dt>Vizita</dt>
+          <dd>Sâmbătă, 17 octombrie 2026, 9:00–12:00</dd>
+        </div>
+        <div>
+          <dt>Oameni</dt>
+          <dd>8: 3 medici, 3 asistente, 2 la recepție</dd>
+        </div>
+        <div>
+          <dt>Calculatoare</dt>
+          <dd>9: 7 desktopuri și 2 laptopuri</dd>
+        </div>
+        <div>
+          <dt>Întocmit de</dt>
+          <dd>Denis, Tulnic</dd>
+        </div>
+      </dl>
+    </header>
+
+    <section class="report-section" aria-labelledby="r-pe-scurt">
+      <h3 id="r-pe-scurt">1. Pe scurt</h3>
+      <p>Rețeaua și calculatoarele funcționează, dar documentele cabinetului nu sunt protejate cum ar trebui. Ultima copie de siguranță e din iulie, pacienții folosesc aceeași rețea Wi-Fi cu calculatoarele, iar la recepție trei oameni folosesc același cont de e-mail.</p>
+      <p>Am găsit 3 probleme urgente, 4 de rezolvat în următoarele 30 de zile și 2 care pot aștepta. Aproape toate se rezolvă la punerea în ordine, la preț fix. În plus, un calculator vechi trebuie înlocuit.</p>
+    </section>
+
+    <section class="report-section" aria-labelledby="r-inventar">
+      <h3 id="r-inventar">2. Ce aveți</h3>
+      <div class="report-scroll" role="region" aria-labelledby="r-inventar" tabindex="0">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th scope="col">Echipament sau cont</th>
+              <th scope="col">Câte</th>
+              <th scope="col">Ce am observat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Router de la furnizorul de internet</th>
+              <td>1</td>
+              <td>Parola de administrare din fabrică; WPS pornit</td>
+            </tr>
+            <tr>
+              <th scope="row">Switch fără administrare, 8 porturi</th>
+              <td>1</td>
+              <td>În dulapul de rețea; cablurile nu sunt etichetate</td>
+            </tr>
+            <tr>
+              <th scope="row">Calculatoare desktop</th>
+              <td>7</td>
+              <td>4 cu Windows 11, 3 cu Windows 10</td>
+            </tr>
+            <tr>
+              <th scope="row">Laptopuri</th>
+              <td>2</td>
+              <td>Windows 11, actualizate</td>
+            </tr>
+            <tr>
+              <th scope="row">Imprimantă multifuncțională, în rețea</th>
+              <td>1</td>
+              <td>Parola din fabrică la pagina de administrare</td>
+            </tr>
+            <tr>
+              <th scope="row">Hard disk extern, 1 TB</th>
+              <td>1</td>
+              <td>Folosit pentru backup; ultima copie: 14 iulie 2026</td>
+            </tr>
+            <tr>
+              <th scope="row">Conturi Microsoft 365</th>
+              <td>6</td>
+              <td>Pentru 8 oameni: contul recepției e folosit de 3 persoane</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="report-section" aria-labelledby="r-verificat">
+      <h3 id="r-verificat">3. Ce am verificat</h3>
+      <ul>
+        <li>rețeaua și Wi-Fi-ul: routerul, switch-ul, rețelele și parolele;</li>
+        <li>backup-ul: ce se copiază, unde, când a rulat ultima dată și dacă documentele se pot restaura;</li>
+        <li>conturile Microsoft 365: cine le folosește și cum sunt protejate;</li>
+        <li>cele 9 calculatoare: sistemul, actualizările, antivirusul și drepturile utilizatorilor;</li>
+        <li>imprimanta din rețea.</li>
+      </ul>
+      <p><strong>Nu am verificat:</strong> aplicația de programări și fișele pacienților, pe care le administrează furnizorul aplicației, și nici instalația electrică.</p>
+    </section>
+
+    <section class="report-section" aria-labelledby="r-probleme">
+      <h3 id="r-probleme">4. Probleme, în ordinea priorității</h3>
+
+      <h4 class="priority priority-high">Urgent</h4>
+      <ol class="findings">
+        <li>
+          <p><strong>Ultima copie de siguranță e din 14 iulie.</strong> Copia e pe un hard disk extern lăsat conectat la calculatorul de la recepție. Un virus de tip ransomware sau o defecțiune a acestui calculator ar lua și documentele, și copia lor.</p>
+          <p class="fix"><strong>Recomand:</strong> backup 3-2-1, cu o copie în birou și una în cloud, verificat lunar și cu test de restaurare.</p>
+        </li>
+        <li>
+          <p><strong>Pacienții folosesc aceeași rețea Wi-Fi cu calculatoarele.</strong> Parola e afișată în sala de așteptare, așa că un telefon infectat ajunge în aceeași rețea cu calculatoarele cabinetului.</p>
+          <p class="fix"><strong>Recomand:</strong> o rețea separată pentru vizitatori, fără acces la calculatoare.</p>
+        </li>
+        <li>
+          <p><strong>Trei oameni folosesc același cont de e-mail.</strong> Contul recepției are o singură parolă, știută de trei persoane, și nu are autentificare în doi pași. Nu se poate ști cine a trimis un mesaj, iar accesul nu i se poate retrage cuiva care pleacă.</p>
+          <p class="fix"><strong>Recomand:</strong> un cont pentru fiecare om, autentificare în doi pași și un manager de parole pentru echipă.</p>
+        </li>
+      </ol>
+
+      <h4 class="priority priority-mid">În următoarele 30 de zile</h4>
+      <ol class="findings" start="4">
+        <li>
+          <p><strong>Trei calculatoare au Windows 10.</strong> Microsoft a încheiat suportul pentru Windows 10 în octombrie 2025, așa că problemele de securitate descoperite de atunci rămân deschise pe aceste calculatoare. Două pot trece pe Windows 11; al treilea nu e compatibil.</p>
+          <p class="fix"><strong>Recomand:</strong> trecerea a două calculatoare pe Windows 11 și înlocuirea celui de-al treilea.</p>
+        </li>
+        <li>
+          <p><strong>Toți utilizatorii sunt administratori pe calculatoare.</strong> Orice program descărcat, inclusiv unul periculos, se instalează fără nicio oprire.</p>
+          <p class="fix"><strong>Recomand:</strong> conturi de lucru fără drepturi de administrator; programele noi se instalează la cerere.</p>
+        </li>
+        <li>
+          <p><strong>Routerul are parola din fabrică, iar WPS e pornit.</strong> Cine ajunge în raza Wi-Fi-ului poate încerca mai ușor să intre în rețea.</p>
+          <p class="fix"><strong>Recomand:</strong> parole noi, WPS oprit și firmware actualizat.</p>
+        </li>
+        <li>
+          <p><strong>Nu există inventar sau schemă a rețelei.</strong> Parolele sunt scrise pe bilețele lipite de monitoare, iar nimeni din cabinet nu știe exact cum e legată rețeaua.</p>
+          <p class="fix"><strong>Recomand:</strong> inventar, schema rețelei și parolele într-un seif de parole al cabinetului.</p>
+        </li>
+      </ol>
+
+      <h4 class="priority priority-low">Poate aștepta</h4>
+      <ol class="findings" start="8">
+        <li>
+          <p><strong>Imprimanta are parola din fabrică.</strong> După separarea rețelei pentru vizitatori, riscul e mic.</p>
+          <p class="fix"><strong>Recomand:</strong> o parolă nouă, la punerea în ordine.</p>
+        </li>
+        <li>
+          <p><strong>Routerul și backup-ul nu au o sursă UPS.</strong> O pană scurtă de curent oprește internetul și poate întrerupe o copie de siguranță.</p>
+          <p class="fix"><strong>Recomand:</strong> o sursă UPS mică, la următoarea achiziție.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="report-section" aria-labelledby="r-costuri">
+      <h3 id="r-costuri">5. Recomandări și costuri</h3>
+      <div class="report-scroll" role="region" aria-labelledby="r-costuri" tabindex="0">
+        <table class="report-table report-costs">
+          <thead>
+            <tr>
+              <th scope="col">Ce</th>
+              <th scope="col">Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Punerea în ordine, pentru până la 10 calculatoare: rezolvă problemele 1–8, cu documentația și 30 de minute de instruire pentru echipă</th>
+              <td>{lei(setup)}, preț fix</td>
+            </tr>
+            <tr>
+              <th scope="row">Diagnosticul, scăzut din punerea în ordine dacă începem în 30 de zile</th>
+              <td>−{lei(diagnostic)}</td>
+            </tr>
+            <tr class="total">
+              <th scope="row">De plată pentru punerea în ordine</th>
+              <td>{lei(setup - diagnostic)}</td>
+            </tr>
+            <tr>
+              <th scope="row">Abonamentul Esențial, după punerea în ordine: monitorizare, verificarea lunară a backup-ului, suport de la distanță și o oră de intervenții pe lună</th>
+              <td>{lei(essential)} pe lună</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Punerea în ordine se plătește 50% la început și 50% la predare.</p>
+
+      <h4>Ce cumpărați pe numele cabinetului</h4>
+      <p>Echipamentele și licențele nu intră în prețul meu: le cumpărați direct, la prețul furnizorului. Înainte de comandă vă trimit două-trei variante, cu prețuri.</p>
+      <ul>
+        <li>un calculator nou, în locul celui care nu poate trece pe Windows 11;</li>
+        <li>un disc de rețea pentru copia de siguranță din birou;</li>
+        <li>abonamentul de backup în cloud;</li>
+        <li>două licențe Microsoft 365 în plus, ca fiecare om să aibă contul lui;</li>
+        <li>abonamentul managerului de parole pentru echipă;</li>
+        <li>mai târziu, o sursă UPS.</li>
+      </ul>
+    </section>
+
+    <section class="report-section" aria-labelledby="r-pasi">
+      <h3 id="r-pasi">6. Pașii următori</h3>
+      <ol>
+        <li>Îmi spuneți ce variantă alegeți. Dacă începem până pe 16 noiembrie, cei {lei(diagnostic)} ai diagnosticului se scad din punerea în ordine.</li>
+        <li>Comandați echipamentele și licențele din listă.</li>
+        <li>Stabilim două sâmbete pentru lucrări, ca să nu opresc activitatea cabinetului.</li>
+        <li>La final primiți documentația, parolele în seiful cabinetului și 30 de minute de instruire pentru echipă.</li>
+      </ol>
+    </section>
+  </article>
+
+  <CallToAction title="Vreți un raport ca acesta pentru biroul dumneavoastră?" />
+</BaseLayout>
+
+<style>
+  .report {
+    max-width: 52rem;
+    margin-top: var(--space-6);
+    padding: var(--space-6);
+    background: var(--surface);
+    border: var(--border-hairline) solid var(--line);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+  }
+
+  .report-kicker {
+    margin: 0 0 var(--space-2);
+    color: var(--wood);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .report h2 {
+    margin-bottom: var(--space-5);
+  }
+
+  .report-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-3) var(--space-5);
+    margin: 0;
+    padding-bottom: var(--space-5);
+    border-bottom: var(--border-hairline) solid var(--line);
+  }
+
+  .report-meta dt {
+    color: var(--ink-muted);
+    font-size: 0.875rem;
+  }
+
+  .report-meta dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .report-section {
+    margin-top: var(--space-6);
+  }
+
+  .report-section > :last-child {
+    margin-bottom: 0;
+  }
+
+  .report ul,
+  .report ol {
+    padding-left: 1.5rem;
+  }
+
+  .report li + li {
+    margin-top: var(--space-2);
+  }
+
+  .report h4 {
+    margin: var(--space-5) 0 var(--space-3);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* Prioritatea: scrisă în cuvinte, culoarea doar o întărește */
+  .priority {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: 0.9375rem;
+  }
+
+  .priority-high {
+    background: var(--amber-tint);
+    color: var(--wood);
+    border: var(--border-hairline) solid var(--amber);
+  }
+
+  .priority-mid {
+    border: var(--border-hairline) solid var(--ink-muted);
+  }
+
+  .priority-low {
+    color: var(--ink-muted);
+    border: var(--border-hairline) dashed var(--ink-muted);
+  }
+
+  .findings li + li {
+    margin-top: var(--space-4);
+  }
+
+  .findings p {
+    margin: 0;
+  }
+
+  .findings .fix {
+    margin-top: var(--space-1);
+    color: var(--ink-muted);
+  }
+
+  .findings .fix strong {
+    color: var(--ink);
+  }
+
+  .report-scroll {
+    margin-bottom: var(--space-4);
+    overflow-x: auto;
+    border: var(--border-hairline) solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+
+  .report-table {
+    width: 100%;
+    min-width: 32rem;
+    border-collapse: collapse;
+  }
+
+  .report-costs {
+    min-width: 0;
+  }
+
+  .report-table th,
+  .report-table td {
+    padding: 0.625rem var(--space-3);
+    border-bottom: var(--border-hairline) solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .report-table thead th {
+    background: var(--bg);
+    font-size: 0.875rem;
+  }
+
+  .report-table tbody th {
+    font-weight: 400;
+  }
+
+  .report-table tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  .report-costs td {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .report-table .total > * {
+    font-weight: 700;
+  }
+
+  @media (max-width: 40rem) {
+    .report {
+      padding: var(--space-4);
+    }
+
+    .report-costs td {
+      white-space: normal;
+    }
+  }
+
+  /* La tipărire rămân doar nota și raportul, ca exemplul să poată fi salvat ca PDF. */
+  @media print {
+    :global(.band),
+    :global(.skip-link) {
+      display: none !important;
+    }
+
+    :global(.content) {
+      padding: 0;
+    }
+
+    .report {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }
+</style>

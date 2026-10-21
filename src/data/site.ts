@@ -19,6 +19,7 @@ export const site = {
 export const navLinks = [
   { href: '/', label: 'Acasă' },
   { href: '/servicii/', label: 'Servicii' },
+  { href: '/aplicatii/', label: 'Aplicații' },
   { href: '/de-ce-tulnic/', label: 'De ce Tulnic' },
   { href: '/contact/', label: 'Contact' },
 ] as const;
@@ -39,7 +40,7 @@ export const diagnosticMailto = mailto('Cerere diagnostic', [
   'Când vă convine o primă vizită (o după-amiază sau o sâmbătă):',
 ]);
 
-// Pentru aplicații și automatizări (Servicii, #aplicatii).
+// Pentru aplicații și automatizări (pagina Aplicații).
 export const appMailto = mailto('Aplicație sau automatizare', [
   'Bună ziua,',
   '',

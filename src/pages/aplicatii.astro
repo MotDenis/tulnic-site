@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { appMailto } from '../data/site';
+import { appPrices, hourlyRate, lei, leiRange, vatNote } from '../data/offer';
+---
+
+<BaseLayout
+  title="Aplicații și automatizări"
+  description="Aplicații web simple și automatizări la comandă pentru firme mici: în locul unui Excel care nu mai face față, al datelor introduse de două ori sau al pașilor făcuți de mână. Preț fix, după specificații."
+>
+  <Fragment slot="intro">
+    <h1>Aplicații și automatizări la comandă</h1>
+    <p class="lead">
+      Pentru firmele care pierd timp cu un Excel care nu mai face față, cu aceleași date introduse de mai multe ori sau cu pași făcuți de mână.
+      Construiesc aplicația sau automatizarea de care aveți nevoie, la preț fix, stabilit după specificații.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href={appMailto}>Scrieți-mi de ce aveți nevoie</a>
+      <a class="btn btn-secondary" href="#preturi">Vedeți prețurile</a>
+    </div>
+  </Fragment>
+
+  <section class="section" aria-labelledby="ce-rezolv">
+    <h2 id="ce-rezolv">Ce pot rezolva</h2>
+    <ul class="cards" role="list">
+      <li class="card">
+        <h3>Un Excel care nu mai face față</h3>
+        <p>Comenzi, stocuri, lucrări sau clienți, ținuți într-un fișier pe care îl editează pe rând mai mulți oameni. Îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă.</p>
+      </li>
+      <li class="card">
+        <h3>Aceleași date, introduse de două ori</h3>
+        <p>O comandă din magazinul online, trecută apoi de mână în facturare și la curier. Leg programele între ele, ca datele să treacă singure dintr-unul în altul.</p>
+      </li>
+      <li class="card">
+        <h3>Facturile din e-Factura, descărcate de mână</h3>
+        <p>Pentru cabinetele de contabilitate: descărcarea și sortarea automată a facturilor din e-Factura, cu alerte și rapoarte.</p>
+      </li>
+      <li class="card">
+        <h3>Evidențe ținute pe hârtie</h3>
+        <p>Pontaj, lucrări de service sau un CRM simplu: aplicații mici, făcute pe măsura felului în care lucrați deja.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="cum-lucram">
+    <h2 id="cum-lucram">Cum lucrăm</h2>
+    <ol class="step-list" role="list">
+      <li>
+        <h3>Discutăm fluxul de lucru</h3>
+        <p>Îmi arătați cum lucrați acum: ce fișiere folosiți, cine introduce datele și unde se pierde timpul.</p>
+      </li>
+      <li>
+        <h3>Specificații și preț fix</h3>
+        <p>Scriu specificațiile și criteriile de acceptare, adică ce trebuie să facă aplicația ca s-o considerați gata. Pe baza lor primiți un preț fix.</p>
+      </li>
+      <li>
+        <h3>Livrare în etape</h3>
+        <p>Livrez în etape pe care le vedeți și le încercați pe parcurs, ca să corectăm direcția din timp. Durata obișnuită: 6–10 săptămâni.</p>
+      </li>
+      <li>
+        <h3>Predare</h3>
+        <p>La plata integrală primiți codul aplicației, iar datele rămân ale dumneavoastră. Dacă vreți, găzduiesc aplicația și o țin la zi.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="preturi">
+    <h2 id="preturi">Prețuri</h2>
+    <ul class="cards" role="list">
+      <li class="card">
+        <h3>Aplicație internă mică</h3>
+        <p>De exemplu, evidența comenzilor sau un CRM simplu.</p>
+        <p class="price">{leiRange(appPrices.internalApp)}</p>
+      </li>
+      <li class="card">
+        <h3>Integrare</h3>
+        <p>Legătura dintre două programe, de exemplu magazinul online și facturarea.</p>
+        <p class="price">{leiRange(appPrices.integration)}</p>
+      </li>
+      <li class="card">
+        <h3>Găzduire și mentenanță</h3>
+        <p>Opțional, după predare: găzduiesc aplicația și o țin la zi.</p>
+        <p class="price">{leiRange(appPrices.hosting)} pe lună</p>
+      </li>
+    </ul>
+    <ul class="prose">
+      <li><strong>Preț:</strong> fix, stabilit după specificații. Sumele de mai sus sunt orientative.</li>
+      <li><strong>Plata:</strong> 30–50% avans, restul pe etape. Schimbările față de specificații se plătesc separat, cu {lei(hourlyRate)}/oră.</li>
+      <li><strong>Date personale:</strong> când aplicația conține date personale, semnăm un contract de prelucrare a datelor, conform art. 28 din GDPR.</li>
+      <li><strong>Nu preiau:</strong> aplicații cu plăți online sau care prelucrează date medicale. Administrarea IT a cabinetelor medicale (rețea, backup, conturi) o fac, ca la orice birou: <a href="/servicii/">IT pentru birouri</a>.</li>
+      <li>{vatNote}</li>
+    </ul>
+  </section>
+
+  <CallToAction title="Primul pas: o discuție despre cum lucrați" mailto={appMailto} offer={false} />
+</BaseLayout>

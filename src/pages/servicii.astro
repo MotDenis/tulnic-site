@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, appMailto, partnerMailto } from '../data/site';
+import { site, partnerMailto } from '../data/site';
 import CallToAction from '../components/CallToAction.astro';
+import OfferBadge from '../components/OfferBadge.astro';
 import {
-  appPrices,
   hourlyRate,
   launchOffer,
   lei,
-  leiRange,
   officePrices,
   sizes,
   vatNote,
@@ -16,7 +15,7 @@ import {
 
 <BaseLayout
   title="Servicii și prețuri"
-  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București, plus aplicații și automatizări la comandă. Prețuri fixe, publicate."
+  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București. Prețuri fixe, publicate, fără perioadă minimă de contract."
 >
   <Fragment slot="intro">
     <h1>Servicii și prețuri</h1>
@@ -24,11 +23,11 @@ import {
       Pentru birourile de <span class="nowrap">5–30</span> de oameni: cabinete medicale, contabili, avocați.
       Prețuri fixe, fără perioadă minimă de contract.
     </p>
+    <OfferBadge />
     <nav class="toc" aria-label="Pe această pagină">
       <ul>
         <li><a href="#it-birouri">IT pentru birouri</a></li>
         <li><a href="#preturi">Prețuri</a></li>
-        <li><a href="#aplicatii">Aplicații și automatizări</a></li>
         <li><a href="#firme-it">Pentru firme de IT</a></li>
       </ul>
     </nav>
@@ -52,6 +51,7 @@ import {
           <li>ce e urgent și ce poate să mai aștepte.</li>
         </ul>
         <p>Diagnosticul nu include reparațiile, care se fac la punerea în ordine, și nu ține loc de un audit GDPR.</p>
+        <p><a href="/exemplu-raport/">Vedeți un exemplu de raport</a></p>
       </li>
       <li>
         <h3>Punere în ordine</h3>
@@ -115,7 +115,7 @@ import {
     <ul class="prose">
       <li>Orele de intervenție peste cele incluse în abonament costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă.</li>
       <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
-      {launchOffer && <li>Primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise, dacă sunt mulțumite.</li>}
+      {launchOffer && <li><strong>Ofertă de lansare:</strong> primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise, dacă sunt mulțumite.</li>}
       <li>{vatNote}</li>
     </ul>
 
@@ -135,9 +135,9 @@ import {
     <h2 id="program">Program și timp de răspuns</h2>
     <ul class="prose">
       <li>Program: {site.hours}.</li>
+      <li>Suportul din abonamente se oferă în acest program. Monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
       <li>{site.reply}</li>
-      <li>Suportul din abonamente se oferă în acest program. În zilele lucrătoare nu pot interveni înainte de ora 15:00; monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
-      <li>Actualizările și reconfigurările le fac după închiderea biroului sau sâmbăta, deci fără întreruperi.</li>
+      <li>Actualizările și reconfigurările se fac după închiderea biroului, deci fără întreruperi.</li>
     </ul>
   </section>
 
@@ -154,18 +154,7 @@ import {
 
   <section class="section" aria-labelledby="aplicatii">
     <h2 id="aplicatii">Aplicații și automatizări</h2>
-    <p class="prose">Dacă țineți comenzi, stocuri, lucrări sau clienți într-un Excel care nu mai face față, îl transform într-o aplicație web simplă, cu conturi pentru fiecare om din echipă. Iar unde aceleași date se introduc de mai multe ori, de mână, pun o automatizare să facă munca repetitivă.</p>
-    <ul class="prose">
-      <li><strong>Exemple:</strong> evidența comenzilor sau a stocurilor, lucrări de service, pontaj, un CRM simplu, legătura dintre magazinul online, facturare și curieri. Pentru cabinetele de contabilitate: descărcarea și sortarea automată a facturilor din e-Factura, cu alerte și rapoarte.</li>
-      <li><strong>Cum lucrăm:</strong> discutăm fluxul de lucru, scriu specificațiile și criteriile de acceptare, apoi livrez în etape pe care le vedeți pe parcurs. Durata obișnuită: 6–10 săptămâni.</li>
-      <li><strong>Preț:</strong> fix, stabilit după specificații. Orientativ, {leiRange(appPrices.internalApp)} pentru o aplicație internă mică și {leiRange(appPrices.integration)} pentru o integrare. Găzduirea și mentenanța costă {leiRange(appPrices.hosting)} pe lună.</li>
-      <li><strong>Plata:</strong> 30–50% avans, restul pe etape. Schimbările față de specificații se plătesc separat, cu {lei(hourlyRate)}/oră.</li>
-      <li><strong>Codul și datele:</strong> la plata integrală primiți codul aplicației, iar datele rămân ale dumneavoastră. Când aplicația conține date personale, semnăm un contract de prelucrare a datelor, conform art. 28 din GDPR.</li>
-      <li><strong>Nu preiau:</strong> aplicații cu plăți online sau care prelucrează date medicale. Administrarea IT a cabinetelor medicale (rețea, backup, conturi) o fac, ca la orice birou.</li>
-    </ul>
-    <div class="actions">
-      <a class="btn btn-secondary" href={appMailto}>Scrieți-mi de ce aveți nevoie</a>
-    </div>
+    <p class="prose">Construiesc și aplicații web simple sau automatizări la comandă, de exemplu în locul unui Excel care nu mai face față. <a href="/aplicatii/">Exemple, cum lucrăm și prețuri</a></p>
   </section>
 
   <section class="section" aria-labelledby="firme-it">
@@ -177,7 +166,7 @@ import {
 </BaseLayout>
 
 <style>
-  /* Rândul de după lista de livrabile a diagnosticului */
+  /* Rândurile de după lista de livrabile a diagnosticului */
   .step-list ul + p {
     margin-top: var(--space-3);
   }

@@ -1,17 +1,29 @@
 ---
 import { site, diagnosticMailto } from '../data/site';
+import { launchOffer } from '../data/offer';
 
+interface Props {
+  /** Titlul panoului; implicit, diagnosticul pentru birouri. */
+  title?: string;
+  /** Linkul butonului „Scrieți un e-mail”, cu subiectul și întrebările potrivite paginii. */
+  mailto?: string;
+  /** Oferta de lansare apare doar unde e vorba de diagnostic. */
+  offer?: boolean;
+}
+
+const { title = 'Primul pas: diagnosticul', mailto = diagnosticMailto, offer = true } = Astro.props;
 const tel = site.phone.replace(/[^+\d]/g, '');
 ---
 
 <section class="cta band" aria-labelledby="primul-pas">
-  <h2 id="primul-pas">Primul pas: diagnosticul</h2>
+  {offer && launchOffer && <p class="eyebrow">Ofertă de lansare: diagnostic gratuit pentru primele trei birouri</p>}
+  <h2 id="primul-pas">{title}</h2>
   <p>
     Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.
     {site.reply}
   </p>
   <div class="actions">
-    <a class="btn btn-primary" href={diagnosticMailto}>Scrieți un e-mail</a>
+    <a class="btn btn-primary" href={mailto}>Scrieți un e-mail</a>
     <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
   </div>
 </section>

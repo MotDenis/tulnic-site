@@ -1,0 +1,67 @@
+---
+// Oferta de lansare, pe banda de sus a paginii: un semn pe fond chihlimbar, greu de ratat.
+// Dispare singur când launchOffer devine false în data/offer.ts.
+import { launchOffer } from '../data/offer';
+
+interface Props {
+  /** Unde duce semnul: implicit, la detaliile ofertei de pe prima pagină. */
+  href?: string;
+}
+
+const { href = '/#oferta' } = Astro.props;
+---
+
+{launchOffer && (
+  <p class="offer">
+    <a class="offer-badge" href={href}>
+      <svg viewBox="38 0 26 26" aria-hidden="true">
+        <g class="waves">
+          <path d="M42.4 15.1A8 8 0 0 1 48.9 21.6" />
+          <path d="M43.4 9.2A14 14 0 0 1 54.8 20.6" />
+          <path d="M44.5 3.3A20 20 0 0 1 60.7 19.5" />
+        </g>
+      </svg>
+      <span><strong>Ofertă de lansare:</strong> diagnostic gratuit pentru primele trei birouri</span>
+    </a>
+  </p>
+)}
+
+<style>
+  .offer {
+    margin: 0 0 var(--space-4);
+  }
+
+  /* :global(.band) bate regula pentru linkurile de pe bandă (global.css), care le-ar face deschise la culoare. */
+  :global(.band) a.offer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--amber-tint);
+    color: var(--ink);
+    border: var(--border-control) solid var(--amber);
+    border-radius: var(--radius-lg);
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  :global(.band) a.offer-badge:hover span {
+    text-decoration: underline;
+    text-decoration-thickness: var(--border-control);
+    text-underline-offset: 0.2em;
+  }
+
+  .offer-badge svg {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+  }
+
+  .offer-badge .waves {
+    fill: none;
+    stroke: var(--wood);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+  }
+</style>

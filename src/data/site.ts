@@ -20,6 +20,7 @@ export const navLinks = [
   { href: '/', label: 'Acasă' },
   { href: '/servicii/', label: 'Servicii' },
   { href: '/aplicatii/', label: 'Aplicații' },
+  { href: '/site-uri/', label: 'Site-uri' },
   { href: '/de-ce-tulnic/', label: 'De ce Tulnic' },
   { href: '/contact/', label: 'Contact' },
 ] as const;
@@ -57,4 +58,23 @@ export const partnerMailto = mailto('Colaborare ca subcontractor', [
   'Firma:',
   'Ce lucrări aveți (migrări de servere, backup, rețea, altele):',
   'Cât de des și când ar trebui făcute:',
+]);
+
+// Pentru site-uri de prezentare (pagina Site-uri).
+export const siteMailto = mailto('Site de prezentare', [
+  'Bună ziua,',
+  '',
+  'Numele firmei și ce faceți:',
+  'Aveți deja un site? Dacă da, adresa lui:',
+  'Aveți un domeniu (de exemplu firma.ro)?',
+  'Vreți să modificați singuri conținutul site-ului?',
+  'Până când ați avea nevoie de site:',
+]);
+
+// Pentru verificarea gratuită a unui site existent (pagina Site-uri).
+export const siteCheckMailto = mailto('Verificare gratuită a site-ului', [
+  'Bună ziua,',
+  '',
+  'Adresa site-ului:',
+  'Ce vă nemulțumește acum la el (opțional):',
 ]);

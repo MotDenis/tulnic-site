@@ -6,7 +6,7 @@ export const site = {
   homeTitle: 'Tulnic — IT pentru birouri mici din București',
   email: 'contact@tulnic.ro',
   phone: '+40 741 704 551',
-  hours: 'Luni\u2060–\u2060vineri 15\u2060–\u206022, sâmbătă 9\u2060–\u206017',
+  hours: 'Luni\u2060–\u2060vineri 9\u2060–\u206021, sâmbătă 9\u2060–\u206017',
   reply: 'De luni până sâmbătă, cererile primite până la ora 15:00 primesc răspuns în aceeași zi.',
   legal: {
     name: 'Mot Denis-Cristian PFA', 
@@ -20,6 +20,7 @@ export const navLinks = [
   { href: '/', label: 'Acasă' },
   { href: '/servicii/', label: 'Servicii' },
   { href: '/aplicatii/', label: 'Aplicații' },
+  { href: '/site-uri/', label: 'Site-uri' },
   { href: '/de-ce-tulnic/', label: 'De ce Tulnic' },
   { href: '/contact/', label: 'Contact' },
 ] as const;
@@ -37,7 +38,7 @@ export const diagnosticMailto = mailto('Cerere diagnostic', [
   'Câți oameni și câte calculatoare:',
   'Ce folosiți pentru e-mail și documente (Google, Microsoft, altceva):',
   'Ce vă supără acum:',
-  'Când vă convine o primă vizită (o după-amiază sau o sâmbătă):',
+  'Când v-ar conveni o primă vizită:',
 ]);
 
 // Pentru aplicații și automatizări (pagina Aplicații).
@@ -57,4 +58,23 @@ export const partnerMailto = mailto('Colaborare ca subcontractor', [
   'Firma:',
   'Ce lucrări aveți (migrări de servere, backup, rețea, altele):',
   'Cât de des și când ar trebui făcute:',
+]);
+
+// Pentru site-uri de prezentare (pagina Site-uri).
+export const siteMailto = mailto('Site de prezentare', [
+  'Bună ziua,',
+  '',
+  'Numele firmei și ce faceți:',
+  'Aveți deja un site? Dacă da, adresa lui:',
+  'Aveți un domeniu (de exemplu firma.ro)?',
+  'Vreți să modificați singuri conținutul site-ului?',
+  'Până când ați avea nevoie de site:',
+]);
+
+// Pentru verificarea gratuită a unui site existent (pagina Site-uri).
+export const siteCheckMailto = mailto('Verificare gratuită a site-ului', [
+  'Bună ziua,',
+  '',
+  'Adresa site-ului:',
+  'Ce vă nemulțumește acum la el (opțional):',
 ]);

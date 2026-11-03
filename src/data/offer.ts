@@ -18,6 +18,17 @@ export const appPrices = {
   hosting: [150, 400], // pe lună
 } as const;
 
+// Site-uri de prezentare (pagina Site-uri). Un preț sau un interval; prețul fix se stabilește după structură.
+export const sitePrices = {
+  onePage: 500, // o singură pagină
+  presentation: [1000, 1500], // până la șase pagini
+  wordpress: [1500, 2000], // WordPress, până la opt pagini, modificate de client
+  wordpressCare: 200, // întreținere WordPress, pe lună
+} as const;
+
+// Verificarea gratuită a unui site existent (pagina Site-uri). Pune false când nu mai ai timp de ea.
+export const siteCheckOffer = true;
+
 // TODO: confirmă statutul de TVA. Dacă devii plătitor, schimbă textul.
 export const vatNote = 'PFA neplătitor de TVA, deci prețurile sunt finale.';
 

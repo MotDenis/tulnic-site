@@ -18,11 +18,11 @@ export const appPrices = {
   hosting: [150, 400], // pe lună
 } as const;
 
-// Site-uri de prezentare (pagina Site-uri). Preț fix pe pachet.
+// Site-uri de prezentare (pagina Site-uri). Un preț sau un interval; prețul fix se stabilește după structură.
 export const sitePrices = {
-  onePage: 1500, // o singură pagină
-  presentation: 3500, // până la șase pagini
-  wordpress: 5000, // până la opt pagini, modificate de client
+  onePage: 500, // o singură pagină
+  presentation: [1000, 1500], // până la șase pagini
+  wordpress: [1500, 2000], // WordPress, până la opt pagini, modificate de client
   wordpressCare: 200, // întreținere WordPress, pe lună
 } as const;
 

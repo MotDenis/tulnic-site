@@ -6,7 +6,7 @@ export const site = {
   homeTitle: 'Tulnic — IT pentru birouri mici din București',
   email: 'contact@tulnic.ro',
   phone: '+40 741 704 551',
-  hours: 'Luni\u2060–\u2060vineri 15\u2060–\u206022, sâmbătă 9\u2060–\u206017',
+  hours: 'Luni\u2060–\u2060vineri 9\u2060–\u206021, sâmbătă 9\u2060–\u206017',
   reply: 'De luni până sâmbătă, cererile primite până la ora 15:00 primesc răspuns în aceeași zi.',
   legal: {
     name: 'Mot Denis-Cristian PFA', 
@@ -38,7 +38,7 @@ export const diagnosticMailto = mailto('Cerere diagnostic', [
   'Câți oameni și câte calculatoare:',
   'Ce folosiți pentru e-mail și documente (Google, Microsoft, altceva):',
   'Ce vă supără acum:',
-  'Când vă convine o primă vizită (o după-amiază sau o sâmbătă):',
+  'Când v-ar conveni o primă vizită:',
 ]);
 
 // Pentru aplicații și automatizări (pagina Aplicații).

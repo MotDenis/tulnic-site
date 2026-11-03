@@ -3,12 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CallToAction from '../components/CallToAction.astro';
 import Note from '../components/Note.astro';
 import { siteCheckMailto, siteMailto } from '../data/site';
-import { hourlyRate, lei, siteCheckOffer, sitePrices, vatNote } from '../data/offer';
+import { hourlyRate, lei, leiRange, siteCheckOffer, sitePrices, vatNote } from '../data/offer';
 ---
 
 <BaseLayout
   title="Site-uri de prezentare pentru firme mici"
-  description={`Site-uri de prezentare rapide, accesibile și ușor de citit pe telefon, cu domeniul și conturile pe numele firmei. Preț fix, de la ${lei(sitePrices.onePage)}.`}
+  description={`Site-uri de prezentare rapide, accesibile și ușor de citit pe telefon, cu domeniul și conturile pe numele firmei. Prețuri de la ${lei(sitePrices.onePage)}.`}
 >
   <Fragment slot="intro">
     <h1>Site-uri de prezentare pentru firme mici</h1>
@@ -83,17 +83,17 @@ import { hourlyRate, lei, siteCheckOffer, sitePrices, vatNote } from '../data/of
       </li>
       <li class="card">
         <h3>Site de prezentare</h3>
-        <p>Până la șase pagini, de exemplu Acasă, Servicii, Echipa, Prețuri și Contact. Modificările ulterioare le fac eu, la cerere.</p>
-        <p class="price">{lei(sitePrices.presentation)}</p>
+        <p>Până la șase pagini, de exemplu Acasă, Servicii, Echipa, Prețuri și Contact. Găzduirea e gratuită, iar modificările le fac eu, la cerere.</p>
+        <p class="price">{leiRange(sitePrices.presentation)}</p>
       </li>
       <li class="card">
-        <h3>Site WordPress</h3>
-        <p>Până la opt pagini, pe care le puteți modifica singuri, de exemplu cu noutăți sau articole. Include o oră de instruire.</p>
-        <p class="price">{lei(sitePrices.wordpress)}</p>
+        <h3>Site pe care îl modificați singuri</h3>
+        <p>Construit pe WordPress, cu până la opt pagini. Schimbați singuri textele și prețurile sau publicați noutăți, dintr-un panou de administrare. Include o oră de instruire.</p>
+        <p class="price">{leiRange(sitePrices.wordpress)}</p>
       </li>
     </ul>
     <ul class="prose">
-      <li><strong>Găzduire:</strong> pagina și site-ul de prezentare se găzduiesc gratuit, pe un cont al firmei. Plătiți doar domeniul, de obicei sub 100 de lei pe an. Site-ul WordPress are nevoie de găzduire plătită, pe care o contractați direct cu furnizorul.</li>
+      <li><strong>Găzduire:</strong> pagina și site-ul de prezentare se găzduiesc gratuit, pe un cont al firmei. Plătiți doar domeniul, de obicei sub 100 de lei pe an. Site-ul pe care îl modificați singuri are nevoie de găzduire plătită, pe care o contractați direct cu furnizorul.</li>
       <li><strong>Modificări după publicare:</strong> corecturile mici de text din primele 30 de zile sunt incluse. Apoi, {lei(hourlyRate)}/oră, facturate la jumătate de oră.</li>
       <li><strong>Întreținere WordPress:</strong> {lei(sitePrices.wordpressCare)} pe lună, pentru actualizări, backup verificat, monitorizare și o jumătate de oră de modificări. Se oprește cu 30 de zile de preaviz.</li>
       <li><strong>Plata:</strong> 50% la început și 50% la publicare.</li>

@@ -1,6 +1,6 @@
 ---
 import { site, diagnosticMailto } from '../data/site';
-import { launchOffer } from '../data/offer';
+import { launchOffer, launchSpotsText } from '../data/offer';
 
 interface Props {
   /** Titlul panoului; implicit, diagnosticul pentru birouri. */
@@ -16,7 +16,7 @@ const tel = site.phone.replace(/[^+\d]/g, '');
 ---
 
 <section class="cta band" aria-labelledby="primul-pas">
-  {offer && launchOffer && <p class="eyebrow">Ofertă de lansare: diagnostic gratuit pentru primele trei birouri</p>}
+  {offer && launchOffer && <p class="eyebrow">Ofertă de lansare: diagnostic gratuit pentru primele trei birouri ({launchSpotsText})</p>}
   <h2 id="primul-pas">{title}</h2>
   <p>
     Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.

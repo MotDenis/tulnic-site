@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CallToAction from '../components/CallToAction.astro';
 import OfferBadge from '../components/OfferBadge.astro';
 import Profile from '../components/Profile.astro';
-import { launchOffer, lei, leiRange, officePrices, priceFrom } from '../data/offer';
+import { launchOffer, launchSpotsText, lei, leiRange, officePrices, priceFrom } from '../data/offer';
 
 // Cât costă de obicei diagnosticul: de la biroul cel mai mic la cel mai mare.
 const diagnosticPrices = officePrices.find((item) => item.id === 'diagnostic')?.prices ?? [0];
@@ -16,7 +16,7 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
 >
   <Fragment slot="intro">
     <p class="eyebrow">Cabinete medicale · Contabili · Avocați</p>
-    <h1>IT de încredere pentru birouri mici din București</h1>
+    <h1>IT făcut temeinic pentru birouri mici din București</h1>
     <p class="lead">
       Pun în ordine rețeaua, copiile de siguranță și conturile de lucru, ca echipa dumneavoastră să își poată desfășura activitatea fără întreruperi IT evitabile.
     </p>
@@ -42,7 +42,7 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
         <p>Configurez și documentez rețeaua și Wi-Fi-ul, separ accesul vizitatorilor de cel al echipei și țin la zi echipamentele de rețea.</p>
       </li>
       <li class="card">
-        <h3>Copii de siguranță pe care le verificăm</h3>
+        <h3>Copii de siguranță pe care le verific</h3>
         <p>Configurez backup-ul, cu o copie în birou și una în cloud, și testez restaurarea, astfel încât să știm dacă datele pot fi recuperate, nu doar dacă backup-ul apare ca finalizat.</p>
       </li>
       <li class="card">
@@ -99,7 +99,8 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
       <p class="eyebrow">Ofertă de lansare</p>
       <h2 id="oferta-titlu">Diagnostic gratuit pentru primele trei birouri</h2>
       <p>Vin la birou, verific rețeaua, backup-ul, conturile și calculatoarele și primiți raportul scris, la fel ca la un diagnostic plătit. În mod normal, diagnosticul costă {leiRange(diagnosticRange)}, după numărul de calculatoare.</p>
-      <p>În schimb, dacă sunteți mulțumiți, îmi lăsați o recomandare scrisă.</p>
+      <p>În schimb, dacă sunteți mulțumiți, îmi lăsați o recomandare scrisă, pe care o pot publica pe site.</p>
+      <p><strong>{launchSpotsText.charAt(0).toUpperCase() + launchSpotsText.slice(1)}.</strong></p>
       <div class="actions">
         <a class="btn btn-primary" href="/contact/">Rezervați un loc</a>
       </div>
@@ -128,7 +129,7 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
   <section class="section" aria-labelledby="cine-lucreaza">
     <h2 id="cine-lucreaza">Cine lucrează</h2>
     <Profile>
-      <p>Sunt Denis, inginer, cu patru ani de experiență în infrastructură și software. Lucrez zilnic cu rețele, servere și mașini virtuale VMware.</p>
+      <p>Sunt Denis, inginer, cu patru ani de experiență în infrastructură și dezvoltare software. Lucrez zilnic cu rețele, servere și mașini virtuale VMware.</p>
       <p>În birourile mici aduc aceleași obiceiuri: fiecare echipament trecut într-un inventar, fiecare schimbare notată, parolele într-un seif, nu pe bilețele. De la primul telefon până la întreținere, vorbiți direct cu mine.</p>
       <p><a href="/de-ce-tulnic/">Mai multe despre mine și despre nume</a></p>
     </Profile>

@@ -32,8 +32,15 @@ export const siteCheckOffer = true;
 // TODO: confirmă statutul de TVA. Dacă devii plătitor, schimbă textul.
 export const vatNote = 'PFA neplătitor de TVA, deci prețurile sunt finale.';
 
-// Oferta de lansare. Pune false după primele trei birouri.
-export const launchOffer = true;
+// Oferta de lansare: câte locuri au mai rămas din cele trei.
+// Scazi numărul după fiecare birou; la 0, oferta dispare singură de pe tot site-ul.
+export const launchSpotsLeft: number = 3;
+export const launchOffer = launchSpotsLeft > 0;
+
+// „mai sunt trei locuri”, „mai sunt două locuri”, „a mai rămas un singur loc”
+const spotWords: Record<number, string> = { 2: 'două', 3: 'trei' };
+export const launchSpotsText =
+  launchSpotsLeft === 1 ? 'a mai rămas un singur loc' : `mai sunt ${spotWords[launchSpotsLeft] ?? launchSpotsLeft} locuri`;
 
 type PackageId = (typeof officePrices)[number]['id'];
 

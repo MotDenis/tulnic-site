@@ -1,9 +1,9 @@
 // Datele site-ului, într-un singur loc.
 
 export const site = {
-  name: 'Tulnic',
-  tagline: 'IT făcut temeinic',
-  homeTitle: 'Tulnic — IT pentru birouri mici din București',
+  name: 'Tulnic IT',
+  tagline: 'IT pentru birouri mici, făcut temeinic',
+  homeTitle: 'Tulnic IT — servicii IT pentru birouri mici din București',
   email: 'contact@tulnic.ro',
   phone: '+40 741 704 551',
   hours: 'Luni\u2060–\u2060vineri 9\u2060–\u206021, sâmbătă 9\u2060–\u206017',
@@ -13,6 +13,11 @@ export const site = {
     regNo: 'F2/2/2023',
     cui: '47400356', 
     seat: 'Comuna Dieci, nr. 16, județul Arad',
+  },
+  // Profilurile Tulnic IT de pe alte site-uri: apar în footer și în datele structurate (sameAs).
+  social: {
+    facebook: 'https://www.facebook.com/tulnic.ro',
+    google: 'https://www.google.com/maps?cid=11009406650961651517',
   },
 } as const;
 
@@ -49,15 +54,6 @@ export const appMailto = mailto('Aplicație sau automatizare', [
   'Câți oameni ar folosi aplicația:',
   'Ce programe folosiți deja (facturare, magazin online, altele):',
   'Până când ați avea nevoie de ea:',
-]);
-
-// Pentru firmele de IT care caută un subcontractor (Servicii, #firme-it).
-export const partnerMailto = mailto('Colaborare ca subcontractor', [
-  'Bună ziua,',
-  '',
-  'Firma:',
-  'Ce lucrări aveți (migrări de servere, backup, rețea, altele):',
-  'Cât de des și când ar trebui făcute:',
 ]);
 
 // Pentru site-uri de prezentare (pagina Site-uri).

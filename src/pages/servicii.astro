@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, partnerMailto } from '../data/site';
+import { site } from '../data/site';
 import CallToAction from '../components/CallToAction.astro';
 import OfferBadge from '../components/OfferBadge.astro';
 import {
   hourlyRate,
   launchOffer,
+  launchSpotsText,
   lei,
   officePrices,
   sizes,
@@ -28,7 +29,6 @@ import {
       <ul>
         <li><a href="#it-birouri">IT pentru birouri</a></li>
         <li><a href="#preturi">Prețuri</a></li>
-        <li><a href="#firme-it">Pentru firme de IT</a></li>
       </ul>
     </nav>
   </Fragment>
@@ -115,7 +115,7 @@ import {
     <ul class="prose">
       <li>Orele de intervenție peste cele incluse în abonament costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă.</li>
       <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
-      {launchOffer && <li><strong>Ofertă de lansare:</strong> primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise, dacă sunt mulțumite.</li>}
+      {launchOffer && <li><strong>Ofertă de lansare:</strong> primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise pentru site, dacă sunt mulțumite ({launchSpotsText}).</li>}
       <li>{vatNote}</li>
     </ul>
 
@@ -137,7 +137,7 @@ import {
       <li>Program: {site.hours}.</li>
       <li>Intervențiile din abonamente le programăm împreună, iar monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
       <li>{site.reply}</li>
-      <li>Actualizările și reconfigurările se fac după închiderea biroului, deci fără întreruperi.</li>
+      <li>Actualizările și reconfigurările le fac după închiderea biroului, ca să nu vă întrerup lucrul.</li>
     </ul>
   </section>
 
@@ -160,11 +160,6 @@ import {
   <section class="section" aria-labelledby="site-uri">
     <h2 id="site-uri">Site-uri de prezentare</h2>
     <p class="prose">Fac și site-uri de prezentare rapide, ușor de citit pe telefon, cu domeniul și e-mailul pe numele firmei. <a href="/site-uri/">Pachete și prețuri</a></p>
-  </section>
-
-  <section class="section" aria-labelledby="firme-it">
-    <h2 id="firme-it">Pentru firme de IT</h2>
-    <p class="prose">Lucrez și ca subcontractor, la lucrări programate, inclusiv în afara programului clienților și în weekend: migrări de servere, backup, reorganizări de rack și de rețea. Nu iau legătura cu clienții firmei. <a href={partnerMailto}>Scrieți-mi pentru oferta de colaborare</a>.</p>
   </section>
 
   <CallToAction />

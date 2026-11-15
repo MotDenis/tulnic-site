@@ -725,6 +725,11 @@ main {
   list-style: none;
 }
 
+/* O a doua listă de etichete, sub prima (pagina De ce Tulnic) */
+.tags + .small {
+  margin-top: var(--space-4);
+}
+
 .tags li {
   padding: var(--space-1) var(--space-3);
   background: var(--surface);

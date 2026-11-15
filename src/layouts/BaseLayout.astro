@@ -30,7 +30,7 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: site.name,
-    alternateName: ['tulnic.ro'],
+    alternateName: ['Tulnic', 'tulnic.ro'],
     url: homeUrl,
   },
   {
@@ -43,6 +43,8 @@ const jsonLd = [
     email: site.email,
     telephone: site.phone.replace(/[^+\d]/g, ''),
     taxID: site.legal.cui,
+    // Profilurile aceleiași firme pe alte site-uri, ca Google să le lege între ele.
+    sameAs: [site.social.facebook, site.social.google],
   },
 ];
 ---

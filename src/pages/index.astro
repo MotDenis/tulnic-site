@@ -22,6 +22,7 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
     </p>
     <p class="lead">
       Sunt Denis, inginer, și lucrez pentru birouri de <span class="nowrap">5–30</span> de oameni.
+      Vizitele le fac la sediul dumneavoastră, în București și Ilfov.
       Fac actualizările și reconfigurările după închiderea biroului sau sâmbăta, iar la final primiți documentația și accesul complet la sistemele dumneavoastră.
     </p>
     <div class="actions">
@@ -54,6 +55,7 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
         <p>Inventar, schemă de rețea și documentație predată. Știți ce echipamente aveți și cum sunt organizate.</p>
       </li>
     </ul>
+    <p class="prose after-cards">Aveți un birou de contabilitate? <a href="/it-contabilitate/">Vedeți ce fac pentru birourile de contabilitate.</a></p>
   </section>
 
   <section class="section" aria-labelledby="cum-incepem">
@@ -139,6 +141,11 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
 </BaseLayout>
 
 <style>
+  /* Propoziția de sub cardurile „Ce pun în ordine” */
+  .after-cards {
+    margin: var(--space-5) 0 0;
+  }
+
   /* Eticheta ofertei pe cardul Diagnostic */
   .card-offer {
     align-self: flex-start;

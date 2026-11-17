@@ -1,5 +1,5 @@
 ---
-import { site } from '../data/site';
+import { footerLinks, site } from '../data/site';
 
 const year = new Date().getFullYear();
 const tel = site.phone.replace(/[^+\d]/g, '');
@@ -10,6 +10,11 @@ const tel = site.phone.replace(/[^+\d]/g, '');
     <div>
       <p class="brand">{site.name}</p>
       <p>{site.tagline}</p>
+      <ul class="links" role="list">
+        {footerLinks.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
     </div>
     <div>
       <h2>Contact</h2>
@@ -44,5 +49,16 @@ const tel = site.phone.replace(/[^+\d]/g, '');
 <style>
   .sal {
     line-height: 0;
+  }
+
+  /* Linkurile de sub numele site-ului (footerLinks din data/site.ts) */
+  .links {
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links li + li {
+    margin-top: var(--space-1);
   }
 </style>

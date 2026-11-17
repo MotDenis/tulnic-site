@@ -1,0 +1,46 @@
+---
+// Un tabel mic de prețuri, cu două coloane (de exemplu serviciu și preț).
+// Rămâne tabel și pe telefon, spre deosebire de tabelul mare de pe Servicii, care acolo devine carduri.
+// Prețurile se scriu cu lei() din data/offer.ts: „500 lei”.
+interface Props {
+  head: readonly [string, string];
+  rows: readonly { label: string; price: string }[];
+}
+
+const { head, rows } = Astro.props;
+---
+
+<div class="price-list">
+  <table class="price-table">
+    <thead>
+      <tr>
+        <th scope="col">{head[0]}</th>
+        <th scope="col">{head[1]}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          <th scope="row">{row.label}</th>
+          <td>{row.price}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .price-list {
+    max-width: var(--measure);
+    margin-block: var(--space-4) var(--space-5);
+    overflow-x: auto;
+    background: var(--surface);
+    border: var(--border-hairline) solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Tabelul mare are o lățime minimă pentru cele patru coloane; aici sunt doar două. */
+  .price-table {
+    min-width: 0;
+  }
+</style>

@@ -4,7 +4,8 @@ import '../styles/global.css';
 import { Font } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import { openingHours, site, tel } from '../data/site';
+import { areaServed, organizationId } from '../data/schema';
 
 interface Props {
   title?: string;
@@ -13,9 +14,11 @@ interface Props {
   hero?: boolean;
   /** Pagina nu apare în motoarele de căutare (de exemplu, pagina 404). */
   noindex?: boolean;
+  /** Datele structurate ale paginii (de exemplu un Service cu prețuri), făcute cu funcțiile din data/schema.ts. */
+  structuredData?: object | object[];
 }
 
-const { title, description, hero = false, noindex = false } = Astro.props;
+const { title, description, hero = false, noindex = false, structuredData } = Astro.props;
 const pageTitle = !title ? site.homeTitle : title.includes(site.name) ? title : `${title} — ${site.name}`;
 
 // Adresa canonică a paginii, mereu cu „/” la final, ca în meniu și în sitemap.
@@ -25,7 +28,9 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
 
 const isHome = Astro.url.pathname === '/';
 const homeUrl = new URL('/', Astro.site).href;
-const jsonLd = [
+
+// Datele structurate (schema.org): site-ul și firma, pe prima pagină; pe celelalte, ce trimite pagina.
+const siteJsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -36,17 +41,31 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': organizationId,
     name: site.name,
     legalName: site.legal.name,
     url: homeUrl,
     logo: new URL('/icon-192.png', Astro.site).href,
     email: site.email,
-    telephone: site.phone.replace(/[^+\d]/g, ''),
+    telephone: tel,
     taxID: site.legal.cui,
+    // Unde vin la sediu: București și Ilfov.
+    areaServed,
+    // Numele complet apare doar dacă vrei; atunci îl scrii aici în loc de „Denis”.
+    founder: { '@type': 'Person', name: 'Denis', jobTitle: 'Inginer' },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: tel,
+      email: site.email,
+      availableLanguage: 'ro',
+      hoursAvailable: openingHours,
+    },
     // Profilurile aceleiași firme pe alte site-uri, ca Google să le lege între ele.
     sameAs: [site.social.facebook, site.social.google],
   },
 ];
+const jsonLd = [...(isHome ? siteJsonLd : []), ...(structuredData ? [structuredData].flat() : [])];
 ---
 
 <!doctype html>
@@ -75,9 +94,9 @@ const jsonLd = [
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Tulnic: IT pentru birouri mici, făcut temeinic" />
+    <meta property="og:image:alt" content={`${site.name}: ${site.tagline}`} />
     <meta name="twitter:card" content="summary_large_image" />
-    {isHome && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {jsonLd.length > 0 && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <Font cssVariable="--font-heading" preload={[{ subset: 'latin', weight: 700 }]} />
     <Font cssVariable="--font-body" preload={[{ subset: 'latin' }]} />

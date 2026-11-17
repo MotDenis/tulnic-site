@@ -5,21 +5,44 @@ import CallToAction from '../components/CallToAction.astro';
 import OfferBadge from '../components/OfferBadge.astro';
 import {
   hourlyRate,
+  ilfovTravel,
   launchOffer,
   launchSpotsText,
   lei,
+  leiInText,
   officePrices,
+  priceRange,
   sizes,
   vatNote,
+  vpnAccess,
 } from '../data/offer';
+import { monthlyOffer, offer, offerRange, service, unitOffer } from '../data/schema';
+
+const description =
+  'Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București. Prețuri fixe, publicate, fără perioadă minimă de contract.';
+
+// Datele structurate: prețurile din tabel, accesul de acasă și orele de intervenție, toate din data/offer.ts.
+const structuredData = service({
+  name: 'Servicii IT pentru birouri',
+  serviceType: 'Administrare IT pentru birouri',
+  description,
+  url: new URL('/servicii/', Astro.site).href,
+  offers: [
+    ...officePrices.map((item) =>
+      item.period === 'lunar'
+        ? monthlyOffer(`${item.name}, după numărul de calculatoare`, priceRange(item.id))
+        : offerRange(`${item.name}, după numărul de calculatoare`, item.prices),
+    ),
+    offer(`Acces de acasă (VPN), până la ${vpnAccess.people} persoane`, vpnAccess.price),
+    unitOffer('Acces de acasă (VPN), fiecare persoană în plus', vpnAccess.extraPerson, 'persoană'),
+    unitOffer('Ore de intervenție peste cele incluse în abonament', hourlyRate, 'oră'),
+  ],
+});
 ---
 
-<BaseLayout
-  title="Servicii și prețuri"
-  description="Diagnostic, punere în ordine și abonamente IT pentru birouri de 5–30 de oameni din București. Prețuri fixe, publicate, fără perioadă minimă de contract."
->
+<BaseLayout title="Servicii IT pentru birouri din București, cu prețuri fixe" description={description} structuredData={structuredData}>
   <Fragment slot="intro">
-    <h1>Servicii și prețuri</h1>
+    <h1>Servicii IT pentru birouri: prețuri fixe</h1>
     <p class="lead">
       Pentru birourile de <span class="nowrap">5–30</span> de oameni: cabinete medicale, contabili, avocați.
       Prețuri fixe, fără perioadă minimă de contract.
@@ -38,6 +61,7 @@ import {
     <div class="prose">
       <p>Un birou nu are nevoie doar de cineva care să repare calculatorul când se strică. Are nevoie de o infrastructură documentată, copii de siguranță verificate și conturi gestionate corect.</p>
       <p>Începem cu un diagnostic și un raport scris. Vă explic ce am găsit, ce riscuri merită rezolvate primele și cât costă fiecare etapă. Decideți apoi ce implementăm și în ce ordine.</p>
+      <p>Aveți un birou de contabilitate? <a href="/it-contabilitate/">Vedeți ce fac pentru birourile de contabilitate.</a></p>
     </div>
     <ol class="step-list" role="list">
       <li>
@@ -51,6 +75,7 @@ import {
           <li>ce e urgent și ce poate să mai aștepte.</li>
         </ul>
         <p>Diagnosticul nu include reparațiile, care se fac la punerea în ordine, și nu ține loc de un audit GDPR.</p>
+        <p><a href="/diagnostic-it/">Ce verific la un diagnostic</a></p>
         <p><a href="/exemplu-raport/">Vedeți un exemplu de raport</a></p>
       </li>
       <li>
@@ -112,8 +137,14 @@ import {
 
     <p class="prose small">Se numără calculatoarele și laptopurile de lucru, inclusiv când un om folosește două. Imprimantele, telefoanele și echipamentele de rețea nu se numără.</p>
 
+    <div class="card extra">
+      <h3>Acces de acasă (VPN)</h3>
+      <p>Vă conectați de acasă, printr-o conexiune protejată (VPN), la calculatorul de la birou. Prețul include configurarea, instalarea pe calculatoarele de acasă și instrucțiuni scrise.</p>
+      <p class="price">{leiInText(vpnAccess.price)} pentru până la {vpnAccess.people} persoane; {leiInText(vpnAccess.extraPerson)} pentru fiecare persoană în plus.</p>
+    </div>
+
     <ul class="prose">
-      <li>Orele de intervenție peste cele incluse în abonament costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă.</li>
+      <li>Orele de intervenție peste cele incluse în abonament costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă. În Ilfov se adaugă {leiInText(ilfovTravel)} la fiecare vizită la sediu.</li>
       <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
       {launchOffer && <li><strong>Ofertă de lansare:</strong> primele trei birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise pentru site, dacă sunt mulțumite ({launchSpotsText}).</li>}
       <li>{vatNote}</li>
@@ -128,6 +159,17 @@ import {
         <h3>Standard</h3>
         <p>Tot ce are Esențial, plus 3 ore de intervenții, o vizită lunară la sediu, conturi pentru angajații noi și închiderea celor care pleacă, administrarea rețelei și a Wi-Fi-ului.</p>
       </li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="ce-primiti">
+    <h2 id="ce-primiti">Ce primiți, oricare ar fi pachetul</h2>
+    <ul class="prose">
+      <li>Preț fix în lei, după numărul de calculatoare, scris pe această pagină. Preț final, fără TVA adăugat.</li>
+      <li>Fără perioadă minimă de contract. Abonamentul se oprește cu 30 de zile de preaviz.</li>
+      <li>Același inginer, de la prima discuție la fiecare intervenție.</li>
+      <li>Copia de siguranță (backup), testată prin restaurare la punerea în ordine și verificată lunar în abonament.</li>
+      <li>Actualizările și reconfigurările le fac după program sau sâmbăta, ca să nu vă întrerup lucrul.</li>
     </ul>
   </section>
 
@@ -169,5 +211,11 @@ import {
   /* Rândurile de după lista de livrabile a diagnosticului */
   .step-list ul + p {
     margin-top: var(--space-3);
+  }
+
+  /* Accesul de acasă, sub tabelul de prețuri */
+  .extra {
+    max-width: var(--measure);
+    margin: var(--space-5) 0;
   }
 </style>

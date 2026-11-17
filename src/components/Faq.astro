@@ -1,0 +1,49 @@
+---
+// Întrebări frecvente: fiecare răspuns se deschide la clic, fără JavaScript (<details>).
+// Răspunsurile rămân în pagină, deci Google și cititoarele de ecran le găsesc și închise.
+interface Props {
+  items: readonly { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {items.map((item) => (
+    <details>
+      <summary>{item.question}</summary>
+      <p>{item.answer}</p>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq {
+    max-width: var(--measure);
+    border-top: var(--border-hairline) solid var(--line);
+  }
+
+  details {
+    border-bottom: var(--border-hairline) solid var(--line);
+  }
+
+  summary {
+    padding-block: var(--space-4);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  summary::marker {
+    color: var(--wood);
+  }
+
+  summary:hover {
+    text-decoration: underline;
+    text-decoration-thickness: var(--border-hairline);
+    text-underline-offset: 0.15em;
+  }
+
+  details p {
+    margin: 0 0 var(--space-4);
+  }
+</style>

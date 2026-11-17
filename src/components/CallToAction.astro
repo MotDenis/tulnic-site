@@ -2,6 +2,8 @@
 import { site, diagnosticMailto } from '../data/site';
 import { launchOffer, launchSpotsText } from '../data/offer';
 
+// Textul de sub titlu se poate înlocui, pe pagina care îl vrea altfel:
+// <CallToAction title="…">Scrieți-mi sau sunați-mă.</CallToAction>
 interface Props {
   /** Titlul panoului; implicit, diagnosticul pentru birouri. */
   title?: string;
@@ -19,8 +21,10 @@ const tel = site.phone.replace(/[^+\d]/g, '');
   {offer && launchOffer && <p class="eyebrow">Ofertă de lansare: diagnostic gratuit pentru primele trei birouri ({launchSpotsText})</p>}
   <h2 id="primul-pas">{title}</h2>
   <p>
-    Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.
-    {site.reply}
+    <slot>
+      Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.
+      {site.reply}
+    </slot>
   </p>
   <div class="actions">
     <a class="btn btn-primary" href={mailto}>Scrieți un e-mail</a>

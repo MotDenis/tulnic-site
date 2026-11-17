@@ -1,0 +1,21 @@
+---
+// Paginile de nișă: câte o pagină pentru fiecare fișier din src/data/niches/.
+// Numele fișierului e adresa paginii: it-contabilitate.ts → tulnic.ro/it-contabilitate/.
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import NichePage from '../layouts/NichePage.astro';
+import type { NicheContent } from '../data/niche';
+
+export const getStaticPaths = (() => {
+  const files = import.meta.glob<{ default: NicheContent }>('../data/niches/*.ts', { eager: true });
+  return Object.entries(files).map(([file, content]) => ({
+    params: { nisa: file.replace(/^.*\//, '').replace(/\.ts$/, '') },
+    props: { page: content.default },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+---
+
+<NichePage page={page} />

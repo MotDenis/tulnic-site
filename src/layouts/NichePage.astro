@@ -1,0 +1,124 @@
+---
+// Așezarea paginilor de nișă (de exemplu /it-contabilitate/), aceeași pentru toate nișele.
+// Conținutul vine dintr-un fișier din src/data/niches/ (vezi src/data/niche.ts); aici stau doar aspectul și ordinea secțiunilor.
+import BaseLayout from './BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Faq from '../components/Faq.astro';
+import OfferBadge from '../components/OfferBadge.astro';
+import PriceTable from '../components/PriceTable.astro';
+import Profile from '../components/Profile.astro';
+import type { NicheContent } from '../data/niche';
+import { service } from '../data/schema';
+import { tel } from '../data/site';
+
+interface Props {
+  page: NicheContent;
+}
+
+const { page } = Astro.props;
+
+// Adresa paginii, cu „/” la final, pentru datele structurate.
+const url = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
+const structuredData = service({
+  name: page.service.name,
+  serviceType: page.service.serviceType,
+  description: page.description,
+  url,
+  offers: page.service.offers,
+});
+---
+
+<BaseLayout title={page.title} description={page.description} structuredData={structuredData}>
+  <Fragment slot="intro">
+    <h1>{page.intro.h1}</h1>
+    <p class="lead">{page.intro.lead}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={page.intro.mailto}>Solicitați un diagnostic</a>
+      <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+    </div>
+    <OfferBadge />
+    {page.intro.note && <p class="small">{page.intro.note}</p>}
+  </Fragment>
+
+  <section class="section" aria-labelledby="cunoscut">
+    <h2 id="cunoscut">{page.problems.title}</h2>
+    <ul class="prose">
+      {page.problems.items.map((item) => <li>{item}</li>)}
+    </ul>
+    {page.problems.outro && <p class="prose">{page.problems.outro}</p>}
+  </section>
+
+  <section class="section" aria-labelledby="ce-fac">
+    <h2 id="ce-fac">{page.services.title}</h2>
+    <ul class="cards services" role="list">
+      {page.services.items.map((item) => (
+        <li class="card">
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="cat-costa">
+    <h2 id="cat-costa">{page.prices.title}</h2>
+    <p class="prose">{page.prices.intro}</p>
+    <PriceTable head={page.prices.head} rows={page.prices.rows} />
+    <ul class="prose">
+      {page.prices.notes.map((note) => <li>{note}</li>)}
+    </ul>
+    {page.prices.example && <p class="prose">{page.prices.example}</p>}
+    <p class="prose"><a href={page.prices.link.href}>{page.prices.link.text}</a></p>
+  </section>
+
+  <section class="section" aria-labelledby="cum-lucrez">
+    <h2 id="cum-lucrez">{page.steps.title}</h2>
+    <ol class="prose">
+      {page.steps.items.map((item) => <li>{item}</li>)}
+    </ol>
+    <ul class="prose links" role="list">
+      {page.steps.links.map((link) => (
+        <li><a href={link.href}>{link.text}</a></li>
+      ))}
+    </ul>
+  </section>
+
+  {page.data && (
+    <section class="section" aria-labelledby="datele-clientilor">
+      <h2 id="datele-clientilor">{page.data.title}</h2>
+      <ul class="prose">
+        {page.data.items.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {page.about && (
+    <section class="section" aria-labelledby="cine-vine">
+      <h2 id="cine-vine">{page.about.title}</h2>
+      <Profile>
+        <p>{page.about.text}</p>
+        <p><a href={page.about.link.href}>{page.about.link.text}</a></p>
+      </Profile>
+    </section>
+  )}
+
+  <section class="section" aria-labelledby="intrebari">
+    <h2 id="intrebari">{page.faq.title}</h2>
+    <Faq items={page.faq.items} />
+  </section>
+
+  <CallToAction title={page.cta.title} mailto={page.intro.mailto} offer={false}>{page.cta.text}</CallToAction>
+</BaseLayout>
+
+<style>
+  /* Cardurile serviciilor: cel mult trei pe rând, ca la cinci carduri să rămână 3 + 2, nu 4 + 1 */
+  .services {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+
+  /* Legăturile de sub pași, fără buline */
+  .links {
+    padding: 0;
+    list-style: none;
+  }
+</style>

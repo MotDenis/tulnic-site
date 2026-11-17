@@ -1,0 +1,121 @@
+---
+// Diagnosticul IT (auditul), explicat pentru orice birou. Destinația reclamelor generale despre diagnostic.
+// Textele vin din proiectul de marketing (brieful din 16 noiembrie 2026) și se pun cuvânt cu cuvânt;
+// prețurile și deplasarea vin din data/offer.ts, iar programul și linkul de e-mail din data/site.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Faq from '../components/Faq.astro';
+import OfferBadge from '../components/OfferBadge.astro';
+import PriceTable from '../components/PriceTable.astro';
+import { diagnosticMailto, hoursText, plainText } from '../data/site';
+import { ilfovTravel, lei, leiInText, leiRangeInText, officePrices, priceFrom, priceRange, sizes } from '../data/offer';
+import { offerRange, service } from '../data/schema';
+
+const prices = officePrices.find((item) => item.id === 'diagnostic')?.prices ?? [];
+const from = priceFrom('diagnostic');
+
+const title = plainText(`Diagnostic IT (audit) la sediu, de la ${leiInText(from)} — Tulnic IT`);
+const description = plainText(
+  `Vin la birou 2–4 ore, verific rețeaua, backup-ul, conturile și calculatoarele și primiți un raport scris, cu prețuri. ${leiRangeInText(priceRange('diagnostic'))}, preț final.`,
+);
+
+const faq = [
+  {
+    question: 'Cât durează?',
+    answer: 'Între 2 și 4 ore la sediu, în funcție de numărul de calculatoare.',
+  },
+  {
+    question: 'Ce se întâmplă după diagnostic?',
+    answer: 'Decideți dumneavoastră. Puteți rezolva ce scrie în raport singuri, cu omul cu care lucrați acum sau cu mine, la preț fix.',
+  },
+  {
+    question: 'Avem doar 3 sau 4 calculatoare. Are rost?',
+    answer: `Da. Și într-un birou mic se pot pierde date sau parole. Prețul e același: ${leiInText(from)} pentru ${sizes[0].toLowerCase()} calculatoare.`,
+  },
+  {
+    question: 'Este un audit GDPR?',
+    answer: 'Nu. Verific partea tehnică: copii de siguranță, acces, parole. Pentru conformitatea GDPR aveți nevoie de un specialist în protecția datelor.',
+  },
+];
+
+const structuredData = service({
+  name: 'Diagnostic IT la sediu',
+  serviceType: 'Diagnostic IT pentru birouri',
+  description: 'Vizită de 2–4 ore la sediu și raport scris, cu prețuri.',
+  url: new URL('/diagnostic-it/', Astro.site).href,
+  offers: [offerRange('Diagnostic IT la sediu, după numărul de calculatoare', prices)],
+});
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <Fragment slot="intro">
+    <h1>Diagnostic IT la sediu, cu raport scris</h1>
+    <p class="lead">
+      Un diagnostic IT, numit uneori și audit IT, arată în ce stare sunt rețeaua, copiile de siguranță și conturile biroului.
+      Vin la sediu <span class="nowrap">2–4 ore</span> și vă las un raport scris, cu ce e urgent, ce poate aștepta și cât costă fiecare etapă.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href={diagnosticMailto}>Solicitați un diagnostic</a>
+      <a class="btn btn-secondary" href="/exemplu-raport/">Vedeți un exemplu de raport</a>
+    </div>
+    <OfferBadge />
+  </Fragment>
+
+  <section class="section" aria-labelledby="ce-verific">
+    <h2 id="ce-verific">Ce verific</h2>
+    <ul class="prose">
+      <li><strong>Echipamentele și conturile:</strong> ce aveți, cine are acces și unde sunt parolele.</li>
+      <li><strong>Rețeaua și Wi-Fi-ul:</strong> routerul, parolele și rețeaua pentru vizitatori.</li>
+      <li><strong>Copiile de siguranță (backup):</strong> ce se copiază, unde și dacă se poate restaura.</li>
+      <li><strong>Conturile de e-mail și de lucru:</strong> parolele și verificarea în doi pași (parola plus un cod pe telefon).</li>
+      <li><strong>Calculatoarele:</strong> actualizări, antivirus și drepturi de administrator.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="ce-primiti">
+    <h2 id="ce-primiti">Ce primiți</h2>
+    <p class="prose">Un raport scris, pe înțelesul dumneavoastră:</p>
+    <ul class="prose">
+      <li>inventarul echipamentelor și al conturilor;</li>
+      <li>riscurile, în ordinea priorității;</li>
+      <li>recomandări, cu costul fiecărei etape;</li>
+      <li>ce e urgent și ce poate aștepta.</li>
+    </ul>
+    <p class="prose">Raportul rămâne al dumneavoastră. Îl puteți folosi cu mine sau cu altcineva.</p>
+    <p class="prose"><a href="/exemplu-raport/">Vedeți un exemplu de raport</a></p>
+  </section>
+
+  <section class="section" aria-labelledby="cat-costa">
+    <h2 id="cat-costa">Cât costă</h2>
+    <PriceTable head={['Calculatoare în birou', 'Preț']} rows={sizes.map((size, i) => ({ label: size, price: lei(prices[i]) }))} />
+    <ul class="prose">
+      <li>Preț final: Tulnic IT este PFA neplătitor de TVA.</li>
+      <li>Dacă alegeți punerea în ordine în 30 de zile, prețul diagnosticului se scade din ea.</li>
+      <li>Se numără calculatoarele și laptopurile de lucru. Imprimantele, telefoanele și echipamentele de rețea nu se numără.</li>
+      <li>Deplasarea în București e inclusă. În Ilfov se adaugă {leiInText(ilfovTravel)}.</li>
+      <li>Diagnosticul nu include reparații și nu ține loc de audit GDPR.</li>
+    </ul>
+    <p class="prose"><a href="/servicii/#preturi">Toate prețurile și condițiile</a></p>
+  </section>
+
+  <section class="section" aria-labelledby="cum-decurge">
+    <h2 id="cum-decurge">Cum decurge</h2>
+    <ol class="prose">
+      <li>Îmi scrieți sau mă sunați și stabilim ziua. Se poate și după program sau sâmbăta.</li>
+      <li>Vin la sediu. Lucrul biroului nu se oprește: am nevoie, pe rând, de fiecare calculator.</li>
+      <li>Primiți raportul scris și îl parcurgem împreună.</li>
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="intrebari">
+    <h2 id="intrebari">Întrebări frecvente</h2>
+    <Faq items={faq} />
+  </section>
+
+  <section class="section" aria-labelledby="contabilitate">
+    <h2 id="contabilitate">Aveți un birou de contabilitate?</h2>
+    <p class="prose"><a href="/it-contabilitate/">Vedeți ce fac pentru birourile de contabilitate</a></p>
+  </section>
+
+  <CallToAction title="Solicitați un diagnostic" offer={false}>Scrieți-mi sau sunați-mă. Program: {hoursText}.</CallToAction>
+</BaseLayout>

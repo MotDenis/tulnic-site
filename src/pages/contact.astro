@@ -12,11 +12,8 @@ import { site, tel, diagnosticMailto } from '../data/site';
       Nu trebuie să cunoașteți termenii tehnici. Vă răspund în programul afișat și stabilim dacă diagnosticul este pasul potrivit.
     </p>
 
+    {/* E-mailul și telefonul sunt scrise sub formular, o singură dată. */}
     <RequestForm mailto={diagnosticMailto} />
-
-    <div class="actions phone">
-      <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați la {site.phone}</a>
-    </div>
   </Fragment>
 
   <dl class="details">
@@ -58,10 +55,3 @@ import { site, tel, diagnosticMailto } from '../data/site';
     <p class="prose">Folosesc datele din mesaj doar ca să vă răspund și să pregătim diagnosticul. Detalii în <a href="/confidentialitate/">Politica de confidențialitate</a>.</p>
   </section>
 </BaseLayout>
-
-<style>
-  /* Butonul de telefon, sub formular */
-  .phone {
-    margin-top: var(--space-5);
-  }
-</style>

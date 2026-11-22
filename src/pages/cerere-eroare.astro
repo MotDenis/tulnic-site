@@ -1,6 +1,7 @@
 ---
 // Pagina de după formularul de cerere, când cererea nu a plecat: trimiterea a eșuat, câmpurile nu erau în regulă
 // sau s-au trimis prea multe cereri într-un minut. Are noindex și lipsește din sitemap (astro.config.mjs).
+// Adresa și telefonul apar o singură dată, pe butoane.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { diagnosticMailto, nowrap, site, tel } from '../data/site';
 ---
@@ -8,15 +9,12 @@ import { diagnosticMailto, nowrap, site, tel } from '../data/site';
 <BaseLayout title="Cererea nu a plecat" description="Cererea nu a ajuns la mine. Scrieți-mi pe e-mail sau sunați-mă." noindex>
   <Fragment slot="intro">
     <h1>Cererea nu a plecat</h1>
-    <p class="lead">
-      Ceva n-a mers la trimitere, așa că mesajul nu a ajuns la mine.
-      Scrieți-mi direct la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați-mă la <a href={`tel:${tel}`}>{nowrap(site.phone)}</a>.
-    </p>
+    <p class="lead">Ceva n-a mers la trimitere, așa că mesajul nu a ajuns la mine. Scrieți-mi direct sau <span class="nowrap">sunați-mă</span>.</p>
     <div class="actions">
-      <a class="btn btn-primary" href={diagnosticMailto}>Scrieți un e-mail</a>
-      <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+      <a class="btn btn-primary" href={diagnosticMailto}>Scrieți la {site.email}</a>
+      <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați la {nowrap(site.phone)}</a>
     </div>
   </Fragment>
 
-  <p class="prose">Butonul „Scrieți un e-mail” deschide un mesaj cu întrebările deja scrise. {site.reply}</p>
+  <p class="prose">E-mailul se deschide cu întrebările deja scrise. {site.reply}</p>
 </BaseLayout>

@@ -230,7 +230,11 @@ async function send(env: Env, mail: Mail): Promise<void> {
         textContent: mail.text,
       }),
     });
-    if (!response.ok) throw new Error(`Brevo a răspuns cu ${response.status}`);
+    if (!response.ok) {
+      // Motivul dat de Brevo (de exemplu „Key not found” sau o adresă IP neautorizată), fără adrese de e-mail.
+      const reason = (await response.text()).replace(/[^\s"'<>@]+@[^\s"'<>@]+/g, '[e-mail]').slice(0, 300);
+      throw new Error(`Brevo a răspuns cu ${response.status}: ${reason}`);
+    }
     return;
   }
 

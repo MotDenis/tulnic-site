@@ -18,7 +18,7 @@ export const site = {
   tagline: 'IT pentru birouri mici, făcut temeinic',
   homeTitle: 'Tulnic IT — servicii IT pentru birouri mici din București',
   email: 'contact@tulnic.ro',
-  phone: '+40 741 704 551',
+  phone: '+40 774 160 369',
   hours: hoursShort.charAt(0).toUpperCase() + hoursShort.slice(1),
   reply: 'De luni până sâmbătă, cererile primite până la ora 15:00 primesc răspuns în aceeași zi.',
   legal: {

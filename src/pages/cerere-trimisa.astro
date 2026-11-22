@@ -1,0 +1,19 @@
+---
+// Pagina de după formularul de cerere, când cererea a plecat. Worker-ul (worker/index.ts) trimite aici, cu 303,
+// ca reîncărcarea paginii să nu retrimită formularul. Are noindex și lipsește din sitemap (astro.config.mjs).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { hoursText, site } from '../data/site';
+---
+
+<BaseLayout title="Am primit cererea" description="Cererea a ajuns la mine. Vă răspund pe e-mail." noindex>
+  <Fragment slot="intro">
+    <h1>Am primit cererea</h1>
+    <p class="lead">Vă răspund pe e-mail. {site.reply}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/exemplu-raport/">Vedeți un exemplu de raport</a>
+      <a class="btn btn-secondary" href="/">Înapoi la prima pagină</a>
+    </div>
+  </Fragment>
+
+  <p class="prose">Dacă ați lăsat un număr de telefon, vă pot suna în program: {hoursText}.</p>
+</BaseLayout>

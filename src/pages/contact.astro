@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, diagnosticMailto } from '../data/site';
-
-const tel = site.phone.replace(/[^+\d]/g, '');
+import RequestForm from '../components/RequestForm.astro';
+import { site, tel, diagnosticMailto } from '../data/site';
 ---
 
 <BaseLayout title="Contact și diagnostic IT, București — Tulnic IT" description={`Scrieți-mi sau sunați-mă pentru un diagnostic IT al biroului. ${site.reply}`}>
@@ -13,8 +12,9 @@ const tel = site.phone.replace(/[^+\d]/g, '');
       Nu trebuie să cunoașteți termenii tehnici. Vă răspund în programul afișat și stabilim dacă diagnosticul este pasul potrivit.
     </p>
 
-    <div class="actions">
-      <a class="btn btn-primary" href={diagnosticMailto}>Scrieți un e-mail</a>
+    <RequestForm mailto={diagnosticMailto} />
+
+    <div class="actions phone">
       <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați la {site.phone}</a>
     </div>
   </Fragment>
@@ -50,7 +50,7 @@ const tel = site.phone.replace(/[^+\d]/g, '');
       <li>ce vă supără acum: o rețea lentă, un backup de care nu sunteți siguri, parole scrise pe bilețele;</li>
       <li>când v-ar conveni o primă vizită.</li>
     </ul>
-    <p class="prose">Butonul „Scrieți un e-mail” deschide un mesaj cu aceste întrebări deja scrise.</p>
+    <p class="prose">Dacă preferați e-mailul, linkul de sub formular deschide un mesaj cu aceste întrebări deja scrise.</p>
   </section>
 
   <section class="section" aria-labelledby="datele-dumneavoastra">
@@ -58,3 +58,10 @@ const tel = site.phone.replace(/[^+\d]/g, '');
     <p class="prose">Folosesc datele din mesaj doar ca să vă răspund și să pregătim diagnosticul. Detalii în <a href="/confidentialitate/">Politica de confidențialitate</a>.</p>
   </section>
 </BaseLayout>
+
+<style>
+  /* Butonul de telefon, sub formular */
+  .phone {
+    margin-top: var(--space-5);
+  }
+</style>

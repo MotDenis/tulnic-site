@@ -1,0 +1,160 @@
+---
+// Formularul de cerere: fără JavaScript și fără cookie-uri. Trimite la /api/cerere, unde Worker-ul (worker/index.ts)
+// verifică cererea, o pune pe e-mail și duce omul pe /cerere-trimisa/ sau pe /cerere-eroare/.
+// Apare în panoul de la finalul paginilor (CallToAction.astro) și pe /contact/. Listele și lungimile vin din data/request.ts.
+import { computerOptions, maxLength, sourceOptions } from '../data/request';
+import { diagnosticMailto, nowrap, site, tel } from '../data/site';
+
+interface Props {
+  /** Linkul de e-mail de sub formular, cu subiectul și întrebările potrivite paginii. */
+  mailto?: string;
+}
+
+const { mailto = diagnosticMailto } = Astro.props;
+
+// Pagina de pe care pleacă cererea, de exemplu /it-contabilitate/: din ea, Worker-ul alege subiectul și îți spune de unde a venit.
+const page = Astro.url.pathname;
+---
+
+<div class="request">
+  {/* id="cerere": butoanele „Solicitați un diagnostic” de sus duc aici, fără JavaScript. */}
+  <form id="cerere" class="request-form" method="post" action="/api/cerere">
+    <p class="form-intro">Scrieți-mi aici și vă răspund pe e-mail. {site.reply}</p>
+
+    <div class="fields">
+      <div class="field">
+        <label for="cerere-nume">Numele dumneavoastră</label>
+        <input id="cerere-nume" name="nume" type="text" autocomplete="name" maxlength={maxLength.nume} required />
+      </div>
+
+      <div class="field">
+        <label for="cerere-birou">Numele biroului</label>
+        <input id="cerere-birou" name="birou" type="text" autocomplete="organization" maxlength={maxLength.birou} required />
+      </div>
+
+      <div class="field">
+        <label for="cerere-email">E-mail</label>
+        <input id="cerere-email" name="email" type="email" autocomplete="email" maxlength={maxLength.email} required />
+      </div>
+
+      <div class="field">
+        <label for="cerere-telefon">Telefon (opțional)</label>
+        <input id="cerere-telefon" name="telefon" type="tel" autocomplete="tel" maxlength={maxLength.telefon} />
+      </div>
+
+      <div class="field">
+        <label for="cerere-calculatoare">Câte calculatoare are biroul?</label>
+        <select id="cerere-calculatoare" name="calculatoare" required>
+          <option value="">Alegeți</option>
+          {computerOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="cerere-mesaj">Ce vă supără acum? (opțional)</label>
+        <textarea id="cerere-mesaj" name="mesaj" rows="5" maxlength={maxLength.mesaj}></textarea>
+      </div>
+
+      <div class="field">
+        <label for="cerere-sursa">Cum ați aflat de Tulnic IT?</label>
+        <select id="cerere-sursa" name="sursa" required>
+          <option value="">Alegeți</option>
+          {sourceOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
+      </div>
+    </div>
+
+    <input type="hidden" name="pagina" value={page} />
+
+    {/* Capcana pentru roboți: oamenii nu o văd; dacă vine completată, Worker-ul aruncă cererea fără să spună. */}
+    <div class="trap" aria-hidden="true">
+      <label for="cerere-website">Lăsați gol acest câmp</label>
+      <input id="cerere-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Trimiteți cererea</button>
+    <p class="small form-note">
+      Folosesc datele doar ca să vă răspund și să pregătim diagnosticul. Detalii în <a href="/confidentialitate/">Politica de confidențialitate</a>.
+    </p>
+  </form>
+
+  <p class="request-alt">
+    Preferați e-mailul sau telefonul? Scrieți-mi la <a href={mailto}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{nowrap(site.phone)}</a>.
+  </p>
+</div>
+
+<style>
+  .request {
+    max-width: var(--measure);
+  }
+
+  /* Butoanele de sus duc aici: rămâne puțin loc deasupra, ca titlul panoului să se vadă. */
+  .request-form {
+    scroll-margin-top: var(--space-8);
+  }
+
+  .request .form-intro {
+    margin: 0 0 var(--space-5);
+  }
+
+  .fields {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .field {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .field label {
+    font-weight: 600;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 48px;
+    margin: 0;
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface);
+    color: var(--ink);
+    border: var(--border-control) solid var(--ink-muted);
+    border-radius: var(--radius-sm);
+    font: inherit;
+  }
+
+  .field textarea {
+    resize: vertical;
+  }
+
+  /* Pe banda de brad, marginea câmpurilor rămâne vizibilă și în tema întunecată. */
+  :global(.band) .field input,
+  :global(.band) .field select,
+  :global(.band) .field textarea {
+    border-color: var(--on-band-edge);
+  }
+
+  /* Ascunsă vizual (nu cu type="hidden"), ca roboții care completează tot să o umple. */
+  .trap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .request-form .btn {
+    margin-top: var(--space-5);
+  }
+
+  .request .form-note {
+    margin: var(--space-3) 0 0;
+  }
+
+  .request .request-alt {
+    margin: var(--space-5) 0 0;
+  }
+</style>

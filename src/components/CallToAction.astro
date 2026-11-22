@@ -1,33 +1,42 @@
 ---
-import { site, diagnosticMailto } from '../data/site';
+import RequestForm from './RequestForm.astro';
+import { site, tel, diagnosticMailto } from '../data/site';
 import { launchOffer, launchSpotsText } from '../data/offer';
 
-// Textul de sub titlu se poate înlocui, pe pagina care îl vrea altfel:
-// <CallToAction title="…">Scrieți-mi sau sunați-mă.</CallToAction>
+// Panoul de la finalul paginilor. Implicit are formularul de cerere (RequestForm.astro), cu e-mailul și telefonul sub el.
+// Fără formular (form={false}, pe /aplicatii/ și /site-uri/), rămân textul și butoanele „Scrieți un e-mail” și „Sunați-mă”;
+// textul de sub titlu se poate înlocui, pe pagina care îl vrea altfel: <CallToAction title="…" form={false}>Scrieți-mi.</CallToAction>
 interface Props {
   /** Titlul panoului; implicit, diagnosticul pentru birouri. */
   title?: string;
-  /** Linkul butonului „Scrieți un e-mail”, cu subiectul și întrebările potrivite paginii. */
+  /** Linkul de e-mail cu subiectul și întrebările potrivite paginii: sub formular sau pe butonul „Scrieți un e-mail”. */
   mailto?: string;
   /** Oferta de lansare apare doar unde e vorba de diagnostic. */
   offer?: boolean;
+  /** Formularul de cerere. Îl opresc doar paginile cu alt fel de cereri, care rămân pe e-mail. */
+  form?: boolean;
 }
 
-const { title = 'Primul pas: diagnosticul', mailto = diagnosticMailto, offer = true } = Astro.props;
-const tel = site.phone.replace(/[^+\d]/g, '');
+const { title = 'Primul pas: diagnosticul', mailto = diagnosticMailto, offer = true, form = true } = Astro.props;
 ---
 
 <section class="cta band" aria-labelledby="primul-pas">
   {offer && launchOffer && <p class="eyebrow">Ofertă de lansare: diagnostic gratuit pentru primele trei birouri ({launchSpotsText})</p>}
   <h2 id="primul-pas">{title}</h2>
-  <p>
-    <slot>
-      Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.
-      {site.reply}
-    </slot>
-  </p>
-  <div class="actions">
-    <a class="btn btn-primary" href={mailto}>Scrieți un e-mail</a>
-    <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
-  </div>
+  {form ? (
+    <RequestForm mailto={mailto} />
+  ) : (
+    <>
+      <p>
+        <slot>
+          Scrieți-mi la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{site.phone}</a>.
+          {site.reply}
+        </slot>
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href={mailto}>Scrieți un e-mail</a>
+        <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+      </div>
+    </>
+  )}
 </section>

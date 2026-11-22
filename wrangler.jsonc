@@ -1,12 +1,30 @@
 {
   "name": "tulnic-site",
   "compatibility_date": "2026-10-01",
+  // Worker-ul primește doar formularul de cerere (/api/cerere); restul site-ului vine direct din dist/, ca înainte.
+  "main": "./worker/index.ts",
   // Site-ul răspunde doar pe tulnic.ro, nu și pe adresa de probă workers.dev.
   "workers_dev": false,
   "preview_urls": false,
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     // Orice adresă care nu există primește pagina 404.html, cu codul 404.
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+    // Trimiterea unui formular e o navigare, iar navigările nu ajung la Worker (se servește pagina 404).
+    // Pentru /api/* pornește întâi Worker-ul.
+    "run_worker_first": ["/api/*"]
+  },
+  // Cererile pleacă prin Brevo, de la FORM_FROM (adresă pe tulnic.ro, domeniul autentificat în Brevo) la FORM_TO.
+  // Cheia Brevo e secret, niciodată în repo: în Cloudflare (Worker → Settings → Variables and Secrets) ca BREVO_API_KEY,
+  // iar pentru teste locale în .dev.vars (ignorat de git).
+  // Trimiterea prin Cloudflare (send_email) ar cere Email Routing pe tulnic.ro, adică MX-urile luate de la Zoho, sau Workers Paid.
+  "vars": {
+    "FORM_FROM": "contact@tulnic.ro",
+    "FORM_TO": "denis@tulnic.ro"
+  },
+  // Cel mult 3 trimiteri la 60 de secunde de pe aceeași adresă IP; peste, omul ajunge pe /cerere-eroare/.
+  "ratelimits": [{ "name": "RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
+  // Erorile de trimitere apar în Workers Logs (fără datele din formular).
+  "observability": { "enabled": true }
 }

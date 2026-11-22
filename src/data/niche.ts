@@ -23,7 +23,7 @@ export interface NicheContent {
   intro: {
     h1: string;
     lead: string;
-    /** Linkul de e-mail din data/site.ts, cu subiectul și întrebările nișei: butoanele „Solicitați un diagnostic” și „Scrieți un e-mail”. */
+    /** Linkul de e-mail din data/site.ts, cu subiectul și întrebările nișei: linkul de sub formularul de cerere. */
     mailto: string;
     /** O propoziție sub butoane și sub oferta de lansare. */
     note?: string;
@@ -59,7 +59,7 @@ export interface NicheContent {
   /** „Întrebări frecvente”, deschise la clic. */
   faq: { title: string; items: { question: string; answer: string }[] };
 
-  /** Panoul de la final, cu butoanele „Scrieți un e-mail” și „Sunați-mă”. */
+  /** Panoul de la final, cu formularul de cerere. Textul apare doar dacă panoul nu are formular (form={false} în CallToAction). */
   cta: { title: string; text: string };
 
   /** Serviciul din datele structurate (schema.org): numele, tipul și ofertele, făcute cu funcțiile din data/schema.ts. */

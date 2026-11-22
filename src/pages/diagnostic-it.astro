@@ -7,7 +7,7 @@ import CallToAction from '../components/CallToAction.astro';
 import Faq from '../components/Faq.astro';
 import OfferBadge from '../components/OfferBadge.astro';
 import PriceTable from '../components/PriceTable.astro';
-import { diagnosticMailto, hoursText, plainText } from '../data/site';
+import { hoursText, plainText } from '../data/site';
 import { ilfovTravel, lei, leiInText, leiRangeInText, officePrices, priceFrom, priceRange, sizes } from '../data/offer';
 import { offerRange, service } from '../data/schema';
 
@@ -55,7 +55,7 @@ const structuredData = service({
       Vin la sediu <span class="nowrap">2–4 ore</span> și vă las un raport scris, cu ce e urgent, ce poate aștepta și cât costă fiecare etapă.
     </p>
     <div class="actions">
-      <a class="btn btn-primary" href={diagnosticMailto}>Solicitați un diagnostic</a>
+      <a class="btn btn-primary" href="#cerere">Solicitați un diagnostic</a>
       <a class="btn btn-secondary" href="/exemplu-raport/">Vedeți un exemplu de raport</a>
     </div>
     <OfferBadge />

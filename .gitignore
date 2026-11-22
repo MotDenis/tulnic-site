@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Wrangler: secretele pentru teste locale (.dev.vars) și fișierele lui wrangler dev
+.dev.vars*
+.wrangler/
+
 # macOS-specific files
 .DS_Store
 

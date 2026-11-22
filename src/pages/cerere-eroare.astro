@@ -1,0 +1,22 @@
+---
+// Pagina de după formularul de cerere, când cererea nu a plecat: trimiterea a eșuat, câmpurile nu erau în regulă
+// sau s-au trimis prea multe cereri într-un minut. Are noindex și lipsește din sitemap (astro.config.mjs).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { diagnosticMailto, nowrap, site, tel } from '../data/site';
+---
+
+<BaseLayout title="Cererea nu a plecat" description="Cererea nu a ajuns la mine. Scrieți-mi pe e-mail sau sunați-mă." noindex>
+  <Fragment slot="intro">
+    <h1>Cererea nu a plecat</h1>
+    <p class="lead">
+      Ceva n-a mers la trimitere, așa că mesajul nu a ajuns la mine.
+      Scrieți-mi direct la <a href={`mailto:${site.email}`}>{site.email}</a> sau sunați-mă la <a href={`tel:${tel}`}>{nowrap(site.phone)}</a>.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href={diagnosticMailto}>Scrieți un e-mail</a>
+      <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+    </div>
+  </Fragment>
+
+  <p class="prose">Butonul „Scrieți un e-mail” deschide un mesaj cu întrebările deja scrise. {site.reply}</p>
+</BaseLayout>

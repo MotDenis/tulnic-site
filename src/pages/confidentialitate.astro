@@ -2,8 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
 
-// TODO: actualizează data la fiecare schimbare. Dacă adaugi formulare sau statistici, actualizează și textul.
-const updated = '18 noiembrie 2026';
+// TODO: actualizează data la fiecare schimbare. Dacă schimbi formularul sau statisticile, actualizează și textul.
+const updated = '21 noiembrie 2026';
+
+// Prin ce pleacă mesajele din formularul de cerere: 'brevo' (acum) sau 'cloudflare' (legătura send_email).
+// Trebuie să fie la fel ca în wrangler.jsonc: secretul BREVO_API_KEY pentru Brevo, send_email pentru Cloudflare.
+const formMailer = 'brevo' as 'cloudflare' | 'brevo';
 ---
 
 <BaseLayout title="Politica de confidențialitate" description="Ce date personale primesc prin site și prin e-mail, de ce, cât timp le păstrez și ce drepturi aveți.">
@@ -19,9 +23,10 @@ const updated = '18 noiembrie 2026';
     <h2>Ce date primesc</h2>
     <ul>
       <li><strong>Când îmi scrieți sau mă sunați:</strong> numele, adresa de e-mail, numărul de telefon, numele biroului și ce îmi scrieți în mesaj.</li>
+      <li><strong>Când trimiteți formularul de cerere:</strong> numele, numele biroului, adresa de e-mail, telefonul, dacă îl lăsați, câte calculatoare are biroul, mesajul și cum ați aflat de Tulnic IT. Văd și pagina de pe care l-ați trimis și dacă ați ajuns pe site dintr-o reclamă Google, fără să păstrez vreun cod de identificare al reclamei.</li>
       <li><strong>Când vizitați site-ul:</strong> date tehnice, ca adresa IP, browserul și pagina cerută, pe care furnizorul de găzduire le prelucrează ca să livreze site-ul și să-l protejeze de atacuri.</li>
     </ul>
-    <p>Site-ul nu are formulare, nu folosește cookie-uri de urmărire sau de marketing și nu are statistici care să vă identifice. Fonturile sunt găzduite pe site, deci browserul nu contactează alte servere pentru ele.</p>
+    <p>Formularul de cerere nu pune cookie-uri și nu folosește scripturi: datele ajung la mine doar pe e-mail. Site-ul nu folosește cookie-uri de urmărire sau de marketing și nu are statistici care să vă identifice. Fonturile sunt găzduite pe site, deci browserul nu contactează alte servere pentru ele.</p>
 
     <h2>De ce și pe ce temei</h2>
     <ul>
@@ -42,8 +47,9 @@ const updated = '18 noiembrie 2026';
 
     <h2>Cine mai vede datele</h2>
     <ul>
-      <li><strong>Cloudflare</strong>, furnizorul de găzduire și DNS al site-ului, care îmi dă și statisticile de vizitare.</li>
+      <li><strong>Cloudflare</strong>, furnizorul de găzduire și DNS al site-ului, care îmi dă și statisticile de vizitare{formMailer === 'cloudflare' && ' și prin care trec mesajele trimise din formular'}.</li>
       <li><strong>Zoho</strong>, furnizorul de e-mail, cu datele în centrul său de date din Uniunea Europeană.</li>
+      {formMailer === 'brevo' && <li><strong>Brevo</strong>, furnizorul prin care pleacă mesajele trimise din formular.</li>}
       <li>Autoritățile, doar când legea o cere.</li>
     </ul>
     <p>Nu vând și nu închiriez date. Unii furnizori pot prelucra date și în afara Spațiului Economic European; atunci transferul se face cu garanțiile cerute de GDPR, de exemplu decizia de adecvare pentru cadrul UE–SUA privind protecția datelor sau clauzele contractuale standard.</p>

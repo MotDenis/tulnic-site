@@ -43,7 +43,7 @@ export const vatNote = 'PFA neplătitor de TVA, deci prețurile sunt finale.';
 
 // Oferta de lansare: câte locuri au mai rămas din cele trei.
 // Scazi numărul după fiecare birou; la 0, oferta dispare singură de pe tot site-ul.
-export const launchSpotsLeft: number = 3;
+export const launchSpotsLeft: number = 2;
 export const launchOffer = launchSpotsLeft > 0;
 
 // „mai sunt trei locuri”, „mai sunt două locuri”, „a mai rămas un singur loc”

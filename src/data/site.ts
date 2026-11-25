@@ -48,6 +48,12 @@ export const openingHours = schedule.map((s) => ({
 // Numărul de telefon pentru linkurile tel:, fără spații.
 export const tel = site.phone.replace(/[^+\d]/g, '');
 
+// WhatsApp Business, pe același număr ca telefonul: linkul wa.me, cu un mesaj deja scris.
+// Mesajul spune pagina de pe care scrie omul, ca să știi de unde a venit cererea; de pe prima pagină, doar „tulnic.ro”.
+export const whatsappNumber = tel.replace('+', ''); // 40774160369
+export const whatsappLink = (page = '/') =>
+  `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Bună ziua, vă scriu de pe tulnic.ro${page === '/' ? '' : page}. `)}`;
+
 // Textul nu se rupe pe rânduri diferite, de exemplu „2–4 ore”: spațiile devin neseparabile, iar liniuța se leagă de vecini.
 export const nowrap = (text: string) => joinDash(text).replace(/ /g, '\u00a0');
 

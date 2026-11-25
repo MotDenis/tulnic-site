@@ -9,7 +9,7 @@ import PriceTable from '../components/PriceTable.astro';
 import Profile from '../components/Profile.astro';
 import type { NicheContent } from '../data/niche';
 import { service } from '../data/schema';
-import { tel } from '../data/site';
+import { tel, whatsappLink } from '../data/site';
 
 interface Props {
   page: NicheContent;
@@ -35,6 +35,7 @@ const structuredData = service({
     <div class="actions">
       <a class="btn btn-primary" href="#cerere">Solicitați un diagnostic</a>
       <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+      <a class="btn btn-secondary" href={whatsappLink(Astro.url.pathname)}>Scrieți-mi pe WhatsApp</a>
     </div>
     <OfferBadge />
     {page.intro.note && <p class="small">{page.intro.note}</p>}

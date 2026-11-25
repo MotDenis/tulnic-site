@@ -41,15 +41,12 @@ export const siteCheckOffer = true;
 // Statutul de TVA mai e scris în textele de pe /diagnostic-it/, din src/data/niches/ și în blocul „Ce primiți” de pe /servicii/.
 export const vatNote = 'PFA neplătitor de TVA, deci prețurile sunt finale.';
 
-// Oferta de lansare: câte locuri au mai rămas din cele trei.
-// Scazi numărul după fiecare birou; la 0, oferta dispare singură de pe tot site-ul.
-export const launchSpotsLeft: number = 2;
-export const launchOffer = launchSpotsLeft > 0;
-
-// „mai sunt trei locuri”, „mai sunt două locuri”, „a mai rămas un singur loc”
-const spotWords: Record<number, string> = { 2: 'două', 3: 'trei' };
-export const launchSpotsText =
-  launchSpotsLeft === 1 ? 'a mai rămas un singur loc' : `mai sunt ${spotWords[launchSpotsLeft] ?? launchSpotsLeft} locuri`;
+// Oferta de lansare: diagnostic gratuit pentru birourile care îl solicită până la termen, fără limită de birouri.
+// Pe 1 ianuarie 2027: pune false și publică; oferta dispare de peste tot. Cererile primite până atunci rămân gratuite.
+export const launchOffer: boolean = true;
+// În date,   ține ziua, luna și anul pe același rând (altfel „2026” poate rămâne singur pe rând).
+export const launchOfferDeadline = '31 decembrie 2026'; // până când se trimite cererea
+export const launchOfferVisitBy = '31 ianuarie 2027'; // până când poate avea loc vizita
 
 type PackageId = (typeof officePrices)[number]['id'];
 

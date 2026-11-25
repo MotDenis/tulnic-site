@@ -1,10 +1,10 @@
 ---
 import RequestForm from './RequestForm.astro';
-import { site, tel, diagnosticMailto } from '../data/site';
-import { launchOffer, launchSpotsText } from '../data/offer';
+import { site, tel, diagnosticMailto, whatsappLink } from '../data/site';
+import { launchOffer, launchOfferDeadline } from '../data/offer';
 
-// Panoul de la finalul paginilor. Implicit are formularul de cerere (RequestForm.astro), cu e-mailul și telefonul sub el.
-// Fără formular (form={false}, pe /aplicatii/ și /site-uri/), rămân textul și butoanele „Scrieți un e-mail” și „Sunați-mă”;
+// Panoul de la finalul paginilor. Implicit are formularul de cerere (RequestForm.astro), cu e-mailul, telefonul și WhatsApp sub el.
+// Fără formular (form={false}, pe /aplicatii/ și /site-uri/), rămân textul și butoanele „Scrieți un e-mail”, „Sunați-mă” și „Scrieți-mi pe WhatsApp”;
 // textul de sub titlu se poate înlocui, pe pagina care îl vrea altfel: <CallToAction title="…" form={false}>Scrieți-mi.</CallToAction>
 interface Props {
   /** Titlul panoului; implicit, diagnosticul pentru birouri. */
@@ -21,7 +21,7 @@ const { title = 'Primul pas: diagnosticul', mailto = diagnosticMailto, offer = t
 ---
 
 <section class="cta band" aria-labelledby="primul-pas">
-  {offer && launchOffer && <p class="eyebrow">Ofertă de lansare: diagnostic gratuit pentru primele cinci birouri ({launchSpotsText})</p>}
+  {offer && launchOffer && <p class="eyebrow">Ofertă de lansare: diagnostic gratuit, dacă îl solicitați până pe {launchOfferDeadline}</p>}
   <h2 id="primul-pas">{title}</h2>
   {form ? (
     <RequestForm mailto={mailto} />
@@ -36,6 +36,7 @@ const { title = 'Primul pas: diagnosticul', mailto = diagnosticMailto, offer = t
       <div class="actions">
         <a class="btn btn-primary" href={mailto}>Scrieți un e-mail</a>
         <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+        <a class="btn btn-secondary" href={whatsappLink(Astro.url.pathname)}>Scrieți-mi pe WhatsApp</a>
       </div>
     </>
   )}

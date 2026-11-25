@@ -7,6 +7,7 @@ import CallToAction from '../components/CallToAction.astro';
 import Faq from '../components/Faq.astro';
 import OfferBadge from '../components/OfferBadge.astro';
 import PriceTable from '../components/PriceTable.astro';
+import Profile from '../components/Profile.astro';
 import { hoursText, plainText } from '../data/site';
 import { ilfovTravel, lei, leiInText, leiRangeInText, officePrices, priceFrom, priceRange, sizes } from '../data/offer';
 import { offerRange, service } from '../data/schema';
@@ -105,6 +106,15 @@ const structuredData = service({
       <li>Vin la sediu. Lucrul biroului nu se oprește: am nevoie, pe rând, de fiecare calculator.</li>
       <li>Primiți raportul scris și îl parcurgem împreună.</li>
     </ol>
+  </section>
+
+  <section class="section" aria-labelledby="cine-vine">
+    <h2 id="cine-vine">Cine vine la sediu</h2>
+    <Profile>
+      <p>Sunt Denis, inginer, cu patru ani de experiență în infrastructură și dezvoltare software. Lucrez zilnic cu rețele, servere și mașini virtuale VMware.</p>
+      <p>Tulnic IT înseamnă un singur om: vorbiți direct cu mine, de la prima discuție până la fiecare intervenție.</p>
+      <p><a href="/de-ce-tulnic/">Mai multe despre mine și despre nume</a> · <a href="/exemplu-raport/">Vedeți un exemplu de raport</a></p>
+    </Profile>
   </section>
 
   <section class="section" aria-labelledby="intrebari">

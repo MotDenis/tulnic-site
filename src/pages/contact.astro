@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RequestForm from '../components/RequestForm.astro';
-import { site, tel, diagnosticMailto } from '../data/site';
+import { site, tel, diagnosticMailto, whatsappLink } from '../data/site';
 ---
 
 <BaseLayout title="Contact și diagnostic IT, București — Tulnic IT" description={`Scrieți-mi sau sunați-mă pentru un diagnostic IT al biroului. ${site.reply}`}>
@@ -24,6 +24,10 @@ import { site, tel, diagnosticMailto } from '../data/site';
     <div>
       <dt>Telefon</dt>
       <dd><a href={`tel:${tel}`}>{site.phone}</a></dd>
+    </div>
+    <div>
+      <dt>WhatsApp</dt>
+      <dd><a href={whatsappLink(Astro.url.pathname)}>Scrieți-mi pe WhatsApp</a></dd>
     </div>
     <div>
       <dt>Program</dt>

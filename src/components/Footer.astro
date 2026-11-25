@@ -1,5 +1,5 @@
 ---
-import { footerLinks, site } from '../data/site';
+import { footerLinks, site, whatsappLink } from '../data/site';
 
 const year = new Date().getFullYear();
 const tel = site.phone.replace(/[^+\d]/g, '');
@@ -21,6 +21,7 @@ const tel = site.phone.replace(/[^+\d]/g, '');
       <p>
         <a href={`mailto:${site.email}`}>{site.email}</a><br />
         <a href={`tel:${tel}`}>{site.phone}</a><br />
+        <a href={whatsappLink(Astro.url.pathname)}>WhatsApp</a><br />
         {site.hours}
       </p>
       <p>

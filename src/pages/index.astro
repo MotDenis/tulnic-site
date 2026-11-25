@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CallToAction from '../components/CallToAction.astro';
 import OfferBadge from '../components/OfferBadge.astro';
 import Profile from '../components/Profile.astro';
-import { launchOffer, launchSpotsText, lei, leiRange, officePrices, priceFrom } from '../data/offer';
+import { launchOffer, launchOfferDeadline, launchOfferVisitBy, lei, leiRange, officePrices, priceFrom } from '../data/offer';
 
 // Cât costă de obicei diagnosticul: de la biroul cel mai mic la cel mai mare.
 const diagnosticPrices = officePrices.find((item) => item.id === 'diagnostic')?.prices ?? [0];
@@ -65,7 +65,7 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
       <li class="card">
         <h3>Diagnostic</h3>
         <p>Vin o dată la birou, pentru <span class="nowrap">2–4 ore</span>, și primiți un raport scris, cu prețuri.</p>
-        {launchOffer && <p class="card-offer"><a href="#oferta">Gratuit pentru primele cinci birouri</a></p>}
+        {launchOffer && <p class="card-offer"><a href="#oferta">Gratuit, dacă îl solicitați până pe {launchOfferDeadline}</a></p>}
         <p class="price">De la {lei(priceFrom('diagnostic'))}</p>
       </li>
       <li class="card">
@@ -99,12 +99,11 @@ const diagnosticRange = [Math.min(...diagnosticPrices), Math.max(...diagnosticPr
   {launchOffer && (
     <section class="section offer-panel" id="oferta" aria-labelledby="oferta-titlu">
       <p class="eyebrow">Ofertă de lansare</p>
-      <h2 id="oferta-titlu">Diagnostic gratuit pentru primele cinci birouri</h2>
+      <h2 id="oferta-titlu">Diagnostic gratuit, dacă îl solicitați până pe {launchOfferDeadline}</h2>
       <p>Vin la birou, verific rețeaua, backup-ul, conturile și calculatoarele și primiți raportul scris, la fel ca la un diagnostic plătit. În mod normal, diagnosticul costă {leiRange(diagnosticRange)}, după numărul de calculatoare.</p>
-      <p>În schimb, dacă sunteți mulțumiți, îmi lăsați o recomandare scrisă, pe care o pot publica pe site.</p>
-      <p><strong>{launchSpotsText.charAt(0).toUpperCase() + launchSpotsText.slice(1)}.</strong></p>
+      <p>Contează data cererii: vizita poate avea loc și în ianuarie, până pe {launchOfferVisitBy}, într-o zi stabilită împreună.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="/contact/">Rezervați un loc</a>
+        <a class="btn btn-primary" href="/contact/">Solicitați diagnosticul gratuit</a>
       </div>
     </section>
   )}

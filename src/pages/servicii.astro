@@ -1,16 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, tel, whatsappLink } from '../data/site';
 import CallToAction from '../components/CallToAction.astro';
 import OfferBadge from '../components/OfferBadge.astro';
+import Profile from '../components/Profile.astro';
 import {
   hourlyRate,
   ilfovTravel,
   launchOffer,
-  launchSpotsText,
+  launchOfferDeadline,
+  launchOfferVisitBy,
   lei,
   leiInText,
   officePrices,
+  priceFrom,
   priceRange,
   sizes,
   vatNote,
@@ -44,9 +47,14 @@ const structuredData = service({
   <Fragment slot="intro">
     <h1>Servicii IT pentru birouri: prețuri fixe</h1>
     <p class="lead">
-      Pentru birourile de <span class="nowrap">5–30</span> de oameni: cabinete medicale, contabili, avocați.
-      Prețuri fixe, fără perioadă minimă de contract.
+      Mentenanță IT pentru birourile de <span class="nowrap">5–30</span> de oameni din București și Ilfov: cabinete medicale, contabili, avocați.
+      Abonamentul pornește de la {leiInText(priceFrom('essential'))} pe lună, preț final, fără perioadă minimă de contract.
     </p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#cerere">Solicitați un diagnostic</a>
+      <a class="btn btn-secondary" href={`tel:${tel}`}>Sunați-mă</a>
+      <a class="btn btn-secondary" href={whatsappLink(Astro.url.pathname)}>Scrieți-mi pe WhatsApp</a>
+    </div>
     <OfferBadge />
     <nav class="toc" aria-label="Pe această pagină">
       <ul>
@@ -146,7 +154,7 @@ const structuredData = service({
     <ul class="prose">
       <li>Orele de intervenție peste cele incluse în abonament costă {lei(hourlyRate)}/oră, facturate la jumătate de oră. Deplasarea în București e inclusă. În Ilfov se adaugă {leiInText(ilfovTravel)} la fiecare vizită la sediu.</li>
       <li>Dacă alegeți punerea în ordine în 30 de zile de la diagnostic, prețul diagnosticului se scade din ea.</li>
-      {launchOffer && <li><strong>Ofertă de lansare:</strong> primele cinci birouri primesc diagnosticul gratuit, în schimbul unei recomandări scrise pentru site, dacă sunt mulțumite ({launchSpotsText}).</li>}
+      {launchOffer && <li><strong>Ofertă de lansare:</strong> diagnosticul e gratuit, dacă îl solicitați până pe {launchOfferDeadline}. Vizita poate avea loc și în ianuarie, până pe {launchOfferVisitBy}.</li>}
       <li>{vatNote}</li>
     </ul>
 
@@ -177,6 +185,7 @@ const structuredData = service({
     <h2 id="program">Program și timp de răspuns</h2>
     <ul class="prose">
       <li>Program: {site.hours}.</li>
+      <li>Pe WhatsApp îmi puteți scrie oricând; vă răspund în programul de mai sus.</li>
       <li>Intervențiile din abonamente le programăm împreună, iar monitorizarea și backup-ul testat țin la minimum problemele care opresc lucrul.</li>
       <li>{site.reply}</li>
       <li>Actualizările și reconfigurările le fac după închiderea biroului, ca să nu vă întrerup lucrul.</li>
@@ -194,6 +203,18 @@ const structuredData = service({
     </ul>
   </section>
 
+  <section class="section" aria-labelledby="cine-vine">
+    <h2 id="cine-vine">Cine vine la sediu</h2>
+    <Profile>
+      <p>Sunt Denis, inginer, cu patru ani de experiență în infrastructură și dezvoltare software. Lucrez zilnic cu rețele, servere și mașini virtuale VMware.</p>
+      <p>Tulnic IT înseamnă un singur om: vorbiți direct cu mine, de la prima discuție până la fiecare intervenție.</p>
+      <p><a href="/de-ce-tulnic/">Mai multe despre mine și despre nume</a> · <a href="/exemplu-raport/">Vedeți un exemplu de raport</a></p>
+    </Profile>
+  </section>
+
+  {/* Formularul vine înaintea secțiunilor despre aplicații și site-uri: reclamele pentru birouri duc pe această pagină. */}
+  <CallToAction />
+
   <section class="section" aria-labelledby="aplicatii">
     <h2 id="aplicatii">Aplicații și automatizări</h2>
     <p class="prose">Construiesc și aplicații web simple sau automatizări la comandă, de exemplu în locul unui Excel care nu mai face față. <a href="/aplicatii/">Exemple, cum lucrăm și prețuri</a></p>
@@ -203,8 +224,6 @@ const structuredData = service({
     <h2 id="site-uri">Site-uri de prezentare</h2>
     <p class="prose">Fac și site-uri de prezentare rapide, ușor de citit pe telefon, cu domeniul și e-mailul pe numele firmei. <a href="/site-uri/">Pachete și prețuri</a></p>
   </section>
-
-  <CallToAction />
 </BaseLayout>
 
 <style>

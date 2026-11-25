@@ -1,7 +1,7 @@
 ---
 // Oferta de lansare, pe banda de sus a paginii: un semn pe fond chihlimbar, greu de ratat.
 // Dispare singur când launchOffer devine false în data/offer.ts.
-import { launchOffer, launchSpotsText } from '../data/offer';
+import { launchOffer, launchOfferDeadline } from '../data/offer';
 
 interface Props {
   /** Unde duce semnul: implicit, la detaliile ofertei de pe prima pagină. */
@@ -21,7 +21,7 @@ const { href = '/#oferta' } = Astro.props;
           <path d="M44.5 3.3A20 20 0 0 1 60.7 19.5" />
         </g>
       </svg>
-      <span><strong>Ofertă de lansare:</strong> diagnostic gratuit pentru primele cinci birouri ({launchSpotsText})</span>
+      <span><strong>Ofertă de lansare:</strong> diagnostic gratuit, dacă îl solicitați până pe {launchOfferDeadline}</span>
     </a>
   </p>
 )}

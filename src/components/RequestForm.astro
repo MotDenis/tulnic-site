@@ -3,7 +3,7 @@
 // verifică cererea, o pune pe e-mail și duce omul pe /cerere-trimisa/ sau pe /cerere-eroare/.
 // Apare în panoul de la finalul paginilor (CallToAction.astro) și pe /contact/. Listele și lungimile vin din data/request.ts.
 import { computerOptions, maxLength, sourceOptions } from '../data/request';
-import { diagnosticMailto, nowrap, site, tel } from '../data/site';
+import { diagnosticMailto, nowrap, site, tel, whatsappLink } from '../data/site';
 
 interface Props {
   /** Linkul de e-mail de sub formular, cu subiectul și întrebările potrivite paginii. */
@@ -79,7 +79,7 @@ const page = Astro.url.pathname;
   </form>
 
   <p class="request-alt">
-    Preferați e-mailul sau telefonul? Scrieți-mi la <a href={mailto}>{site.email}</a> sau sunați la <a href={`tel:${tel}`}>{nowrap(site.phone)}</a>.
+    Preferați e-mailul, telefonul sau WhatsApp? Scrieți-mi la <a href={mailto}>{site.email}</a>, sunați la <a href={`tel:${tel}`}>{nowrap(site.phone)}</a> sau <a href={whatsappLink(page)}>scrieți-mi pe WhatsApp</a>.
   </p>
 </div>
 
